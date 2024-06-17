@@ -13,24 +13,23 @@
 }
 
 
-@media screen and (max-width: 320px) {
-  /* Styles for smaller smartphones */
+
+@media only screen and (max-width: 767px) {
+ 
 }
 
-@media screen and (min-width: 321px) and (max-width: 480px) {
-  /* Styles for larger smartphones */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* Your tablet styles for landscape orientation here */
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  /* Styles for tablets */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* Your tablet styles for portrait orientation here */
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-  /* Styles for small desktops and tablets in landscape */
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: landscape) {
+  /* Your styles for the larger iPad Pro landscape orientation here */
 }
-
-@media screen and (min-width: 1025px) and (max-width: 1440px) {
-  /* Styles for larger desktops and laptops */
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
+  /* Your styles for the larger iPad Pro portrait orientation here */
 }
-
-/* Additional media queries for larger screens can be added if needed */
