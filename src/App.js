@@ -1,26 +1,55 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
-import Contact from "./pages/Contact/Contact.jsx";
-import Projects from "./pages/upcommingProject/Projects.jsx";
-import Headers from "./components/Headers/Headers.jsx";
-import NriCorner from "./pages/NRI/NriCorner.jsx";
-import Gallery from "./pages/Gallery/Gallery.jsx";
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Lazy load the components
+const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
+const UpcomingProjects = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/UpcomingProjects.jsx")
+);
+const PageHeading = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/PageHeading.jsx")
+);
+const BannerImages = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/BannerImages.jsx")
+);
+const Projects = lazy(() => import("./pages/upcommingProject/Projects.jsx"));
+const Home = lazy(() => import("./pages/Home/Home.jsx"));
+const About = lazy(() => import("./pages/About/About.jsx"));
+const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
+const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
+const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
 
 function App() {
   return (
-    <BrowserRouter>
-      <Headers></Headers>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/nri-corner" element={<NriCorner />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact-us" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route key="adminpanel" path="adminpanel" element={<AdminPanel />}>
+            <Route
+              key="upcomingprojects"
+              path="upcomingprojects"
+              element={<UpcomingProjects />}
+            />
+            <Route
+              key="pageheading"
+              path="pageheading"
+              element={<PageHeading />}
+            />
+            <Route
+              key="bannerimages"
+              path="bannerimages"
+              element={<BannerImages />}
+            />
+          </Route>
+          <Route key="Projects" path="/projects" element={<Projects />} />
+          <Route key="Home" path="/" element={<Home />} />
+          <Route key="About" path="/about" element={<About />} />
+          <Route key="NriCorner" path="/nri-corner" element={<NriCorner />} />
+          <Route key="Gallery" path="/gallery" element={<Gallery />} />
+          <Route key="Contact" path="/contact-us" element={<Contact />} />
+        </Routes>
+      </Suspense>
+    </Router>
   );
 }
 

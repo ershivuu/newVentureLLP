@@ -1,24 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Headers from "../../components/Headers/Headers";
+import { projectPageBanner } from "../../Services/frontendServices";
 
 function Gallery() {
+  const [projects, setProjects] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://192.168.29.110:5000/getAllSectionFirst"
+      );
+      setProjects(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
+      <Headers></Headers>
       <div className="wrapper">
-        <p>GALLERY</p>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Reprehenderit omnis sapiente doloremque illum velit nam quisquam
-          molestias atque aperiam! Saepe ducimus unde, cupiditate officiis
-          consequatur voluptate ullam minima! Quasi quo natus impedit iste a
-          asperiores, ipsa eum possimus? Incidunt, numquam ex. Labore fugiat
-          ipsa voluptate dolores eum odit pariatur optio praesentium, molestiae
-          mollitia facilis eveniet laboriosam sed dicta fugit. Dolorem, sapiente
-          nam? Sit ex nobis molestias libero expedita quidem minima, at
-          perferendis ipsum iste maiores. Animi ratione asperiores nostrum eos,
-          facere aliquid tempore, quas ipsam blanditiis molestias officia
-          corrupti ducimus non? Soluta aperiam deleniti dolor a, minima
-          perspiciatis ipsa cum.
-        </p>
+        <div>
+          {projects.length > 0 ? (
+            projects.map((project) => (
+              <div key={project.id}>
+                <p>{project.heading}</p>
+                <div className="banner-images">
+                  {project.banner_images &&
+                    project.banner_images.map((image) => (
+                      <img
+                        key={image.id}
+                        src={image.img_path}
+                        alt={image.img_name}
+                      />
+                    ))}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
       </div>
     </>
   );

@@ -1,8 +1,10 @@
 import React from "react";
+import Headers from "../../components/Headers/Headers";
 
 function About() {
   return (
     <>
+      <Headers></Headers>
       <div className="wrapper">
         <p>About US</p>
         <p>

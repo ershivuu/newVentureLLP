@@ -1,9 +1,11 @@
 import React from "react";
+import Headers from "../../components/Headers/Headers";
 import "./Home.css";
 
 function Home() {
   return (
     <>
+      <Headers></Headers>
       <div className="wrapper">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus

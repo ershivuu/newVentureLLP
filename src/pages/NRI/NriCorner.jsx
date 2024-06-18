@@ -1,8 +1,10 @@
 import React from "react";
+import Headers from "../../components/Headers/Headers";
 
 function NriCorner() {
   return (
     <>
+      <Headers></Headers>
       <div className="wrapper">
         <p>NRI Corner</p>
         <p>

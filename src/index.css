@@ -7,4 +7,8 @@
 }
 .wrapper {
   margin-top: 70px;
+  color: black !important;
+}
+::-webkit-scrollbar {
+  display: none;
 }

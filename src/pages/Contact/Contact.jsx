@@ -1,8 +1,9 @@
 import React from "react";
-
+import Headers from "../../components/Headers/Headers";
 function Contact() {
   return (
     <>
+      <Headers></Headers>
       <div className="wrapper">
         <p>Contact</p>
         <p>

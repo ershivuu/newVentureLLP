@@ -58,7 +58,7 @@ function Headers() {
                     className="nav-link"
                     aria-current="page"
                   >
-                    CONTACT-US
+                    CONTACT US
                   </Link>
                 </li>
               </ul>
