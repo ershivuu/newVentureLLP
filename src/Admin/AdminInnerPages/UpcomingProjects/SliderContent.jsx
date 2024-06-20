@@ -43,13 +43,19 @@ function SliderContent() {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [notificationSeverity, setNotificationSeverity] = useState("default");
-  
+  const [fileError, setFileError] = useState("");
 
   const [editFormData, setEditFormData] = useState({
     heading: "",
     content: "",
     video_link: "",
   });
+  const [editFormErrors, setEditFormErrors] = useState({
+    heading: "",
+    content: "",
+    video_link: "",
+  });
+
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [addFormData, setAddFormData] = useState({
     heading: "",
@@ -58,7 +64,13 @@ function SliderContent() {
     slider_img: null,
   });
 
-  
+  const [addFormErrors, setAddFormErrors] = useState({
+    heading: "",
+    content: "",
+    video_link: "",
+    slider_img: "",
+  });
+
   // const sliderImages=({
   //     display: 'flex',
 
@@ -86,13 +98,15 @@ function SliderContent() {
     setOpenDialog(false);
     setSelectedItemId(null);
     getData(); // Refresh the data after closing the dialog
+    setFileError("");
   };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+
     const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
     const maxSize = 20 * 1024 * 1024; // 20 MB in bytes
-  
+
     if (file) {
       if (!allowedFormats.includes(file.type)) {
         setNotificationSeverity("error");
@@ -106,14 +120,16 @@ function SliderContent() {
         event.target.value = null; // Clear the input field
       } else {
         setFile(file);
+        setFileError("");
       }
     }
   };
-  
 
   const handleSubmit = async () => {
-   
-
+    if (!file) {
+      setFileError("This field is required");
+      return;
+    }
     const formData = new FormData();
     formData.append("slider_img", file);
     formData.append("content_video_id", selectedItemId);
@@ -133,6 +149,18 @@ function SliderContent() {
   };
 
   const handleEditSubmit = async () => {
+    const errors = {
+      heading: editFormData.heading ? "" : "This field is required.",
+      content: editFormData.content ? "" : "This field is required.",
+      video_link: editFormData.video_link ? "" : "This field is required.",
+    };
+
+    setEditFormErrors(errors);
+
+    if (errors.heading || errors.content || errors.video_link) {
+      return; // Don't proceed if there are errors
+    }
+
     try {
       const response = await updateContentWithVideo(contentId, editFormData);
       handleCloseEditDialog();
@@ -148,13 +176,18 @@ function SliderContent() {
     }
   };
 
-
   const handleOpenEditDialog = (item) => {
     setContentId(item.content_video_id);
     setEditFormData({
       heading: item.heading,
       content: item.content,
       video_link: item.video_link,
+    });
+    setEditFormErrors({
+      heading: "",
+      content: "",
+      video_link: "",
+      slider_img: "",
     });
     setEditDialogOpen(true);
   };
@@ -172,7 +205,23 @@ function SliderContent() {
   };
 
   const handleAddSubmit = async () => {
-   
+    const errors = {
+      heading: addFormData.heading ? "" : "This field is required.",
+      content: addFormData.content ? "" : "This field is required.",
+      video_link: addFormData.video_link ? "" : "This field is required.",
+      slider_img: addFormData.slider_img ? "" : "This field is required.",
+    };
+
+    setAddFormErrors(errors);
+
+    if (
+      errors.heading ||
+      errors.content ||
+      errors.video_link ||
+      errors.slider_img
+    ) {
+      return; // Don't proceed if there are errors
+    }
 
     const formData = new FormData();
     formData.append("heading", addFormData.heading);
@@ -196,11 +245,15 @@ function SliderContent() {
   };
 
   const handleAddFormChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    // Clear the error for the field when typing
+    setAddFormErrors({ ...addFormErrors, [name]: "" });
     if (e.target.name === "slider_img") {
       const file = e.target.files[0];
       const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
       const maxSize = 20 * 1024 * 1024; // 20 MB in bytes
-  
+
       if (!allowedFormats.includes(file.type)) {
         setNotificationSeverity("error");
         setNotificationMessage("Only JPG, JPEG, and PNG formats are allowed.");
@@ -216,7 +269,6 @@ function SliderContent() {
       setAddFormData({ ...addFormData, [e.target.name]: e.target.value });
     }
   };
-  
 
   const handleOpenDeleteDialog = (item) => {
     setDeleteContentId(item.content_video_id);
@@ -251,86 +303,93 @@ function SliderContent() {
         Add New Projects
       </Button>
       <Box className="set-table">
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>S No.</TableCell>
-              <TableCell>Container ID</TableCell>
-              <TableCell>Heading</TableCell>
-              <TableCell>Content</TableCell>
-              <TableCell>Video Link</TableCell>
-              <TableCell>Slider Images</TableCell>
-              <TableCell>Add Images</TableCell>
-              <TableCell>Edit Content</TableCell>
-              <TableCell>Delete Content</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((item, index) => (
-              <TableRow key={item.content_video_id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{item.content_video_id}</TableCell>
-                <TableCell>{item.heading}</TableCell>
-                <TableCell>{item.content}</TableCell>
-                <TableCell>
-                  <a
-                    href={item.video_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Video Link
-                  </a>
-                </TableCell>
-                <TableCell>
-                  {item.slider_images.map((image) => (
-                    <div key={image.id}>
-                      <img
-                        src={image.slider_img_path}
-                        alt={image.file_name}
-                        style={{ width: "100px" }}
-                      />
-                    </div>
-                  ))}
-                </TableCell>
-                <TableCell>
-                  <Button
-                    startIcon={<AddPhotoAlternateIcon />}
-                    onClick={() => handleOpenDialog(item.content_video_id)}
-                  >
-                    Add Images
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    startIcon={<EditIcon />}
-                    onClick={() => handleOpenEditDialog(item)}
-                  >
-                    Edit
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    startIcon={<DeleteIcon />}
-                    color="secondary"
-                    onClick={() => handleOpenDeleteDialog(item)}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>S No.</TableCell>
+                <TableCell>Container ID</TableCell>
+                <TableCell>Heading</TableCell>
+                <TableCell>Content</TableCell>
+                <TableCell>Video Link</TableCell>
+                <TableCell>Slider Images</TableCell>
+                <TableCell>Add Images</TableCell>
+                <TableCell>Edit Content</TableCell>
+                <TableCell>Delete Content</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {data.map((item, index) => (
+                <TableRow key={item.content_video_id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{item.content_video_id}</TableCell>
+                  <TableCell>{item.heading}</TableCell>
+                  <TableCell>{item.content}</TableCell>
+                  <TableCell>
+                    <a
+                      href={item.video_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Video Link
+                    </a>
+                  </TableCell>
+                  <TableCell>
+                    {item.slider_images.map((image) => (
+                      <div key={image.id} className="slider-image-container">
+                        <img
+                          src={image.slider_img_path}
+                          alt={image.file_name}
+                          style={{ width: "100px" }}
+                             className="slider-image"
+                        />
+                      </div>
+                    ))}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      startIcon={<AddPhotoAlternateIcon />}
+                      onClick={() => handleOpenDialog(item.content_video_id)}
+                    >
+                      Add Images
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      startIcon={<EditIcon />}
+                      onClick={() => handleOpenEditDialog(item)}
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      startIcon={<DeleteIcon />}
+                      color="secondary"
+                      onClick={() => handleOpenDeleteDialog(item)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
-    
 
       {/* // add slider images  */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Add Slider Image</DialogTitle>
+
         <DialogContent>
-          <TextField type="file" fullWidth onChange={handleFileChange} />
+          <TextField
+            type="file"
+            fullWidth
+            onChange={handleFileChange}
+            error={Boolean(fileError)}
+            helperText={fileError}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
@@ -354,13 +413,16 @@ function SliderContent() {
             name="heading"
             type="text"
             fullWidth
-      
             id="outlined-basic"
             variant="outlined"
             value={editFormData.heading}
-            onChange={(e) =>
-              setEditFormData({ ...editFormData, heading: e.target.value })
-            }
+            onChange={(e) => {
+              setEditFormData({ ...editFormData, heading: e.target.value });
+              // Clear error for this field when typing
+              setEditFormErrors({ ...editFormErrors, heading: "" });
+            }}
+            error={Boolean(editFormErrors.heading)}
+            helperText={editFormErrors.heading}
           />
           <TextField
             label="Content"
@@ -369,13 +431,15 @@ function SliderContent() {
             name="heading"
             type="text"
             fullWidth
-         
             value={editFormData.content}
-            onChange={(e) =>
-              setEditFormData({ ...editFormData, content: e.target.value })
-            }
+            onChange={(e) => {
+              setEditFormData({ ...editFormData, content: e.target.value });
+              setEditFormErrors({ ...editFormErrors, content: "" });
+            }}
             id="outlined-basic"
             variant="outlined"
+            error={Boolean(editFormErrors.content)}
+            helperText={editFormErrors.content}
           />
           <TextField
             label="Video Link"
@@ -384,13 +448,15 @@ function SliderContent() {
             name="heading"
             type="text"
             fullWidth
-           
             value={editFormData.video_link}
-            onChange={(e) =>
-              setEditFormData({ ...editFormData, video_link: e.target.value })
-            }
+            onChange={(e) => {
+              setEditFormData({ ...editFormData, video_link: e.target.value });
+              setEditFormErrors({ ...editFormErrors, video_link: "" });
+            }}
             id="outlined-basic"
             variant="outlined"
+            error={Boolean(editFormErrors.video_link)}
+            helperText={editFormErrors.video_link}
           />
         </DialogContent>
         <DialogActions>
@@ -414,11 +480,12 @@ function SliderContent() {
             margin="dense"
             type="text"
             fullWidth
-       
             value={addFormData.heading}
             onChange={handleAddFormChange}
             id="outlined-basic"
             variant="outlined"
+            error={Boolean(addFormErrors.heading)}
+            helperText={addFormErrors.heading}
           />
           <TextField
             name="content"
@@ -427,10 +494,11 @@ function SliderContent() {
             margin="dense"
             type="text"
             fullWidth
-         
             value={addFormData.content}
             onChange={handleAddFormChange}
             id="outlined-basic"
+            error={Boolean(addFormErrors.content)}
+            helperText={addFormErrors.content}
             variant="outlined"
           />
           <TextField
@@ -440,21 +508,23 @@ function SliderContent() {
             margin="dense"
             type="text"
             fullWidth
-           
             value={addFormData.video_link}
             onChange={handleAddFormChange}
             id="outlined-basic"
             variant="outlined"
+            error={Boolean(addFormErrors.video_link)}
+            helperText={addFormErrors.video_link}
           />
           <TextField
-          fullWidth
-     
-          autoFocus
+            fullWidth
+            autoFocus
             margin="dense"
             type="file"
             accept="image/*"
             name="slider_img"
             onChange={handleAddFormChange}
+            error={!!addFormErrors.slider_img}
+            helperText={addFormErrors.slider_img}
           />
         </DialogContent>
         <DialogActions>

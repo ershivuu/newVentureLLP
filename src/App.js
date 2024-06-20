@@ -2,15 +2,15 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Lazy load the components
-const adminPanel = lazy(() => import("./admin/adminPanel/adminPanel.jsx"));
+const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
 const UpcomingProjects = lazy(() =>
-  import("./admin/adminInnerPages/UpcomingProjects/UpcomingProjects.jsx")
+  import("./admin/AdminInnerPages/UpcomingProjects/UpcomingProjects.jsx")
 );
 const PageHeading = lazy(() =>
-  import("./admin/adminInnerPages/UpcomingProjects/PageHeading.jsx")
+  import("./admin/AdminInnerPages/UpcomingProjects/PageHeading.jsx")
 );
 const BannerImages = lazy(() =>
-  import("./admin/adminInnerPages/UpcomingProjects/BannerImages.jsx")
+  import("./admin/AdminInnerPages/UpcomingProjects/BannerImages.jsx")
 );
 const Projects = lazy(() => import("./pages/upcommingProject/Projects.jsx"));
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
@@ -19,10 +19,10 @@ const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
 const ProjectSlider = lazy(() =>
-  import("./admin/adminInnerPages/UpcomingProjects/ProjectSlider.jsx")
+  import("./admin/AdminInnerPages/UpcomingProjects/ProjectSlider.jsx")
 );
 const SliderContent = lazy(() =>
-  import("./admin/adminInnerPages/UpcomingProjects/SliderContent.jsx")
+  import("./admin/AdminInnerPages/UpcomingProjects/SliderContent.jsx")
 );
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route key="adminpanel" path="adminpanel" element={<adminPanel />}>
+          <Route key="adminpanel" path="adminpanel" element={<AdminPanel />}>
             <Route
               key="upcomingprojects"
               path="upcomingprojects"

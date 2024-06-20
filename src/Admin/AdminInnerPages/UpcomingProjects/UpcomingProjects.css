@@ -9,3 +9,12 @@
     align-items: center; /* Center the items horizontally */
   }
   
+  .slider-image-container {
+    margin-bottom: 10px; /* Adjust the margin as per your preference */
+  }
+  
+  .slider-image {
+    width: 100px; /* Set the width of the images */
+    /* Add any other styles as needed */
+  }
+  

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getAllBannerImages, updateBannerImage, addBannerImage, deleteBannerImage } from "../../AdminServices";
+import {
+  getAllBannerImages,
+  updateBannerImage,
+  addBannerImage,
+  deleteBannerImage,
+} from "../../AdminServices";
 import {
   Table,
   TableBody,
@@ -18,9 +23,9 @@ import {
   TableContainer,
   Box,
 } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Notification from '../../../Notification/Notification';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Notification from "../../../Notification/Notification";
 import "./UpcomingProjects.css";
 
 function BannerImages() {
@@ -33,8 +38,12 @@ function BannerImages() {
   const [editImageId, setEditImageId] = useState(null);
   const [deleteImageId, setDeleteImageId] = useState(null);
   const [file, setFile] = useState(null);
-  const [notification, setNotification] = useState({ open: false, message: '', severity: 'success' });
-  const [fileError, setFileError] = useState('');
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+  const [fileError, setFileError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +71,7 @@ function BannerImages() {
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-  
+
     if (!allowedTypes.includes(selectedFile.type)) {
       setNotification({
         open: true,
@@ -70,9 +79,10 @@ function BannerImages() {
         severity: "error",
       });
       setFile(null);
+      setFileError("");
       return;
     }
-  
+
     if (selectedFile.size > 20 * 1024 * 1024) {
       setNotification({
         open: true,
@@ -80,45 +90,62 @@ function BannerImages() {
         severity: "error",
       });
       setFile(null);
+      setFileError("");
       return;
     }
-  
+
     setFile(selectedFile);
+    setFileError("");
   };
-  
 
   const handleUpdateImage = async () => {
     if (!file) {
-      setFileError('This field is required');
+      setFileError("This field is required");
       return;
     }
     try {
       const response = await updateBannerImage(editImageId, file);
       const updatedImages = await getAllBannerImages();
       setBannerImages(updatedImages[0].banner_images);
-      setNotification({ open: true, message: response.message, severity: 'success' });
+      setNotification({
+        open: true,
+        message: response.message,
+        severity: "success",
+      });
       setOpenEditDialog(false);
       setEditImageId(null);
       setFile(null);
     } catch (error) {
-      setNotification({ open: true, message: error.message, severity: 'error' });
+      setNotification({
+        open: true,
+        message: error.message,
+        severity: "error",
+      });
     }
   };
 
   const handleAddImage = async () => {
     if (!file) {
-      setFileError('This field is required');
+      setFileError("This field is required");
       return;
     }
     try {
       const response = await addBannerImage(file);
       const updatedImages = await getAllBannerImages();
       setBannerImages(updatedImages[0].banner_images);
-      setNotification({ open: true, message: response.message, severity: 'success' });
+      setNotification({
+        open: true,
+        message: response.message,
+        severity: "success",
+      });
       setOpenAddDialog(false);
       setFile(null);
     } catch (error) {
-      setNotification({ open: true, message: error.message, severity: 'error' });
+      setNotification({
+        open: true,
+        message: error.message,
+        severity: "error",
+      });
     }
   };
 
@@ -127,11 +154,19 @@ function BannerImages() {
       const response = await deleteBannerImage(deleteImageId);
       const updatedImages = await getAllBannerImages();
       setBannerImages(updatedImages[0].banner_images);
-      setNotification({ open: true, message: response.message, severity: 'success' });
+      setNotification({
+        open: true,
+        message: response.message,
+        severity: "success",
+      });
       setOpenDeleteDialog(false);
       setDeleteImageId(null);
     } catch (error) {
-      setNotification({ open: true, message: error.message, severity: 'error' });
+      setNotification({
+        open: true,
+        message: error.message,
+        severity: "error",
+      });
     }
   };
 
@@ -174,7 +209,11 @@ function BannerImages() {
       <Typography variant="h4" component="h1" gutterBottom>
         Banner Images
       </Typography>
-      <Button variant="contained" color="success" onClick={handleClickOpenAddDialog}>
+      <Button
+        variant="contained"
+        color="success"
+        onClick={handleClickOpenAddDialog}
+      >
         Add Images
       </Button>
       <Box className="set-table">
@@ -223,6 +262,8 @@ function BannerImages() {
                 ))}
             </TableBody>
           </Table>
+
+          {/* // edit banner image  */}
           <Dialog open={openEditDialog} onClose={handleCloseEditDialog}>
             <DialogTitle>Edit Banner Image</DialogTitle>
             <DialogContent>
@@ -241,7 +282,12 @@ function BannerImages() {
           <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
             <DialogTitle>Add Banner Image</DialogTitle>
             <DialogContent>
-              <TextField type="file" onChange={handleFileChange} name="banner_img" fullWidth />
+              <TextField
+                type="file"
+                onChange={handleFileChange}
+                name="banner_img"
+                fullWidth
+              />
               {fileError && <Typography color="error">{fileError}</Typography>}
             </DialogContent>
             <DialogActions>
@@ -256,7 +302,9 @@ function BannerImages() {
           <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
             <DialogTitle>Confirm Delete</DialogTitle>
             <DialogContent>
-              <Typography>Are you sure you want to delete this image?</Typography>
+              <Typography>
+                Are you sure you want to delete this image?
+              </Typography>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseDeleteDialog}>Cancel</Button>

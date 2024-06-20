@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -16,23 +16,29 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
- 
-} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import { getAllSectionFirst, updateSectionFirstContent } from '../../AdminServices';
-import Notification from '../../../Notification/Notification'; 
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import {
+  getAllSectionFirst,
+  updateSectionFirstContent,
+} from "../../AdminServices";
+import Notification from "../../../Notification/Notification";
 
 function PageHeading() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
-  const [editData, setEditData] = useState({ id: '', heading: '', content: '' });
-  const [fieldErrors, setFieldErrors] = useState({ heading: '', content: '' });
+  const [editData, setEditData] = useState({
+    id: "",
+    heading: "",
+    content: "",
+  });
+  const [fieldErrors, setFieldErrors] = useState({ heading: "", content: "" });
   const [notification, setNotification] = useState({
     open: false,
-    message: '',
-    severity: 'info',
+    message: "",
+    severity: "info",
   });
 
   useEffect(() => {
@@ -52,7 +58,7 @@ function PageHeading() {
 
   const handleClickOpen = (section) => {
     setEditData(section);
-    setFieldErrors({ heading: '', content: '' });
+    setFieldErrors({ heading: "", content: "" });
     setOpen(true);
   };
 
@@ -66,18 +72,22 @@ function PageHeading() {
       ...prevData,
       [name]: value,
     }));
+    setFieldErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const validateFields = () => {
-    const errors = { heading: '', content: '' };
+    const errors = { heading: "", content: "" };
     let isValid = true;
 
     if (!editData.heading) {
-      errors.heading = 'This field is required';
+      errors.heading = "This field is required";
       isValid = false;
     }
     if (!editData.content) {
-      errors.content = 'This field is required';
+      errors.content = "This field is required";
       isValid = false;
     }
 
@@ -89,24 +99,33 @@ function PageHeading() {
     if (!validateFields()) return;
 
     try {
-      const updatedData = { id: editData.id, content: editData.content, heading: editData.heading };
-      const response = await updateSectionFirstContent(editData.id, updatedData);
+      const updatedData = {
+        id: editData.id,
+        content: editData.content,
+        heading: editData.heading,
+      };
+      const response = await updateSectionFirstContent(
+        editData.id,
+        updatedData
+      );
       setData((prevData) =>
         prevData.map((item) =>
-          item.id === editData.id ? { ...item, content: editData.content, heading: editData.heading } : item
+          item.id === editData.id
+            ? { ...item, content: editData.content, heading: editData.heading }
+            : item
         )
       );
 
       setNotification({
         open: true,
         message: response.message,
-        severity: 'success',
+        severity: "success",
       });
     } catch (error) {
       setNotification({
         open: true,
         message: `Error updating data: ${error.message}`,
-        severity: 'error',
+        severity: "error",
       });
       setError(error.message);
     } finally {
@@ -144,7 +163,10 @@ function PageHeading() {
                 <TableCell>{section.heading}</TableCell>
                 <TableCell>{section.content}</TableCell>
                 <TableCell>
-                  <Button startIcon={<EditIcon />} onClick={() => handleClickOpen(section)}>
+                  <Button
+                    startIcon={<EditIcon />}
+                    onClick={() => handleClickOpen(section)}
+                  >
                     Edit
                   </Button>
                 </TableCell>
@@ -157,7 +179,9 @@ function PageHeading() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit Section</DialogTitle>
         <DialogContent>
-          <DialogContentText>To edit this section, please modify the fields below.</DialogContentText>
+          <DialogContentText>
+            To edit this section, please modify the fields below.
+          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
