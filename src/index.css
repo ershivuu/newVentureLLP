@@ -5,3 +5,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+.wrapper {
+  margin-top: 70px;
+  color: black !important;
+}
+::-webkit-scrollbar {
+  display: none;
+}
