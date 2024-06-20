@@ -9,6 +9,9 @@ import UpcomingProjects from "./Admin/AdminInnerPages/UpcomingProjects/UpcomingP
 import PageHeading from "./Admin/AdminInnerPages/UpcomingProjects/PageHeading.jsx";
 import BannerImages from "./Admin/AdminInnerPages/UpcomingProjects/BannerImages.jsx";
 
+import ProjectSlider from "./Admin/AdminInnerPages/UpcomingProjects/ProjectSlider.jsx";
+import SliderContent from "./Admin/AdminInnerPages/UpcomingProjects/SliderContent.jsx";
+
 function App() {
   return (
     <Router>
@@ -32,6 +35,16 @@ function App() {
             key="bannerimages"
             path="bannerimages"
             element={<BannerImages />}
+          />
+          <Route
+            key="projectslider"
+            path="projectslider"
+            element={ <ProjectSlider/>}
+          />
+          <Route
+            key="slidercontent"
+            path="slidercontent"
+            element={ <SliderContent/>}
           />
         </Route>
       </Routes>

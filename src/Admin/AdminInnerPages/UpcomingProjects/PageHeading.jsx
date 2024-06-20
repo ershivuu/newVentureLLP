@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getAllSectionFirst, updateSectionFirstContent } from '../../AdminServices';
 import {
   Table,
   TableBody,
@@ -16,20 +15,24 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  TextField
+  TextField,
+ 
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-
+import { getAllSectionFirst, updateSectionFirstContent } from '../../AdminServices';
+import Notification from '../../../Notification/Notification'; 
 
 function PageHeading() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
-  const [editData, setEditData] = useState({
-    id: '',
-    heading: '',
-    content: ''
+  const [editData, setEditData] = useState({ id: '', heading: '', content: '' });
+  const [fieldErrors, setFieldErrors] = useState({ heading: '', content: '' });
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: 'info',
   });
 
   useEffect(() => {
@@ -49,6 +52,7 @@ function PageHeading() {
 
   const handleClickOpen = (section) => {
     setEditData(section);
+    setFieldErrors({ heading: '', content: '' });
     setOpen(true);
   };
 
@@ -60,21 +64,50 @@ function PageHeading() {
     const { name, value } = e.target;
     setEditData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
+  const validateFields = () => {
+    const errors = { heading: '', content: '' };
+    let isValid = true;
+
+    if (!editData.heading) {
+      errors.heading = 'This field is required';
+      isValid = false;
+    }
+    if (!editData.content) {
+      errors.content = 'This field is required';
+      isValid = false;
+    }
+
+    setFieldErrors(errors);
+    return isValid;
+  };
+
   const handleSave = async () => {
+    if (!validateFields()) return;
+
     try {
-      const updatedData = { id: editData.id, content: editData.content,heading:editData.heading };
-      await updateSectionFirstContent(editData.id, updatedData);
+      const updatedData = { id: editData.id, content: editData.content, heading: editData.heading };
+      const response = await updateSectionFirstContent(editData.id, updatedData);
       setData((prevData) =>
         prevData.map((item) =>
-          item.id === editData.id ? { ...item, content: editData.content,heading:editData.heading } : item
+          item.id === editData.id ? { ...item, content: editData.content, heading: editData.heading } : item
         )
       );
+
+      setNotification({
+        open: true,
+        message: response.message,
+        severity: 'success',
+      });
     } catch (error) {
-      console.error('Error updating data:', error);
+      setNotification({
+        open: true,
+        message: `Error updating data: ${error.message}`,
+        severity: 'error',
+      });
       setError(error.message);
     } finally {
       handleClose();
@@ -82,7 +115,7 @@ function PageHeading() {
   };
 
   if (loading) {
-    return <div><CircularProgress /></div>;
+    return <CircularProgress />;
   }
 
   if (error) {
@@ -91,7 +124,9 @@ function PageHeading() {
 
   return (
     <div>
-      <Typography variant="h4" component="h1" gutterBottom>Page Heading</Typography>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Page Heading
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -99,7 +134,7 @@ function PageHeading() {
               <TableCell>ID</TableCell>
               <TableCell>Heading</TableCell>
               <TableCell>Content</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Edit</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -109,10 +144,7 @@ function PageHeading() {
                 <TableCell>{section.heading}</TableCell>
                 <TableCell>{section.content}</TableCell>
                 <TableCell>
-                  <Button
-                    startIcon={<EditIcon />}
-                    onClick={() => handleClickOpen(section)}
-                  >
+                  <Button startIcon={<EditIcon />} onClick={() => handleClickOpen(section)}>
                     Edit
                   </Button>
                 </TableCell>
@@ -121,13 +153,11 @@ function PageHeading() {
           </TableBody>
         </Table>
       </TableContainer>
-      
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit Section</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To edit this section, please modify the fields below.
-          </DialogContentText>
+          <DialogContentText>To edit this section, please modify the fields below.</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -135,9 +165,12 @@ function PageHeading() {
             label="Heading"
             type="text"
             fullWidth
-            variant="standard"
+            id="outlined-basic"
+            variant="outlined"
             value={editData.heading}
             onChange={handleChange}
+            error={Boolean(fieldErrors.heading)}
+            helperText={fieldErrors.heading}
           />
           <TextField
             margin="dense"
@@ -145,9 +178,12 @@ function PageHeading() {
             label="Content"
             type="text"
             fullWidth
-            variant="standard"
+            id="outlined-basic"
+            variant="outlined"
             value={editData.content}
             onChange={handleChange}
+            error={Boolean(fieldErrors.content)}
+            helperText={fieldErrors.content}
           />
         </DialogContent>
         <DialogActions>
@@ -155,6 +191,13 @@ function PageHeading() {
           <Button onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
+
+      <Notification
+        open={notification.open}
+        handleClose={() => setNotification({ ...notification, open: false })}
+        alertMessage={notification.message}
+        alertSeverity={notification.severity}
+      />
     </div>
   );
 }

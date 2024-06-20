@@ -44,19 +44,13 @@ function Sidebar({ isOpen }) {
                 <Link to="/adminpanel/bannerimages">
                   <a href="#">Banner Images </a>
                 </Link>
-                <Link to="/FrontEndPanel/Section2">
-                  <a href="#">Section 2 </a>
+                <Link to="/adminpanel/projectslider">
+                  <a href="#">Project Slider Images</a>
                 </Link>
-                <Link to="/FrontEndPanel/Section3">
-                  <a href="#">Section 3 </a>
+                <Link to="/adminpanel/slidercontent">
+                  <a href="#">Slider Content And Vedio</a>
                 </Link>
-
-                <Link to="/FrontEndPanel/Section4">
-                  <a href="#">Section 4 </a>
-                </Link>
-                <Link to="/FrontEndPanel/Section5">
-                  <a href="#">Section 5 </a>
-                </Link>
+            
               </div>
 
               <Link to="/FrontEndPanel/EditInterviewSchedule">
