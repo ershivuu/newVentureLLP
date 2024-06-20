@@ -18,6 +18,12 @@ const About = lazy(() => import("./pages/About/About.jsx"));
 const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
+const ProjectSlider = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/ProjectSlider.jsx")
+);
+const SliderContent = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/SliderContent.jsx")
+);
 
 function App() {
   return (
@@ -40,7 +46,18 @@ function App() {
               path="bannerimages"
               element={<BannerImages />}
             />
+            <Route
+              key="projectslider"
+              path="projectslider"
+              element={<ProjectSlider />}
+            />
+            <Route
+              key="slidercontent"
+              path="slidercontent"
+              element={<SliderContent />}
+            />
           </Route>
+
           <Route key="Projects" path="/projects" element={<Projects />} />
           <Route key="Home" path="/" element={<Home />} />
           <Route key="About" path="/about" element={<About />} />
