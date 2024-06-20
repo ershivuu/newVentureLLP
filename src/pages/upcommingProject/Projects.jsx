@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   fetchProjects,
   fetchBannerImages,
@@ -7,11 +6,9 @@ import {
 } from "../../Services/frontendServices";
 import Headers from "../../components/Headers/Headers";
 import "./Projects.css";
-import siteimg1 from "../../assets/images/vector-imgs/site-1.jpg";
-import siteimg2 from "../../assets/images/vector-imgs/site-2.jpg";
-import siteimg3 from "../../assets/images/vector-imgs/site-3.jpg";
-import siteVideo from "../../assets/videos/sitevideo.mp4";
-
+import vectorOne from "../../assets/images/vector-imgs/site-3.jpg";
+import vectorTwo from "../../assets/images/vector-imgs/site-4.jpg";
+import sidVideo from "../../assets/videos/sitevideo.mp4";
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [bannerImages, setBannerImages] = useState([]);
@@ -52,10 +49,15 @@ function Projects() {
               </div>
             ))
           ) : (
-            <p>Please Wait...</p>
+            // content if api is not working
+            <div className="page-heading">
+              <p>Welcome to corusview Venture LLP</p>
+            </div>
           )}
         </div>
+
         <div id="carouselExample" className="carousel slide">
+          <div class="gradient-overlay"></div>
           <div className="carousel-inner">
             {bannerImages.length > 0 ? (
               bannerImages.map((image, index) => (
@@ -73,7 +75,41 @@ function Projects() {
                 </div>
               ))
             ) : (
-              <p>Please Wait...</p>
+              // content if api is not working
+              <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="carousel-item active carousel-item-banner">
+                    <img src={vectorOne} class="d-block w-100" alt="..." />
+                  </div>
+                  <div class="carousel-item carousel-item-banner">
+                    <img src={vectorTwo} class="d-block w-100" alt="..." />
+                  </div>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
             )}
           </div>
           {bannerImages.length > 0 && (
@@ -106,7 +142,8 @@ function Projects() {
           )}
         </div>
       </div>
-      <div className="about-project">
+
+      <div>
         {contentData.length > 0 ? (
           contentData.map((contentItem) => (
             <div className="about-project" key={contentItem.content_video_id}>
@@ -138,7 +175,7 @@ function Projects() {
                     data-bs-slide="prev"
                   >
                     <span
-                      className="carousel-control-prev-icon"
+                      className="carousel-control-prev-icon projects-prev-icon"
                       aria-hidden="true"
                     ></span>
                     <span className="visually-hidden">Previous</span>
@@ -150,7 +187,7 @@ function Projects() {
                     data-bs-slide="next"
                   >
                     <span
-                      className="carousel-control-next-icon"
+                      className="carousel-control-next-icon projects-next-icon"
                       aria-hidden="true"
                     ></span>
                     <span className="visually-hidden">Next</span>
@@ -178,7 +215,63 @@ function Projects() {
             </div>
           ))
         ) : (
-          <p>Please Wait...</p>
+          // content if api is not working
+          <div className="about-project">
+            <div className="project-imgs">
+              <div id="carouselExampleDummy" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="carousel-item active carousel-item-project">
+                    <img src={vectorOne} class="d-block w-100" alt="..." />
+                  </div>
+                  <div class="carousel-item carousel-item-project">
+                    <img src={vectorTwo} class="d-block w-100" alt="..." />
+                  </div>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDummy"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon  projects-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDummy"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon projects-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="content">
+              <div className="project-content">
+                <p>Shiddhraj Paradise</p>
+                <p>
+                  Siddhraj Paradise, a prestigious residential closed colony
+                  nestled in the serene locale of Sinhasa, Indore, is a
+                  testament to luxurious and tranquil living. Located in close
+                  proximity to the Indore International Airport, this
+                  meticulously planned enclave offers a range of plots spanning
+                  from 1200 to 2800 sqft, providing ample space for your dream
+                  home.
+                </p>
+              </div>
+              <div className="video-section">
+                <video src={sidVideo}></video>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>

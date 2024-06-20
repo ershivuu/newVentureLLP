@@ -9,6 +9,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 100;
 }
 .page-heading p {
   text-align: center;
@@ -22,10 +23,21 @@
   height: 100vh;
   object-position: top;
 }
+
 .carousel-control-next-icon {
   position: absolute;
   right: 0;
   margin-right: 50px;
+}
+.projects-prev-icon {
+  bottom: 0%;
+  margin-bottom: 50px;
+  background-image: url("../../assets/logos/prev.png");
+}
+.projects-next-icon {
+  bottom: 0%;
+  margin-bottom: 50px;
+  background-image: url("../../assets/logos/next.png");
 }
 .carousel-control-prev-icon {
   position: absolute;
@@ -44,6 +56,7 @@
   height: auto;
   background-color: black;
 }
+/* css for sliders of projects section */
 .carousel-item-project {
   width: 100%;
   height: 622px;
@@ -51,13 +64,12 @@
 .carousel-item-project img {
   width: inherit;
   height: inherit;
-  object-fit: cover;
+  object-position: top;
 }
 .content {
   width: 40%;
   height: 622px;
   position: relative;
-  background-color: yellow;
 }
 .project-content p:nth-child(1) {
   font-size: 40px;
@@ -84,8 +96,33 @@
   height: inherit;
   object-fit: cover;
 }
+.video-section video {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
 .about-project {
   padding: 10px;
+}
+.about-project:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c73654d;
+  z-index: 10;
+}
+.carousel-control-prev {
+  position: absolute;
+  z-index: 100;
+}
+.carousel-control-next {
+  position: absolute;
+  z-index: 100;
 }
 @media only screen and (max-width: 767px) {
   .page-heading p {
