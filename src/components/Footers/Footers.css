@@ -45,6 +45,9 @@
   font-style: italic;
   color: rgba(255, 255, 255, 0.619);
 }
+.email {
+  position: relative;
+}
 .email input {
   background-color: transparent;
   border: none;
@@ -92,6 +95,27 @@ a {
 a:hover {
   color: #ffb1af;
 }
+.submit-btn img {
+  width: 50px;
+  height: 30px;
+  object-fit: contain;
+}
+.submit-btn {
+  display: flex;
+  position: absolute;
+  border: 2px solid white;
+  width: 100px;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 5px 2px 5px 2px;
+  cursor: pointer;
+  background-color: #004338;
+  right: 0;
+  top: 0;
+  margin-top: 38px;
+  margin-right: -18px;
+}
+
 @media only screen and (max-width: 767px) {
   .inner-wrapper {
     flex-direction: column;
@@ -106,6 +130,10 @@ a:hover {
     text-align: center;
     line-height: 1;
   }
+  /* .submit-btn {
+    margin-bottom: 0px;
+    margin-right: 0px;
+  } */
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {

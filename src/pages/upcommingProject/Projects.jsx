@@ -52,7 +52,7 @@ function Projects() {
           ) : (
             // content if api is not working
             <div className="page-heading">
-              <p>Welcome to corusview Venture LLP</p>
+              <p>Upcomming Projects</p>
             </div>
           )}
         </div>

@@ -10,6 +10,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
+  word-wrap: break-word !important;
+  max-width: 700px;
 }
 .page-heading p {
   text-align: center;
@@ -77,6 +79,7 @@
   font-weight: 700;
   font-family: "Playfair Display", serif;
   color: #12302a;
+  word-wrap: break-word;
 }
 
 .project-content p:nth-child(2) {
@@ -84,6 +87,7 @@
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   letter-spacing: 0.5px;
+  word-wrap: break-word;
 }
 .video-section {
   width: 100%;

@@ -1,8 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import "./Footers.css"; // Import CSS file after JS imports
 import logo from "../../assets/logos/logo.png";
+import mailicon from "../../assets/logos/mail.png";
 
 function Footers() {
   const phoneNumber = "+91 96172-44330";
@@ -16,8 +17,13 @@ function Footers() {
           <div className="email">
             <form>
               <p>Join Our List</p>
-              <input type="email" placeholder="Your Email" />
+              <div>
+                <input type="email" placeholder="Your Email" />
+              </div>
             </form>
+            <div className="submit-btn" type="submit">
+              <img src={mailicon} alt="" />
+            </div>
           </div>
 
           <div className="phone-number">
