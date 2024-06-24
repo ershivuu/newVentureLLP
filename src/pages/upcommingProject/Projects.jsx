@@ -5,6 +5,7 @@ import {
   fetchProject,
 } from "../../Services/frontendServices";
 import Headers from "../../components/Headers/Headers";
+import Footers from "../../components/Footers/Footers";
 import "./Projects.css";
 import vectorOne from "../../assets/images/vector-imgs/site-3.jpg";
 import vectorTwo from "../../assets/images/vector-imgs/site-4.jpg";
@@ -51,7 +52,7 @@ function Projects() {
           ) : (
             // content if api is not working
             <div className="page-heading">
-              <p>Welcome to corusview Venture LLP</p>
+              <p>Upcomming Projects</p>
             </div>
           )}
         </div>
@@ -268,12 +269,19 @@ function Projects() {
                 </p>
               </div>
               <div className="video-section">
-                <video src={sidVideo}></video>
+                <video
+                  src={sidVideo}
+                  autoPlay
+                  muted
+                  loop
+                  controls=" true"
+                ></video>
               </div>
             </div>
           </div>
         )}
       </div>
+      <Footers></Footers>
     </>
   );
 }

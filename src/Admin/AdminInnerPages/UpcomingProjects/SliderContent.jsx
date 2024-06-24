@@ -285,7 +285,7 @@ function SliderContent() {
       handleCloseDeleteDialog();
       getData();
       setNotificationSeverity("success");
-      setNotificationMessage(response.message); // Use response message from API
+      setNotificationMessage(response.message); 
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error deleting content:", error);

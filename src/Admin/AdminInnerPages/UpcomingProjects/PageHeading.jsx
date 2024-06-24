@@ -68,6 +68,16 @@ function PageHeading() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "heading" && value.length > 20) {
+      setFieldErrors({ ...fieldErrors, heading: "Maximum 20 characters allowed" });
+      return;
+    }
+
+    if (name === "content" && value.length > 100) {
+      setFieldErrors({ ...fieldErrors, content: "Maximum 100 characters allowed" });
+      return;
+    }
+
     setEditData((prevData) => ({
       ...prevData,
       [name]: value,

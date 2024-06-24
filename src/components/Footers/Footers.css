@@ -1,0 +1,164 @@
+.footer-wrapper {
+  padding-top: 20px;
+  background: radial-gradient(
+    150.55% 150.55% at 50% 50%,
+    #004c3f 0%,
+    #000000 100%
+  );
+}
+.inner-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 1536px;
+  margin: auto;
+}
+.footer-wrapper-2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  font-size: 18px;
+  align-items: center;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.619);
+  max-width: 1536px;
+  margin: auto;
+}
+.venture-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.venture-logo {
+  width: 285px;
+  height: 133px;
+  object-fit: contain;
+}
+.email p {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.619);
+}
+.email {
+  position: relative;
+}
+.email input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+}
+.email input:focus {
+  outline: none;
+}
+.phone-number p,
+a {
+  color: white;
+  text-decoration: none;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1;
+}
+.phone-number p:nth-child(1) {
+  color: rgba(255, 255, 255, 0.779);
+}
+.social-links {
+  color: white;
+  text-decoration: none;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.social-links p:nth-child(1) {
+  color: rgba(255, 255, 255, 0.779);
+}
+.fs-icons {
+  margin-left: 10px;
+  transform: rotate(-50deg);
+}
+.social-links p[class^="link-heading"]:hover {
+  color: rgba(255, 255, 255, 0.779);
+}
+.social-links p:hover,
+a:hover {
+  color: #ffb1af;
+}
+.submit-btn img {
+  width: 50px;
+  height: 30px;
+  object-fit: contain;
+}
+.submit-btn {
+  display: flex;
+  position: absolute;
+  border: 2px solid white;
+  width: 100px;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 5px 2px 5px 2px;
+  cursor: pointer;
+  background-color: #004338;
+  right: 0;
+  top: 0;
+  margin-top: 38px;
+  margin-right: -18px;
+}
+
+@media only screen and (max-width: 767px) {
+  .inner-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+  }
+  .footer-wrapper-2 {
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1;
+  }
+  /* .submit-btn {
+    margin-bottom: 0px;
+    margin-right: 0px;
+  } */
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .inner-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+  }
+  .footer-wrapper-2 {
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for portrait orientation here */
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  /* Your styles for the larger iPad Pro landscape orientation here */
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  /* Your styles for the larger iPad Pro portrait orientation here */
+}

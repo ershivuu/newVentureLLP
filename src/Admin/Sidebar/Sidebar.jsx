@@ -21,9 +21,16 @@ function Sidebar({ isOpen }) {
         <div className="side-bar">
           <div className={`custom-sidebar ${isOpen ? "open" : ""}`}>
             <ul>
-              {/* <Link to="/adminpanel/upcomingprojects">
-                <a>Upcoming Projects</a>
-              </Link> */}
+              <Link to="/adminpanel/edithome">
+                <a>Home</a>
+              </Link>
+              <Link to="/adminpanel/homesection1">
+                <a>Home Section 1</a>
+              </Link>
+              <Link to="/adminpanel/homesection2">
+                <a>Home Section 2</a>
+              </Link>
+          
 
               <button className="dropdown-btn" onClick={handleDropdown}>
               Upcoming Projects
@@ -53,7 +60,7 @@ function Sidebar({ isOpen }) {
             
               </div>
 
-              <Link to="/FrontEndPanel/EditInterviewSchedule">
+              {/* <Link to="/FrontEndPanel/EditInterviewSchedule">
                 <a href="#"> Interview Schedule </a>
               </Link>
 
@@ -66,7 +73,7 @@ function Sidebar({ isOpen }) {
 
               <Link to="/FrontEndPanel/EditFooter">
                 <a href="#">Footer</a>
-              </Link> 
+              </Link>  */}
 
              
             </ul>
