@@ -213,6 +213,7 @@ function BannerImages() {
         variant="contained"
         color="success"
         onClick={handleClickOpenAddDialog}
+        className="add-btn"
       >
         Add Images
       </Button>
@@ -253,7 +254,7 @@ function BannerImages() {
                       <Button
                         startIcon={<DeleteIcon />}
                         onClick={() => handleClickOpenDeleteDialog(item.id)}
-                        color="secondary"
+                        color="error"
                       >
                         Delete
                       </Button>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.1.13:5000';
+const BASE_URL = 'http://192.168.1.14:5000';
 
 
 //get upcoming project heading
@@ -190,5 +190,97 @@ export const deleteContainerData = async (deleteContentId) => {
   } catch (error) {
     console.error('Error deleting container data:', error);
     throw error;
+  }
+};
+
+
+// Get Home Logo and Banner Image
+export const getHomeData = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getHome`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching home data:', error);
+    throw error;
+  }
+};
+
+
+// PUT Home Logo and banner image
+export const updateHomeData = async (id, newData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateHome`, { id, ...newData });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating home data:', error);
+    throw error;
+  }
+};
+
+// Get home section first data
+export const getHomeSectionFirst = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getHomeSectionFirst`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+};
+
+// Update Home Section First Data
+export const updateHomeSectionFirst = async (id, newData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateHomeSectionFirst`, newData);
+    return response.data; // Assuming your API returns data upon successful update
+  } catch (error) {
+    throw new Error('Error updating home section first data:', error);
+  }
+};
+
+// Get home section second data
+export const getHomeSectionSecond = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/homeSectionSecond`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching HomeSectionSecond data:', error);
+    return null;
+  }
+};
+
+// Update Home Section Second Data 
+export const updateHomeSectionSecond = async (id, updatedData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/homeSectionSecond/${id}`, updatedData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating HomeSectionSecond data:', error);
+    return null;
+  }
+};
+
+
+// ADD Home Section Second Data 
+
+export const addHomeSectionSecond = async (formData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/homeSectionSecond`, formData);
+    return response;
+  } catch (error) {
+    console.error('Error adding Home Section Second image:', error);
+    return null;
+  }
+};
+
+// Delete Home Section Second Data
+
+export const deleteHomeSectionSecond = async (id) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/homeSectionSecond/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting Home Section Second data:', error);
+    return null;
   }
 };

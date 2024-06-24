@@ -197,6 +197,7 @@ function ProjectSlider() {
                   <Button
                     startIcon={<DeleteIcon />}
                     onClick={() => handleDeleteClick(item.id)}
+                     color="error"
                   >
                     Delete
                   </Button>

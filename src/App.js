@@ -1,5 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Test from "../src/admin/Test.jsx"
+
+import EditHome from "./admin/AdminInnerPages/EditHome/EditHome.jsx";
+import HomeSection1 from "./admin/AdminInnerPages/EditHome/HomeSection1.jsx";
+import HomeSection2 from "./admin/AdminInnerPages/EditHome/HomeSection2.jsx";
+
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -56,6 +62,22 @@ function App() {
               path="slidercontent"
               element={<SliderContent />}
             />
+            <Route
+              key="edithome"
+              path="edithome"
+              element={<EditHome />}
+            />
+            <Route
+              key="homesection1"
+              path="homesection1"
+              element={<HomeSection1 />}
+            />
+            <Route
+              key="homesection2"
+              path="homesection2"
+              element={<HomeSection2 />}
+            />
+       
           </Route>
 
           <Route key="Projects" path="/projects" element={<Projects />} />
@@ -64,6 +86,7 @@ function App() {
           <Route key="NriCorner" path="/nri-corner" element={<NriCorner />} />
           <Route key="Gallery" path="/gallery" element={<Gallery />} />
           <Route key="Contact" path="/contact-us" element={<Contact />} />
+          <Route key="test" path="/test" element={< Test/>} />
           <Route key="counter" path="/counter" element={<CharCounter />} />
         </Routes>
       </Suspense>

@@ -285,7 +285,7 @@ function SliderContent() {
       handleCloseDeleteDialog();
       getData();
       setNotificationSeverity("success");
-      setNotificationMessage(response.message); // Use response message from API
+      setNotificationMessage(response.message); 
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error deleting content:", error);
@@ -299,7 +299,7 @@ function SliderContent() {
       <Typography variant="h4" gutterBottom>
         Project Content & Video
       </Typography>
-      <Button variant="contained" color="success" onClick={handleOpenAddDialog}>
+      <Button className="add-btn" variant="contained" color="success" onClick={handleOpenAddDialog}>
         Add New Projects
       </Button>
       <Box className="set-table">
@@ -314,8 +314,8 @@ function SliderContent() {
                 <TableCell>Video Link</TableCell>
                 <TableCell>Slider Images</TableCell>
                 <TableCell>Add Images</TableCell>
-                <TableCell>Edit Content</TableCell>
-                <TableCell>Delete Content</TableCell>
+                <TableCell>Edit </TableCell>
+                <TableCell>Delete </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -350,6 +350,7 @@ function SliderContent() {
                     <Button
                       startIcon={<AddPhotoAlternateIcon />}
                       onClick={() => handleOpenDialog(item.content_video_id)}
+                      color="secondary"
                     >
                       Add Images
                     </Button>
@@ -358,6 +359,7 @@ function SliderContent() {
                     <Button
                       startIcon={<EditIcon />}
                       onClick={() => handleOpenEditDialog(item)}
+
                     >
                       Edit
                     </Button>
@@ -365,8 +367,9 @@ function SliderContent() {
                   <TableCell>
                     <Button
                       startIcon={<DeleteIcon />}
-                      color="secondary"
+                      color="error"
                       onClick={() => handleOpenDeleteDialog(item)}
+                      
                     >
                       Delete
                     </Button>
