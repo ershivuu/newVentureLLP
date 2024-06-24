@@ -21,6 +21,13 @@
 }
 
 
+@media screen and (max-width: 320px) {
+  /* Styles for smaller smartphones */
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+}
 
 @media only screen and (max-width: 767px) {
  

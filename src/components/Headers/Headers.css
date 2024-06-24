@@ -9,13 +9,19 @@
   height: 50px;
   object-fit: contain;
 }
+
 .navbar {
-  background-color: black !important;
+  background: radial-gradient(
+    150.55% 150.55% at 50% 50%,
+    #004c3f 0%,
+    #000000 100%
+  ) !important;
 }
 .navbar a {
   color: white !important;
   font-family: "Poppins", sans-serif;
   font-size: 16px;
+  font-style: normal;
 }
 .nav-item {
   padding-inline: 20px;

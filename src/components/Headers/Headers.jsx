@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./Headers.css";
 import corusviewLogo from "../../assets/logos/logo.png";
+import { getBanner } from "../../Services/frontendServices";
 function Headers() {
+  const [headerColor, setHeaderColor] = useState("");
+  const fetchData = async () => {
+    try {
+      const data = await getBanner();
+      setHeaderColor(data.head_color);
+      console.log(data.head_color, "header color");
+    } catch (error) {
+      console.error("Error fetching header Color:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <div className="fixed-header">

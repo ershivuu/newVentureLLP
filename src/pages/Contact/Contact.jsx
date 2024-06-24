@@ -1,26 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Headers from "../../components/Headers/Headers";
+import Footers from "../../components/Footers/Footers";
+import banner from "../../assets/images/vector-imgs/site-3.jpg";
 function Contact() {
   return (
     <>
       <Headers></Headers>
       <div className="wrapper">
-        <p>Contact</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed deleniti
-          ullam accusantium nostrum, aliquam totam quisquam. Recusandae
-          doloremque ea amet beatae iusto error libero sit animi praesentium
-          voluptatem nulla architecto iure, laborum rem quisquam repellat
-          facilis perferendis possimus aliquid pariatur. Quasi explicabo iure
-          nam perspiciatis, debitis odit exercitationem dicta placeat
-          perferendis harum quo dolores tempora, molestias quis ullam? Nulla
-          dolorem et velit similique voluptatibus consequatur quisquam accusamus
-          laborum odit culpa debitis omnis ratione repellat commodi eum, at odio
-          vel mollitia necessitatibus distinctio nostrum. Quam, veniam eius.
-          Pariatur neque repellendus minima quidem aut id? Necessitatibus vel
-          adipisci tempore, recusandae consequatur sapiente.
-        </p>
+        <div className="nri-banner">
+          <div className="banner-img">
+            <img src={banner} alt="" />
+          </div>
+        </div>
+        <div className="blur-wrapper"></div>
+        <div className="banner-heading">
+          <p>Global Dreams, Local Homes.</p>
+        </div>
       </div>
+      <Footers></Footers>
     </>
   );
 }

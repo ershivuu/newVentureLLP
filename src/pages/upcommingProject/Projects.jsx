@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  fetchProjects,
-  fetchBannerImages,
-  fetchProject,
+  upcommingPageBannerData,
+  upcommingPageBannerImage,
+  getUpcommingProjects,
 } from "../../Services/frontendServices";
 import Headers from "../../components/Headers/Headers";
 import Footers from "../../components/Footers/Footers";
@@ -17,10 +17,9 @@ function Projects() {
 
   const getBanner = async () => {
     try {
-      const projectsData = await fetchProjects();
+      const projectsData = await upcommingPageBannerData();
       setProjects(projectsData);
-
-      const bannerImagesData = await fetchBannerImages();
+      const bannerImagesData = await upcommingPageBannerImage();
       setBannerImages(bannerImagesData);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -28,7 +27,7 @@ function Projects() {
   };
   const getProjects = async () => {
     try {
-      const data = await fetchProject();
+      const data = await getUpcommingProjects();
       setContentData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -93,7 +92,7 @@ function Projects() {
                   data-bs-slide="prev"
                 >
                   <span
-                    class="carousel-control-prev-icon"
+                    class="carousel-control-prev-icon abt-page-prev-btn"
                     aria-hidden="true"
                   ></span>
                   <span class="visually-hidden">Previous</span>
@@ -105,7 +104,7 @@ function Projects() {
                   data-bs-slide="next"
                 >
                   <span
-                    class="carousel-control-next-icon"
+                    class="carousel-control-next-icon abt-page-next-btn"
                     aria-hidden="true"
                   ></span>
                   <span class="visually-hidden">Next</span>

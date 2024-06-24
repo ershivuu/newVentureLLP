@@ -1,0 +1,194 @@
+.carousel-item-banner img {
+  width: inherit;
+  height: inherit;
+  object-position: center;
+}
+
+.about-page-heading {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  word-wrap: break-word !important;
+  max-width: 700px;
+}
+.about-page-heading p {
+  text-align: center;
+  color: white;
+  font-size: 100px;
+  font-family: "Playfair Display", serif;
+  line-height: 1;
+}
+.carousel-item-banner {
+  width: 100%;
+  height: 100vh;
+  object-position: top;
+}
+
+.abt-page-next-btn {
+  position: absolute;
+  top: 60%;
+  right: 0;
+  margin-right: 20px !important;
+  background-image: url(../../assets/logos/next.png);
+}
+
+.abt-page-prev-btn {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  margin-left: 20px !important;
+  background-image: url(../../assets/logos/prev.png);
+}
+
+.blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.carousel-control-prev {
+  position: absolute;
+  z-index: 100;
+}
+.carousel-control-next {
+  position: absolute;
+  z-index: 100;
+}
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c73654d;
+  z-index: 10;
+}
+.mission,
+.vision {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  padding-block: 80px;
+}
+.mission-content,
+.vision-content {
+  max-width: 600px;
+  font-family: "Poppins", sans-serif;
+}
+.mission-heading,
+.vision-heading {
+  max-width: 600px;
+  font-family: "Cormorant", serif;
+  font-size: 46px;
+}
+.vision {
+  flex-direction: row-reverse;
+  color: white;
+  background-color: #101802;
+}
+.about-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  background-color: #101802;
+  padding-block: 100px;
+}
+.about-content {
+  color: white;
+  max-width: 600px;
+}
+.about-content p:nth-child(1) {
+  font-size: 60px;
+  font-family: "Playfair Display", serif;
+  line-height: 1;
+}
+.about-contentp:nth-child(2) {
+  font-size: 16px;
+  color: #9e9e9e;
+  font-family: "Poppins", sans-serif;
+}
+.about-imgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+.about-imgs img {
+  border: 3px solid white;
+}
+.vert-img {
+  width: 290px;
+  height: 400px;
+}
+.vert-img img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+.horizontal-group {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.hor-group-img-1,
+.hor-group-img-2 {
+  width: 350px;
+  height: 180px;
+  object-fit: cover;
+}
+.hor-group-img-1 img,
+.hor-group-img-2 img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .about-content p:nth-child(1) {
+    font-size: 30px;
+    line-height: 1;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .about-page-heading p {
+    font-size: 30px;
+  }
+  .about-page-heading {
+    top: 30%;
+  }
+  .carousel-item-banner {
+    width: 100%;
+    height: 40vh;
+    object-position: top;
+  }
+  .mission,
+  .vision {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-block: 30px;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .about-page-heading {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .about-page-heading p {
+    font-size: 50px;
+  }
+  .carousel-item-banner {
+    width: 100%;
+    height: 40vh;
+    object-position: top;
+  }
+}

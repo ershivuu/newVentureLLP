@@ -12,6 +12,12 @@ const PageHeading = lazy(() =>
 const BannerImages = lazy(() =>
   import("./admin/AdminInnerPages/UpcomingProjects/BannerImages.jsx")
 );
+const ProjectSlider = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/ProjectSlider.jsx")
+);
+const SliderContent = lazy(() =>
+  import("./admin/AdminInnerPages/UpcomingProjects/SliderContent.jsx")
+);
 const Projects = lazy(() => import("./pages/upcommingProject/Projects.jsx"));
 const Home = lazy(() => import("./pages/Home/Home.jsx"));
 const About = lazy(() => import("./pages/About/About.jsx"));
@@ -19,13 +25,6 @@ const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
 const CharCounter = lazy(() => import("./pages/CharCounter/Counter.jsx"));
-const ProjectSlider = lazy(() =>
-  import("./admin/AdminInnerPages/UpcomingProjects/ProjectSlider.jsx")
-);
-const SliderContent = lazy(() =>
-  import("./admin/AdminInnerPages/UpcomingProjects/SliderContent.jsx")
-);
-
 function App() {
   return (
     <Router>
