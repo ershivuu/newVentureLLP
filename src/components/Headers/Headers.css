@@ -35,3 +35,9 @@
 .navbar-toggler-icon {
   background-image: url(../../assets/logos/menu.png);
 }
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.navbar-toggler {
+  border: none !important;
+}

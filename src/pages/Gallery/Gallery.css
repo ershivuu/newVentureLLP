@@ -1,0 +1,157 @@
+.single-banner-image {
+  position: relative;
+  width: 100%;
+  height: 99vh;
+}
+.single-banner-image img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+.colored-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c73654d;
+  z-index: 10;
+}
+.single-banner-heading {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  word-wrap: break-word !important;
+  max-width: 700px;
+}
+.single-banner-heading p {
+  text-align: center;
+  color: white;
+  font-size: 100px;
+  font-family: "Playfair Display", serif;
+  line-height: 1;
+}
+/* -------------------------------------designing imgs-------------------------- */
+.gallery-imgs {
+  padding-block: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+.gallery-img-section-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+}
+.gallery-img-section-1 div {
+  background-color: black;
+  width: 406px;
+  height: 347px;
+}
+.sub-section-1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+.g-portrait-img {
+  background-color: black;
+  width: 402px;
+  height: 708px;
+}
+.g-landscape-img div {
+  width: 390px;
+  height: 225px;
+  background-color: black;
+}
+.g-landscape-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+.sub-section-2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  gap: 15px;
+}
+.gallery-img-section-2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+.big-landscape-image {
+  width: 808px;
+  height: 384px;
+  background-color: black;
+}
+.section-2-child-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.section-2-child-container div {
+  background-color: black;
+  width: 390px;
+  height: 383px;
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+  .single-banner-image {
+    height: 40vh;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+  .image-container {
+    width: 350px !important;
+    height: 350px !important;
+    background-color: blue !important;
+  }
+  .big-landscape-image {
+    margin: auto;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for landscape orientation here */
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for portrait orientation here */
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  /* Your styles for the larger iPad Pro landscape orientation here */
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
+  /* Your styles for the larger iPad Pro portrait orientation here */
+}

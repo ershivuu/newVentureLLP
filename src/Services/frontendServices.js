@@ -71,3 +71,49 @@ export const getHomeSectionThree = async () => {
     throw error;
   }
 };
+
+export const aboutPageBannerData = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/aboutus_banner`);
+    return response.data.data; // Adjust to access the 'data' array
+  } catch (error) {
+    console.error("Error fetching projects data:", error);
+    throw error;
+  }
+};
+
+export const aboutPageBannerImage = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/aboutus_banner`);
+    if (response.data && response.data.data.length > 0) {
+      return response.data.data.map((item) => ({
+        id: item.id,
+        img_path: item.banner_img_path,
+        img_name: item.banner_img_originalname,
+      }));
+    }
+    return [];
+  } catch (error) {
+    console.error("Error fetching banner images:", error);
+    throw error;
+  }
+};
+export const getAboutUsSectionFirst = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/getAboutUsSectionFirst`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching About Us section data:", error);
+    throw error;
+  }
+};
+
+export const getAboutSectionTwo = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/getAboutUsSectionSecond`);
+    return response.data.data; // Assuming the actual data is nested under 'data' key
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null; // Return null if there's an error
+  }
+};
