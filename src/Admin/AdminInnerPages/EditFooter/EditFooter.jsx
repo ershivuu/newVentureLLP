@@ -9,11 +9,7 @@ function EditFooter() {
     const fetchData = async () => {
       try {
         const data = await getAllFooterData();
-        if (isValidData(data)) {
-          setFooterData(data);
-        } else {
-          console.error('Invalid data format:', data);
-        }
+        setFooterData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -21,9 +17,6 @@ function EditFooter() {
 
     fetchData();
   }, []);
-
-  // Custom function to check if data is valid (array and not empty)
-  const isValidData = (data) => Array.isArray(data) && data.length > 0;
 
   return (
     <div>
@@ -38,20 +31,14 @@ function EditFooter() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isValidData(footerData) ? (
-            footerData.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.footer_color}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.mobile}</TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={4}>No data available</TableCell>
+          {footerData && footerData.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.id}</TableCell>
+              <TableCell>{item.footer_color}</TableCell>
+              <TableCell>{item.email}</TableCell>
+              <TableCell>{item.mobile}</TableCell>
             </TableRow>
-          )}
+          ))}
         </TableBody>
       </Table>
     </div>
@@ -59,3 +46,4 @@ function EditFooter() {
 }
 
 export default EditFooter;
+   
