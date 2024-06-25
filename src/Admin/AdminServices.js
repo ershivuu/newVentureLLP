@@ -498,3 +498,9 @@ export const getAllFooterData = async () => {
     return null;
   }
 };
+
+export const updateFooterData = async (id, data) => {
+  return await axios.put(`http://192.168.1.6:5000/updateFooter`, {
+    data,
+  });
+};
