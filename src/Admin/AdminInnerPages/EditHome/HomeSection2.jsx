@@ -44,7 +44,7 @@ function HomeSection2() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const handleEditClick = (imageData) => {
     setSelectedImage(imageData);

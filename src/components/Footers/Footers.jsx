@@ -14,10 +14,20 @@ function Footers() {
   const getFooterInfo = async () => {
     try {
       const data = await getFooterData();
-      setPhoneNumber(data.mobile);
-      setFooterColor(data.footer_color);
+      if (data && data.mobile) {
+        setPhoneNumber(data.mobile);
+      } else {
+        // Set a default phone number if the API response is empty or doesn't contain a valid number
+        setPhoneNumber("+91 9617244330");
+      }
+      setFooterColor(
+        data.footer_color ||
+          "radial-gradient(150.55% 150.55% at 50% 50%, #004c3f 0%, #000000 100%)"
+      );
     } catch (error) {
       console.error("Error fetching footer data:", error);
+      // Set a default phone number in case of an error fetching data from the API
+      setPhoneNumber("+91 9617244330");
     }
   };
   useEffect(() => {

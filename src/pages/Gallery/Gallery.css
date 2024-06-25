@@ -35,32 +35,27 @@
   line-height: 1;
 }
 /* -------------------------------------designing imgs-------------------------- */
-.prjoect-gallery {
-  position: static;
-  top: 0;
-  z-index: 9999;
+.project-gallery {
   max-width: 1440px;
   margin: auto;
-  /* background-color: yellow; */
-  height: 600px;
-  overflow-y: scroll;
-  margin: 30px;
+  margin-block: 50px;
 }
 .group-1-heading {
   position: sticky;
-  top: 63px;
+  top: 135px;
   width: 100%;
   text-align: right;
   font-size: 20px;
   font-family: "Cormorant", serif;
-  margin-right: 30px;
+
+  padding-right: 30px;
   font-weight: bold;
   background-color: white;
+  border: none !important;
 }
 .project-name {
   position: sticky;
-  top: 0;
-  margin-top: 50px;
+  top: 75px;
   font-size: 40px;
   font-family: "Cormorant", serif;
   color: #12302a;
@@ -75,11 +70,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  margin-bottom: 30px;
 }
 .image-section {
   width: 400px;
   height: 250px;
+}
+
+.image-section-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
 }
 .image-section img {
   width: inherit;
@@ -103,6 +105,10 @@
   .nri-content {
     text-align: justify;
   }
+  .image-section {
+    /* margin: auto; */
+    width: 300px;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -116,6 +122,10 @@
   .nri-content {
     text-align: justify;
   }
+  /* .image-section {
+    margin: auto;
+    width: 300px;
+  } */
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
