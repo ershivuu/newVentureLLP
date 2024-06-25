@@ -3,6 +3,8 @@ import "./Gallery.css";
 import Headers from "../../components/Headers/Headers";
 import Footers from "../../components/Footers/Footers";
 import banner from "../../assets/images/vector-imgs/site-3.jpg";
+import home2 from "../../assets/images/home2.jpg";
+import home3 from "../../assets/images/home3.jpg";
 function Gallery() {
   return (
     <>
@@ -18,31 +20,58 @@ function Gallery() {
           </div>
         </div>
       </div>
-      <div className="gallery-imgs">
-        <div className="gallery-img-section-1">
-          <div className="image-container"></div>
-          <div className="image-container"></div>
-          <div className="image-container"></div>
-          <div className="image-container"></div>
+      <div className="prjoect-gallery">
+        <div className="project-name">
+          <p> Shiddhraj Paradise</p>
         </div>
-        <div className="gallery-img-section-2">
-          <div className="sub-section-1">
-            <div className="g-portrait-img image-container"></div>
-            <div className="g-landscape-img image-container">
-              <div className="image-container"></div>
-              <div className="image-container"></div>
-              <div className="image-container"></div>
-            </div>
+        <div className="image-group image-group-1">
+          <div className="group-1-heading">
+            <p>Front-view</p>
           </div>
-          <div className="sub-section-2">
-            <div className="big-landscape-image image-container"></div>
-            <div className="section-2-child-container">
-              <div className="image-container"></div>
-              <div className="image-container"></div>
-            </div>
+          <div className="image-section">
+            <img src={home2} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+        </div>
+        <div className="image-group image-group-1">
+          <div className="group-1-heading">
+            <p>Top view</p>
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
+          </div>
+          <div className="image-section">
+            <img src={home3} alt="" srcset="" />
           </div>
         </div>
       </div>
+
       <Footers></Footers>
     </>
   );

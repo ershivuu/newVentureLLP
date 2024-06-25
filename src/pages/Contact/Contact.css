@@ -34,7 +34,53 @@
   font-family: "Playfair Display", serif;
   line-height: 1;
 }
-
+.contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  padding-block: 50px;
+}
+.contect-us p {
+  color: #88c128;
+  font-size: 60px;
+  font-family: "Cormorant", serif;
+  font-style: italic;
+  font-weight: bold;
+}
+.contect-us {
+  text-align: center;
+  padding-block: 50px;
+}
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+.social-icons img {
+  width: 30px;
+  height: 30px;
+}
+.contact-details p:nth-child(1) {
+  color: #88c128;
+  font-size: 60px;
+  font-family: "Cormorant", serif;
+  font-style: italic;
+  font-weight: bold;
+}
+.contact-details a {
+  color: black;
+}
+.contact-details a:hover {
+  color: black;
+}
+.contact-details p:nth-child(2) a {
+  font-family: "Poppins", sans-serif !important;
+  border-bottom: 2px solid black;
+}
 @media screen and (min-width: 321px) and (max-width: 480px) {
   /* Styles for larger smartphones */
   .single-banner-image {

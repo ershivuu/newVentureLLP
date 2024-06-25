@@ -117,3 +117,35 @@ export const getAboutSectionTwo = async () => {
     return null; // Return null if there's an error
   }
 };
+export const getNriPageData = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/getNriPage`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Propagate the error back to the caller
+  }
+};
+export const addNriPageFormData = async (formData) => {
+  try {
+    const response = await axios.post(`${apiUrl}/addNriPageForm`, {
+      name: formData.name,
+      contact: formData.contact,
+      email: formData.email,
+      comment: formData.comment,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error adding data:", error);
+    throw error; // Propagate the error back to the caller
+  }
+};
+export const getContactPageData = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/getContactPage`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching contact page data:", error);
+    return null;
+  }
+};

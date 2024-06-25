@@ -35,75 +35,56 @@
   line-height: 1;
 }
 /* -------------------------------------designing imgs-------------------------- */
-.gallery-imgs {
-  padding-block: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px;
+.prjoect-gallery {
+  position: static;
+  top: 0;
+  z-index: 9999;
+  max-width: 1440px;
+  margin: auto;
+  /* background-color: yellow; */
+  height: 600px;
+  overflow-y: scroll;
+  margin: 30px;
 }
-.gallery-img-section-1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 50px;
+.group-1-heading {
+  position: sticky;
+  top: 63px;
+  width: 100%;
+  text-align: right;
+  font-size: 20px;
+  font-family: "Cormorant", serif;
+  margin-right: 30px;
+  font-weight: bold;
+  background-color: white;
 }
-.gallery-img-section-1 div {
-  background-color: black;
-  width: 406px;
-  height: 347px;
-}
-.sub-section-1 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-.g-portrait-img {
-  background-color: black;
-  width: 402px;
-  height: 708px;
-}
-.g-landscape-img div {
-  width: 390px;
-  height: 225px;
-  background-color: black;
-}
-.g-landscape-img {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-}
-.sub-section-2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
+.project-name {
+  position: sticky;
+  top: 0;
   margin-top: 50px;
-  gap: 15px;
+  font-size: 40px;
+  font-family: "Cormorant", serif;
+  color: #12302a;
+  font-weight: bold;
+  background-color: white;
+  z-index: 99;
 }
-.gallery-img-section-2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
+.project-name p {
+  border-bottom: 2px solid #12302a;
 }
-.big-landscape-image {
-  width: 808px;
-  height: 384px;
-  background-color: black;
-}
-.section-2-child-container {
+.image-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
 }
-.section-2-child-container div {
-  background-color: black;
-  width: 390px;
-  height: 383px;
+.image-section {
+  width: 400px;
+  height: 250px;
+}
+.image-section img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
 }
 @media screen and (min-width: 321px) and (max-width: 480px) {
   /* Styles for larger smartphones */
@@ -121,14 +102,6 @@
   }
   .nri-content {
     text-align: justify;
-  }
-  .image-container {
-    width: 350px !important;
-    height: 350px !important;
-    background-color: blue !important;
-  }
-  .big-landscape-image {
-    margin: auto;
   }
 }
 
@@ -151,6 +124,7 @@
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
   /* Your styles for the larger iPad Pro landscape orientation here */
+  /* Your tablet styles for portrait orientation here */
 }
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
   /* Your styles for the larger iPad Pro portrait orientation here */
