@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.1.14:5000';
+const BASE_URL = 'http://192.168.1.5:5000';
 
 
 //get upcoming project heading
@@ -281,6 +281,178 @@ export const deleteHomeSectionSecond = async (id) => {
     return response.data;
   } catch (error) {
     console.error('Error deleting Home Section Second data:', error);
+    return null;
+  }
+};
+
+
+// Get Home Section Third  Data
+export const fetchHomeSectionThird = async () => {
+  try {
+    const response = await axios.get (`${BASE_URL}/getHomeSectionThird`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
+};
+
+// Update Home Section Third Data 
+export const updateHomeSectionThird = async (id, newData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateHomeSectionThird`, newData);
+    return response.data; // Assuming your API returns data upon successful update
+  } catch (error) {
+    throw new Error('Error updating home section first data:', error);
+  }
+};
+
+
+// Get About US Banner Data
+
+export const fetchAboutUsBanner = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/aboutus_banner`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching about us banner data:', error);
+    throw error;
+  }
+};
+
+
+// update ABout Us Banner data 
+
+
+export const updateAboutUsBanner = async (id, updatedData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/aboutus_banner/${id}`, updatedData);
+    return response.data; // Optionally, you can return the updated data or a success message
+  } catch (error) {
+    console.error('Error updating About Us Banner data:', error);
+    throw error; // Throw the error to handle it in the component
+  }
+};
+
+
+// ADD ABout Us Banner Data 
+export const addAboutUsBanner = async (formData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/aboutus_banner`, formData);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error adding about us banner:', error);
+  }
+};
+
+// Delete ABout Us Banner Data 
+export const deleteAboutUsBanner = async (id) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/aboutus_banner/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error deleting about us banner:', error);
+  }
+};
+
+
+// Get About us Section First Data 
+export const fetchAboutUsSectionFirst = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getAboutUsSectionFirst`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error fetching about us section first:', error);
+  }
+};
+
+// Update About Us Section First Data
+export const updateAboutUsSectionFirst = async (newData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateAboutUsSectionFirst`, newData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating About Us Section First data:', error);
+    throw error;
+  }
+};
+
+
+// Get About Us Section Second Data
+export const getAboutUsSectionSecond = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getAboutUsSectionSecond`);
+    return response.data.data; // Returning just the data object
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null; // Return null on error
+  }
+};
+
+
+// Update About Us Section Second Data
+export const updateAboutUsSectionSecond = async (formData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateAboutUsSectionSecond`, formData);
+    return response.data; // Returning the response data
+  } catch (error) {
+    console.error('Error updating data:', error);
+    throw error; // Throw error for handling in the component
+  }
+};
+
+//Get NRI Corner Data
+export const getNriPageData = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getNriPage`);
+    return response.data.data; // Returning just the data object
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null; // Return null on error
+  }
+};
+
+//Update NRI Corner Data
+export const updateNriPageData = async (formData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateNriPage`, formData);
+    return response.data; // Returning the response data
+  } catch (error) {
+    console.error('Error updating data:', error);
+    throw error; // Throw error for handling in the component
+  }
+};
+
+
+// Get NRI Contact Details 
+export const getNriPageFormData = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getNriPageForm`);
+    return response.data.data; 
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+};
+
+// Get Contact Us Data 
+export const getContactPageData = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getContactPage`);
+    return response.data.data; 
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
+};
+
+// Update Contact Us Data 
+export const updateContactPageData = async (id, formData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateContactPage`, formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating data:', error);
     return null;
   }
 };

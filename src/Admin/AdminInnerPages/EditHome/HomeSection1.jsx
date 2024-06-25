@@ -120,15 +120,15 @@ const HomeSection1 = () => {
             <TableCell>{data.content}</TableCell>
             <TableCell>
               <img src={data.img_first} alt="Image 1" style={{ width: 100 }} />
-              <div>{data.img_first_originalname}</div>
+              {/* <div>{data.img_first_originalname}</div>   */}
             </TableCell>
             <TableCell>
               <img src={data.img_second} alt="Image 2" style={{ width: 100 }} />
-              <div>{data.img_second_originalname}</div>
+              {/* <div>{data.img_second_originalname}</div> */}
             </TableCell>
             <TableCell>
               <img src={data.img_third} alt="Image 3" style={{ width: 100 }} />
-              <div>{data.img_third_originalname}</div>
+              {/* <div>{data.img_third_originalname}</div> */}
             </TableCell>
             <TableCell>
               <Button
@@ -143,18 +143,21 @@ const HomeSection1 = () => {
       </Table>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Edit Section Data</DialogTitle>
+        <DialogTitle >Edit Section 1</DialogTitle>
         <DialogContent>
           <TextField
             label="Heading"
+            
             fullWidth
             value={heading}
+       margin='dense'
             onChange={(e) => setHeading(e.target.value)}
           />
           <TextField
             label="Content"
             fullWidth
             multiline
+           margin='dense'
             rows={4}
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -162,15 +165,18 @@ const HomeSection1 = () => {
           <TextField
             fullWidth
             type="file"
+           margin='dense'
             onChange={(e) => setImage1(e.target.files[0])}
           />
           <TextField
             fullWidth
+           margin='dense'
             type="file"
             onChange={(e) => setImage2(e.target.files[0])}
           />
           <TextField
             fullWidth
+             margin='dense'
             type="file"
             onChange={(e) => setImage3(e.target.files[0])}
           />
