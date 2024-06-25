@@ -3,24 +3,51 @@ import { Outlet, Link } from "react-router-dom";
 import "./Headers.css";
 import corusviewLogo from "../../assets/logos/logo.png";
 import { getBanner } from "../../Services/frontendServices";
+
 function Headers() {
-  const [headerColor, setHeaderColor] = useState("");
+  const [headerClass, setHeaderClass] = useState("");
+
   const fetchData = async () => {
     try {
       const data = await getBanner();
-      setHeaderColor(data.head_color);
-      console.log(data.head_color, "header color");
+      const color = data.head_color;
+
+      if (color) {
+        const className = `header-color-${color.replace("#", "")}`;
+
+        // Create a new style element
+        const style = document.createElement("style");
+        style.innerHTML = `
+          .${className} {
+            background-color: ${color} !important;
+          }
+        `;
+        // Append the style element to the document head
+        document.head.appendChild(style);
+
+        setHeaderClass(className);
+        console.log(color, "header color");
+      }
     } catch (error) {
-      console.error("Error fetching header Color:", error);
+      console.error("Error fetching header color:", error);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <>
       <div className="fixed-header">
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav
+          className={`navbar navbar-expand-lg bg-body-tertiary ${headerClass}`}
+          style={{
+            background: !headerClass
+              ? "radial-gradient(150.55% 150.55% at 50% 50%, #004c3f 0%, #000000 100%)"
+              : "initial",
+          }}
+        >
           <div className="container-fluid">
             <Link to="/" className="navbar-brand" aria-current="page">
               <img src={corusviewLogo} alt="corusviewLogo" />
@@ -46,10 +73,9 @@ function Headers() {
                     ABOUT US
                   </Link>
                 </li>
-
                 <li className="nav-item">
                   <Link to="/projects" className="nav-link" aria-current="page">
-                    UPCOMMING PROJECTS
+                    UPCOMING PROJECTS
                   </Link>
                 </li>
                 <li className="nav-item">

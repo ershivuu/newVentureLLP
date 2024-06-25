@@ -9,6 +9,7 @@ function Sidebar({ isOpen }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const [footerDropdownOpen, setFooterDropdownOpen] = useState(false);
   const [nriDropdownOpen, setNriDropdownOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -26,6 +27,9 @@ function Sidebar({ isOpen }) {
   const handleAboutDropdown = () => {
     setAboutDropdownOpen(!aboutDropdownOpen);
   };
+  const handleFooterDropdown = () => {
+    setFooterDropdownOpen(!footerDropdownOpen);
+  };
 
   const handleNriDropdown = () => {
     // Function to toggle NRI Corner dropdown
@@ -37,6 +41,7 @@ function Sidebar({ isOpen }) {
     setHomeDropdownOpen(false);
     setAboutDropdownOpen(false);
     setNriDropdownOpen(false);
+    setAboutDropdownOpen(false);
   };
 
   return (
@@ -140,9 +145,26 @@ function Sidebar({ isOpen }) {
               <Link to="/adminpanel/editcontactus" onClick={handleLinkClick}>
                 <a>Contact Us</a>
               </Link>
-              <Link to="/adminpanel/editfooter" onClick={handleLinkClick}>
-                <a>Footer</a>
-              </Link>
+              {/* --------------------------------------------------------------------------- */}
+              <button className="dropdown-btn" onClick={handleFooterDropdown}>
+                Footer
+                <span className="custom-btn">
+                  {footerDropdownOpen ? "-" : "+"}
+                </span>
+              </button>
+              <div
+                className={`dropdown-container  ${
+                  footerDropdownOpen ? "active" : ""
+                }`}
+                style={{ display: footerDropdownOpen ? "block" : "none" }}
+              >
+                <Link to="/adminpanel/footerdata" onClick={handleLinkClick}>
+                  <a>Footer Data</a>
+                </Link>
+                <Link to="/adminpanel/editfooter" onClick={handleLinkClick}>
+                  <a>Edit Footer</a>
+                </Link>
+              </div>
             </ul>
           </div>
         </div>

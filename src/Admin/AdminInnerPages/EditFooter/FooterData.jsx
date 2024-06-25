@@ -6,6 +6,9 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  TableContainer,
+  Box,
+  Typography
 } from "@mui/material";
 
 function EditFooter() {
@@ -30,8 +33,9 @@ function EditFooter() {
   const isValidData = (data) => Array.isArray(data) && data.length > 0;
 
   return (
-    <div>
-      <h1>Footer Data</h1>
+    <Box>
+      <Typography>Footer Data</Typography>
+      <TableContainer>
       <Table>
         <TableHead>
           <TableRow>
@@ -56,7 +60,9 @@ function EditFooter() {
           )}
         </TableBody>
       </Table>
-    </div>
+      </TableContainer>
+      
+    </Box>
   );
 }
 

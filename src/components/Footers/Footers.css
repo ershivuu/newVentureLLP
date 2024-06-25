@@ -1,10 +1,10 @@
 .footer-wrapper {
   padding-top: 20px;
-  background: radial-gradient(
+  /* background: radial-gradient(
     150.55% 150.55% at 50% 50%,
     #004c3f 0%,
     #000000 100%
-  );
+  ); */
 }
 .inner-wrapper {
   display: flex;
