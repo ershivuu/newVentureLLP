@@ -5,6 +5,13 @@ import Test from "../src/admin/Test.jsx"
 import EditHome from "./admin/AdminInnerPages/EditHome/EditHome.jsx";
 import HomeSection1 from "./admin/AdminInnerPages/EditHome/HomeSection1.jsx";
 import HomeSection2 from "./admin/AdminInnerPages/EditHome/HomeSection2.jsx";
+import HomeSection3 from "./admin/AdminInnerPages/EditHome/HomeSection3.jsx";
+import AboutBanner from "./admin/AdminInnerPages/EditAboutUs/AboutBanner.jsx";
+import AboutSection1 from "./admin/AdminInnerPages/EditAboutUs/AboutSection1.jsx";
+import AboutSection2 from "./admin/AdminInnerPages/EditAboutUs/AboutSection2.jsx";
+import NriBanner from "./admin/AdminInnerPages/EditNriCorner/NriBanner.jsx";
+import ContactDetails from "./admin/AdminInnerPages/EditNriCorner/ContactDetails.jsx";
+import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx";
 
 
 // Lazy load the components
@@ -76,6 +83,44 @@ function App() {
               key="homesection2"
               path="homesection2"
               element={<HomeSection2 />}
+            />
+       
+            <Route
+              key="homesection3"
+              path="homesection3"
+              element={<HomeSection3 />}
+            />
+       
+            <Route
+              key="aboutbanner"
+              path="aboutbanner"
+              element={<AboutBanner />}
+            />
+            <Route
+              key="aboutsection1"
+              path="aboutsection1"
+              element={<AboutSection1 />}
+            />
+            <Route
+              key="aboutsection2"
+              path="aboutsection2"
+              element={<AboutSection2 />}
+            />
+            <Route
+              key="nribanner"
+              path="nribanner"
+              element={<NriBanner />}
+            />
+            <Route
+              key="contactdetails"
+              path="contactdetails"
+              element={<ContactDetails />}
+            />
+       
+            <Route
+              key="editcontactus"
+              path="editcontactus"
+              element={<EditContactUs />}
             />
        
           </Route>
