@@ -1,7 +1,6 @@
 import axios from "axios";
-import { API_URL } from "../Config/config";
 
-const BASE_URL = API_URL;
+const BASE_URL = "http://192.168.1.5:5000";
 
 //get upcoming project heading
 export const getAllSectionFirst = async () => {
@@ -489,14 +488,5 @@ export const updateContactPageData = async (id, formData) => {
   } catch (error) {
     console.error("Error updating data:", error);
     return null;
-  }
-};
-export const getAllFooterData = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/getAllFooterData`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching footer data", error);
-    throw error;
   }
 };
