@@ -41,6 +41,21 @@
   margin-bottom: 50px;
   background-image: url("../../assets/logos/next.png");
 }
+.abt-page-next-btn {
+  position: absolute;
+  top: 60%;
+  right: 0;
+  margin-right: 20px !important;
+  background-image: url(../../assets/logos/next.png);
+}
+
+.abt-page-prev-btn {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  margin-left: 20px !important;
+  background-image: url(../../assets/logos/prev.png);
+}
 .carousel-control-prev-icon {
   position: absolute;
   left: 0;

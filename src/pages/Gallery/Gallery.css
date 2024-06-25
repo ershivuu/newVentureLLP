@@ -1,0 +1,131 @@
+.single-banner-image {
+  position: relative;
+  width: 100%;
+  height: 99vh;
+}
+.single-banner-image img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+.colored-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c73654d;
+  z-index: 10;
+}
+.single-banner-heading {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  word-wrap: break-word !important;
+  max-width: 700px;
+}
+.single-banner-heading p {
+  text-align: center;
+  color: white;
+  font-size: 100px;
+  font-family: "Playfair Display", serif;
+  line-height: 1;
+}
+/* -------------------------------------designing imgs-------------------------- */
+.prjoect-gallery {
+  position: static;
+  top: 0;
+  z-index: 9999;
+  max-width: 1440px;
+  margin: auto;
+  /* background-color: yellow; */
+  height: 600px;
+  overflow-y: scroll;
+  margin: 30px;
+}
+.group-1-heading {
+  position: sticky;
+  top: 63px;
+  width: 100%;
+  text-align: right;
+  font-size: 20px;
+  font-family: "Cormorant", serif;
+  margin-right: 30px;
+  font-weight: bold;
+  background-color: white;
+}
+.project-name {
+  position: sticky;
+  top: 0;
+  margin-top: 50px;
+  font-size: 40px;
+  font-family: "Cormorant", serif;
+  color: #12302a;
+  font-weight: bold;
+  background-color: white;
+  z-index: 99;
+}
+.project-name p {
+  border-bottom: 2px solid #12302a;
+}
+.image-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.image-section {
+  width: 400px;
+  height: 250px;
+}
+.image-section img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+  .single-banner-image {
+    height: 40vh;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for landscape orientation here */
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for portrait orientation here */
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  /* Your styles for the larger iPad Pro landscape orientation here */
+  /* Your tablet styles for portrait orientation here */
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
+  /* Your styles for the larger iPad Pro portrait orientation here */
+}
