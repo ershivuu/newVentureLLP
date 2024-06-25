@@ -140,6 +140,9 @@ function Sidebar({ isOpen }) {
               <Link to="/adminpanel/editcontactus" onClick={handleLinkClick}>
                 <a>Contact Us</a>
               </Link>
+              <Link to="/adminpanel/editfooter" onClick={handleLinkClick}>
+                <a>Footer</a>
+              </Link>
             </ul>
           </div>
         </div>

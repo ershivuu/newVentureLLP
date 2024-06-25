@@ -12,6 +12,7 @@ import AboutSection2 from "./admin/AdminInnerPages/EditAboutUs/AboutSection2.jsx
 import NriBanner from "./admin/AdminInnerPages/EditNriCorner/NriBanner.jsx";
 import ContactDetails from "./admin/AdminInnerPages/EditNriCorner/ContactDetails.jsx";
 import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx";
+import EditFooter from "./admin/AdminInnerPages/EditFooter/EditFooter.jsx";
 
 
 // Lazy load the components
@@ -121,6 +122,12 @@ function App() {
               key="editcontactus"
               path="editcontactus"
               element={<EditContactUs />}
+            />
+       
+            <Route
+              key="editfooter"
+              path="editfooter"
+              element={<EditFooter />}
             />
        
           </Route>
