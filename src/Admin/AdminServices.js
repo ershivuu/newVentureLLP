@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.1.5:5000";
+const BASE_URL = "http://192.168.1.6:5000";
 
 //get upcoming project heading
 export const getAllSectionFirst = async () => {
@@ -229,10 +229,7 @@ export const getHomeData = async () => {
 // PUT Home Logo and banner image
 export const updateHomeData = async (id, newData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/updateHome`, {
-      id,
-      ...newData,
-    });
+    const response = await axios.put(`${BASE_URL}/updateHome`, newData);
     return response.data;
   } catch (error) {
     console.error("Error updating home data:", error);
@@ -487,6 +484,17 @@ export const updateContactPageData = async (id, formData) => {
     return response.data;
   } catch (error) {
     console.error("Error updating data:", error);
+    return null;
+  }
+};
+
+//Get Footer Data
+export const getAllFooterData = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getAllFooterData`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching footer data:", error);
     return null;
   }
 };

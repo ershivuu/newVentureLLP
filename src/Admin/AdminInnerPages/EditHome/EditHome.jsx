@@ -14,12 +14,12 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  IconButton,
   Typography,
   Box
 } from '@mui/material';
 import EditIcon from "@mui/icons-material/Edit";
 import { ChromePicker } from 'react-color';
+import Notification from '../../../Notification/Notification'; // Adjust the import path as needed
 
 const EditHome = () => {
   const [data, setData] = useState(null);
@@ -29,6 +29,14 @@ const EditHome = () => {
     banner_img_path: '',
     banner_img: null
   });
+
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
+
+  const [fileError, setFileError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +64,10 @@ const EditHome = () => {
     setOpen(false);
   };
 
+  const handleNotificationClose = () => {
+    setNotification((prevState) => ({ ...prevState, open: false }));
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -66,10 +78,30 @@ const EditHome = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setFormData((prevState) => ({
-      ...prevState,
-      banner_img: file
-    }));
+    const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
+    const maxSize = 20 * 1024 * 1024; // 20 MB
+
+    if (file) {
+      if (!allowedFormats.includes(file.type)) {
+        setNotification({
+          open: true,
+          message: 'Only JPG, JPEG, and PNG formats are allowed.',
+          severity: 'error'
+        });
+      } else if (file.size > maxSize) {
+        setNotification({
+          open: true,
+          message: 'Image size should not exceed 20 MB.',
+          severity: 'error'
+        });
+      } else {
+        setFormData((prevState) => ({
+          ...prevState,
+          banner_img: file
+        }));
+        setFileError('');
+      }
+    }
   };
 
   const handleColorChange = (color) => {
@@ -81,21 +113,49 @@ const EditHome = () => {
 
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
-    formDataToSend.append('head_color', formData.head_color);
-    if (formData.banner_img) {
+  
+    // Update only if the header color was changed
+    if (formData.head_color !== data.head_color) {
+      formDataToSend.append('head_color', formData.head_color);
+    }
+  
+    // Update only if a new banner image was selected and there are no file errors
+    if (formData.banner_img && !fileError) {
       formDataToSend.append('banner_img', formData.banner_img);
     }
-
-    try {
-      await updateHomeData(data.id, formDataToSend);
-      setData((prevData) => ({
-        ...prevData,
-        ...formData,
-        banner_img_path: formData.banner_img ? URL.createObjectURL(formData.banner_img) : prevData.banner_img_path
-      }));
-      handleClose();
-    } catch (error) {
-      console.error('Error updating home data:', error);
+  
+    // Check if any updates were made
+    if (formDataToSend.has('head_color') || formDataToSend.has('banner_img')) {
+      try {
+        const response = await updateHomeData(data.id, formDataToSend);
+        if (formDataToSend.has('head_color')) {
+          setData((prevData) => ({
+            ...prevData,
+            head_color: formData.head_color
+          }));
+        }
+        if (formDataToSend.has('banner_img')) {
+          setData((prevData) => ({
+            ...prevData,
+            banner_img_path: URL.createObjectURL(formData.banner_img)
+          }));
+        }
+        handleClose();
+        setNotification({
+          open: true,
+          message: response.message,
+          severity: 'success'
+        });
+      } catch (error) {
+        console.error('Error updating home data:', error);
+        setNotification({
+          open: true,
+          message: 'Failed to update home data',
+          severity: 'error'
+        });
+      }
+    } else {
+      setFileError(formDataToSend.has('banner_img') ? '' : 'No changes were made.');
     }
   };
 
@@ -105,73 +165,77 @@ const EditHome = () => {
 
   return (
     <Box>
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Typography variant="h4" component="h1" gutterBottom>
         Home Section
       </Typography>
       <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>S No.</TableCell>
-            <TableCell>Header Color</TableCell>
-            <TableCell>Banner Image</TableCell>
-            <TableCell>Banner Image Original Name</TableCell>
-            <TableCell>Edit</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell>{data.id}</TableCell>
-            <TableCell>
-              <div style={{ width: 50, height: 30, backgroundColor: data.head_color,  }} />
-            </TableCell>
-            <TableCell>
-              <img src={data.banner_img_path} alt={data.banner_img_originalname} width="100" />
-            </TableCell>
-            <TableCell>{data.banner_img_originalname}</TableCell>
-            <TableCell>
-              <Button startIcon={<EditIcon />} onClick={handleClickOpen}>
-                Edit
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>S No.</TableCell>
+              <TableCell>Header Color</TableCell>
+              <TableCell>Banner Image</TableCell>
+              <TableCell>Banner Image Original Name</TableCell>
+              <TableCell>Edit</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>{data.id}</TableCell>
+              <TableCell>
+                <div style={{ width: 50, height: 30, backgroundColor: data.head_color }} />
+              </TableCell>
+              <TableCell>
+                <img src={data.banner_img_path} alt={data.banner_img_originalname} width="100" />
+              </TableCell>
+              <TableCell>{data.banner_img_originalname}</TableCell>
+              <TableCell>
+                <Button startIcon={<EditIcon />} onClick={handleClickOpen}>
+                  Edit
+                </Button>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle variant='h5'>Edit Home </DialogTitle>
-        <DialogContent>
-    
-        <Typography variant="h6" gutterBottom >
-            Update Header Color
-          </Typography>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle variant='h5'>Edit Home</DialogTitle>
+          <DialogContent>
+            <Typography variant="h6" gutterBottom>
+              Update Header Color
+            </Typography>
             <ChromePicker color={formData.head_color} onChange={handleColorChange} />
-          
-          <Typography variant="h6" gutterBottom>
-            Banner Image
-          </Typography>
-          <TextField
-            margin="dense"
-            name="banner_img"
-            // label="Banner Image"
-            type="file"
-            fullWidth
-            onChange={handleFileChange}
-          />
-         
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </TableContainer>
+
+            <Typography variant="h6" gutterBottom>
+              Banner Image
+            </Typography>
+            <TextField
+              margin="dense"
+              name="banner_img"
+              type="file"
+              fullWidth
+              onChange={handleFileChange}
+            />
+            {fileError && <Typography color="error">{fileError}</Typography>}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleSubmit} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </TableContainer>
+
+      <Notification
+        open={notification.open}
+        handleClose={handleNotificationClose}
+        alertMessage={notification.message}
+        alertSeverity={notification.severity}
+      />
     </Box>
-  
   );
 };
 

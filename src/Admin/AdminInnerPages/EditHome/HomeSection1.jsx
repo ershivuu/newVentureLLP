@@ -21,6 +21,7 @@ import {
   updateHomeSectionFirst,
 } from "../../AdminServices";
 import EditIcon from "@mui/icons-material/Edit";
+import Notification from "../../../Notification/Notification"
 
 const HomeSection1 = () => {
   const [data, setData] = useState(null);
@@ -30,6 +31,9 @@ const HomeSection1 = () => {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
+  const [notificationOpen, setNotificationOpen] = useState(false); // Notification state
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +63,7 @@ const HomeSection1 = () => {
     setOpenDialog(false);
   };
 
+
   const handleSave = async () => {
     try {
       const formData = new FormData();
@@ -76,6 +81,7 @@ const HomeSection1 = () => {
 
       await updateHomeSectionFirst(data.id, formData, updatedData);
 
+      const response = await updateHomeSectionFirst(data.id, formData, updatedData);
       handleCloseDialog();
 
       const fetchedData = await getHomeSectionFirst();
@@ -85,8 +91,15 @@ const HomeSection1 = () => {
       setImage1(null);
       setImage2(null);
       setImage3(null);
+
+      setNotificationMessage(response.message); // Assuming your API response has a 'message' field
+      setNotificationSeverity("success");
+      setNotificationOpen(true);
     } catch (error) {
       console.error("Error updating data:", error);
+      setNotificationMessage("Error updating data");
+      setNotificationSeverity("error");
+      setNotificationOpen(true);
     }
   };
 
@@ -162,18 +175,21 @@ const HomeSection1 = () => {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
+           <Typography>Image 1</Typography>
           <TextField
             fullWidth
             type="file"
            margin='dense'
             onChange={(e) => setImage1(e.target.files[0])}
           />
+          <Typography>Image 2</Typography>
           <TextField
             fullWidth
            margin='dense'
             type="file"
             onChange={(e) => setImage2(e.target.files[0])}
           />
+           <Typography>Image 3</Typography>
           <TextField
             fullWidth
              margin='dense'
@@ -189,6 +205,12 @@ const HomeSection1 = () => {
         </DialogActions>
       </Dialog>
     </TableContainer>
+    <Notification
+      open={notificationOpen}
+      handleClose={() => setNotificationOpen(false)}
+      alertMessage={notificationMessage}
+      alertSeverity={notificationSeverity}
+    />
     </Box>
     
   );

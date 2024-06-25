@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Test from "../src/admin/Test.jsx"
+import Test from "../src/admin/Test.jsx";
 
 import EditHome from "./admin/AdminInnerPages/EditHome/EditHome.jsx";
 import HomeSection1 from "./admin/AdminInnerPages/EditHome/HomeSection1.jsx";
@@ -12,7 +12,8 @@ import AboutSection2 from "./admin/AdminInnerPages/EditAboutUs/AboutSection2.jsx
 import NriBanner from "./admin/AdminInnerPages/EditNriCorner/NriBanner.jsx";
 import ContactDetails from "./admin/AdminInnerPages/EditNriCorner/ContactDetails.jsx";
 import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx";
-
+import EditFooter from "./admin/AdminInnerPages/EditFooter/EditFooter.jsx";
+import FooterData from "./admin/AdminInnerPages/EditFooter/FooterData.jsx";
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -69,11 +70,7 @@ function App() {
               path="slidercontent"
               element={<SliderContent />}
             />
-            <Route
-              key="edithome"
-              path="edithome"
-              element={<EditHome />}
-            />
+            <Route key="edithome" path="edithome" element={<EditHome />} />
             <Route
               key="homesection1"
               path="homesection1"
@@ -84,13 +81,13 @@ function App() {
               path="homesection2"
               element={<HomeSection2 />}
             />
-       
+
             <Route
               key="homesection3"
               path="homesection3"
               element={<HomeSection3 />}
             />
-       
+
             <Route
               key="aboutbanner"
               path="aboutbanner"
@@ -106,23 +103,29 @@ function App() {
               path="aboutsection2"
               element={<AboutSection2 />}
             />
-            <Route
-              key="nribanner"
-              path="nribanner"
-              element={<NriBanner />}
-            />
+            <Route key="nribanner" path="nribanner" element={<NriBanner />} />
             <Route
               key="contactdetails"
               path="contactdetails"
               element={<ContactDetails />}
             />
-       
+
             <Route
               key="editcontactus"
               path="editcontactus"
               element={<EditContactUs />}
             />
-       
+
+            <Route
+              key="editfooter"
+              path="editfooter"
+              element={<EditFooter />}
+            />
+            <Route
+              key="editfooter"
+              path="footerdata"
+              element={<FooterData />}
+            />
           </Route>
 
           <Route key="Projects" path="/projects" element={<Projects />} />
@@ -131,7 +134,7 @@ function App() {
           <Route key="NriCorner" path="/nri-corner" element={<NriCorner />} />
           <Route key="Gallery" path="/gallery" element={<Gallery />} />
           <Route key="Contact" path="/contact-us" element={<Contact />} />
-          <Route key="test" path="/test" element={< Test/>} />
+          <Route key="test" path="/test" element={<Test />} />
           <Route key="counter" path="/counter" element={<CharCounter />} />
         </Routes>
       </Suspense>
