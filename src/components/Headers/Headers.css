@@ -11,12 +11,14 @@
 }
 
 .navbar {
-  background: radial-gradient(
+  /* background: radial-gradient(
     150.55% 150.55% at 50% 50%,
     #004c3f 0%,
     #000000 100%
-  ) !important;
+  ) !important; */
+  /* background-color: #a80d0d !important; */
 }
+
 .navbar a {
   color: white !important;
   font-family: "Poppins", sans-serif;

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { FRONTEND_URL } from "../Config/config";
-const apiUrl = FRONTEND_URL;
+import { API_URL } from "../Config/config";
+const apiUrl = API_URL;
 
 export const upcommingPageBannerData = async () => {
   try {
@@ -147,5 +147,30 @@ export const getContactPageData = async () => {
   } catch (error) {
     console.error("Error fetching contact page data:", error);
     return null;
+  }
+};
+
+export const submitEmail = async (email) => {
+  try {
+    const response = await axios.post(
+      `${apiUrl}/addFooterEmail`,
+      { email },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const getFooterData = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/getFooterData`);
+    return response.data.data;
+  } catch (error) {
+    throw error;
   }
 };
