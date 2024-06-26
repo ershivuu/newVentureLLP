@@ -42,6 +42,7 @@ function Sidebar({ isOpen }) {
     setAboutDropdownOpen(false);
     setNriDropdownOpen(false);
     setAboutDropdownOpen(false);
+    setFooterDropdownOpen(false);  
   };
 
   return (
@@ -142,7 +143,7 @@ function Sidebar({ isOpen }) {
                   <a>Contact Details</a>
                 </Link>
               </div>
-              <Link to="/adminpanel/editcontactus" onClick={handleLinkClick}>
+              <Link className="dropdown-btn" to="/adminpanel/editcontactus" onClick={handleLinkClick}>
                 <a>Contact Us</a>
               </Link>
               {/* --------------------------------------------------------------------------- */}

@@ -6,12 +6,13 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  TableContainer,
+  Typography,
   Box,
-  Typography
+  TableContainer,
+  Paper
 } from "@mui/material";
 
-function EditFooter() {
+function FooterData() {
   const [footerData, setFooterData] = useState([]);
 
   useEffect(() => {
@@ -27,43 +28,40 @@ function EditFooter() {
     fetchFooterData();
   }, []);
 
-  // Filter the footerData to only include the item with id 1
-  const filteredData = footerData.filter((item) => item.id === 1);
-
   const isValidData = (data) => Array.isArray(data) && data.length > 0;
-
   return (
     <Box>
-      <Typography>Footer Data</Typography>
-      <TableContainer>
+      <Typography variant="h4" component="h1" gutterBottom>Footer Data</Typography>
+      <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell>Footer Color</TableCell>
-            <TableCell>Phone Number</TableCell>
+            {/* <TableCell>Footer Color</TableCell> */}
+            <TableCell>Email</TableCell>
+            {/* <TableCell>Mobile</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {isValidData(filteredData) ? (
-            filteredData.map((item) => (
+          {isValidData(footerData) ? (
+            footerData.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
-                <TableCell>{item.footer_color || "N/A"}</TableCell>
-                <TableCell>{item.mobile || "N/A"}</TableCell>
+                {/* <TableCell>{item.footer_color || "N/A"}</TableCell> */}
+                <TableCell>{item.email}</TableCell>
+                {/* <TableCell>{item.mobile || "N/A"}</TableCell> */}
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={3}>No data available</TableCell>
+              <TableCell colSpan={4}>No data available</TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
       </TableContainer>
-      
     </Box>
   );
 }
 
-export default EditFooter;
+export default FooterData;

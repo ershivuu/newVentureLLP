@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.1.6:5000";
+const BASE_URL = "http://192.168.1.2:5000";
 
 //get upcoming project heading
 export const getAllSectionFirst = async () => {
@@ -496,5 +496,16 @@ export const getAllFooterData = async () => {
   } catch (error) {
     console.error("Error fetching footer data:", error);
     return null;
+  }
+};
+
+//update footer data 
+export const updateFooterData = async (id, data) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/updateFooter`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating footer data", error);
+    throw error;
   }
 };

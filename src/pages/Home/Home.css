@@ -52,7 +52,7 @@
   height: inherit;
   object-fit: cover;
 }
-
+/* word-wrap: break-word; */
 .landscape-img {
   width: 350px;
   height: 200px;
