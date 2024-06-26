@@ -500,7 +500,19 @@ export const getAllFooterData = async () => {
 };
 
 export const updateFooterData = async (id, data) => {
-  return await axios.put(`http://192.168.1.6:5000/updateFooter`, {
+  return await axios.put(`${BASE_URL}/updateFooter`, {
     data,
   });
+};
+
+export const getAllGalleryImages = async () => {
+  const response = await axios.get(`${BASE_URL}/getAllGalleryImages`);
+  return response.data;
+};
+
+export const updateMainHeading = async (id, main_heading) => {
+  const response = await axios.put(`${BASE_URL}/updateMainHeading/${id}`, {
+    main_heading,
+  });
+  return response.data;
 };
