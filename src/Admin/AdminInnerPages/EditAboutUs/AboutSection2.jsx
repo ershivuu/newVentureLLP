@@ -1,18 +1,43 @@
-// AboutSection2.js
-import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
-import { getAboutUsSectionSecond, updateAboutUsSectionSecond } from '../../AdminServices'; // Assuming your service file is in the same directory
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+} from "@mui/material";
+import {
+  getAboutUsSectionSecond,
+  updateAboutUsSectionSecond,
+} from "../../AdminServices"; // Assuming your service file is in the same directory
+import EditIcon from "@mui/icons-material/Edit";
+
+// Truncate text after two words
+const truncateText = (text) => {
+  const words = text.split(" ");
+  if (words.length > 2) {
+    return words.slice(0, 2).join(" ") + "...";
+  }
+  return text;
+};
 
 function AboutSection2() {
   const [aboutData, setAboutData] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [formData, setFormData] = useState({
-    id: '',
-    heading_first: '',
-    content_first: '',
-    heading_second: '',
-    content_second: '',
+    id: "",
+    heading_first: "",
+    content_first: "",
+    heading_second: "",
+    content_second: "",
   });
 
   useEffect(() => {
@@ -54,14 +79,14 @@ function AboutSection2() {
 
   return (
     <div>
-      <h2>About Section 2</h2>
+      <h2>Edit Mission & Vision</h2>
       {aboutData ? (
         <div>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
-                  
+                  <TableCell>S No.</TableCell>
                   <TableCell>Heading First</TableCell>
                   <TableCell>Content First</TableCell>
                   <TableCell>Heading Second</TableCell>
@@ -71,10 +96,15 @@ function AboutSection2() {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell>{aboutData.heading_first}</TableCell>
-                  <TableCell>{aboutData.content_first}</TableCell>
-                  <TableCell>{aboutData.heading_second}</TableCell>
-                  <TableCell>{aboutData.content_second}</TableCell>
+                  <TableCell>1</TableCell>
+                  <TableCell>{truncateText(aboutData.heading_first)}</TableCell>
+                  <TableCell>{truncateText(aboutData.content_first)}</TableCell>
+                  <TableCell>
+                    {truncateText(aboutData.heading_second)}
+                  </TableCell>
+                  <TableCell>
+                    {truncateText(aboutData.content_second)}
+                  </TableCell>
                   <TableCell>
                     <Button startIcon={<EditIcon />} onClick={handleEditClick}>
                       Edit
@@ -90,7 +120,7 @@ function AboutSection2() {
             <DialogContent>
               <TextField
                 fullWidth
-                 margin='dense'
+                margin="dense"
                 label="Heading First"
                 name="heading_first"
                 value={formData.heading_first}
@@ -98,7 +128,7 @@ function AboutSection2() {
               />
               <TextField
                 fullWidth
-                 margin='dense'
+                margin="dense"
                 label="Content First"
                 name="content_first"
                 value={formData.content_first}
@@ -106,7 +136,7 @@ function AboutSection2() {
               />
               <TextField
                 fullWidth
-                 margin='dense'
+                margin="dense"
                 label="Heading Second"
                 name="heading_second"
                 value={formData.heading_second}
@@ -114,7 +144,7 @@ function AboutSection2() {
               />
               <TextField
                 fullWidth
-                 margin='dense'
+                margin="dense"
                 label="Content Second"
                 name="content_second"
                 value={formData.content_second}

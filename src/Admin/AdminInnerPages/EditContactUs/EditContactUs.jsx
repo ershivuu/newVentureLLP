@@ -1,20 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
-  Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
-  Dialog, DialogActions, DialogContent, DialogTitle, TextField, Input
-} from '@mui/material';
-import { getContactPageData, updateContactPageData } from '../../AdminServices'; // Adjust the import path based on your file structure
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Input,
+} from "@mui/material";
+import { getContactPageData, updateContactPageData } from "../../AdminServices"; // Adjust the import path based on your file structure
 import EditIcon from "@mui/icons-material/Edit";
 
 function EditContactUs() {
   const [contactData, setContactData] = useState(null);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
-    id: '',
-    heading: '',
-    banner_img: '',
-    email: '',
-    phone: ''
+    id: "",
+    heading: "",
+    banner_img: "",
+    email: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -30,9 +42,9 @@ function EditContactUs() {
     setFormData({
       id: data.id,
       heading: data.heading,
-      banner_img: '',
+      banner_img: "",
       email: data.email,
-      phone: data.phone
+      phone: data.phone,
     });
     setOpen(true);
   };
@@ -40,11 +52,11 @@ function EditContactUs() {
   const handleClose = () => {
     setOpen(false);
     setFormData({
-      id: '',
-      heading: '',
-      banner_img: '',
-      email: '',
-      phone: ''
+      id: "",
+      heading: "",
+      banner_img: "",
+      email: "",
+      phone: "",
     });
   };
 
@@ -60,24 +72,24 @@ function EditContactUs() {
   const handleFormSubmit = async () => {
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append('heading', formData.heading);
+      formDataToSend.append("heading", formData.heading);
       if (formData.banner_img) {
-        formDataToSend.append('banner_img', formData.banner_img);
+        formDataToSend.append("banner_img", formData.banner_img);
       }
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
 
       await updateContactPageData(formData.id, formDataToSend);
       handleClose();
       fetchContactData();
     } catch (error) {
-      console.error('Error updating data:', error);
+      console.error("Error updating data:", error);
     }
   };
 
   return (
     <div>
-      <h2>Contact Page Data</h2>
+      <h2>Edit Contact Page</h2>
       {contactData ? (
         <TableContainer component={Paper}>
           <Table>
@@ -96,12 +108,21 @@ function EditContactUs() {
                 <TableCell>{contactData.id}</TableCell>
                 <TableCell>{contactData.heading}</TableCell>
                 <TableCell>
-                  <img src={contactData.banner_img} alt="Banner" style={{ maxWidth: '100px',maxHeight:"100px" }} />
+                  <img
+                    src={contactData.banner_img}
+                    alt="Banner"
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
                 </TableCell>
                 <TableCell>{contactData.email}</TableCell>
                 <TableCell>{contactData.phone}</TableCell>
                 <TableCell>
-                  <Button startIcon={<EditIcon />} onClick={() => handleClickOpen(contactData)}>Edit</Button>
+                  <Button
+                    startIcon={<EditIcon />}
+                    onClick={() => handleClickOpen(contactData)}
+                  >
+                    Edit
+                  </Button>
                 </TableCell>
               </TableRow>
             </TableBody>

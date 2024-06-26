@@ -150,7 +150,7 @@ function AboutBanner() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        About Us Banner
+        Edit Banner
       </Typography>
       <Button
         startIcon={<AddIcon />}

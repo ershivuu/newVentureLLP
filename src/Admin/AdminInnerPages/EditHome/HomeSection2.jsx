@@ -83,7 +83,7 @@ function HomeSection2() {
     if (selectedImage && imageFile) {
       const formData = new FormData();
       formData.append("slider_img", imageFile);
-      const idToUpdate = selectedImage.id;
+      const idToUpdate = selectedImage.second_id;
       const result = await updateHomeSectionSecond(idToUpdate, formData);
       if (result && result.data && result.data.slider_img_path) {
         console.log("Image updated successfully:", result);
@@ -95,11 +95,11 @@ function HomeSection2() {
           return item;
         });
         setData(updatedData);
-        handleCloseUpdateDialog();
       } else {
         console.error("Error updating image");
       }
     }
+    fetchData();
     handleCloseUpdateDialog();
   };
 
@@ -138,13 +138,12 @@ function HomeSection2() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Home Section 2
+        Edit Slider
       </Typography>
       <Button
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
-        
         onClick={handleAddClick}
         style={{ marginBottom: "16px" }}
       >
@@ -183,7 +182,7 @@ function HomeSection2() {
                 </TableCell>
                 <TableCell>
                   <Button
-                  color="error"
+                    color="error"
                     startIcon={<DeleteIcon />}
                     onClick={() => handleDeleteClick(item.id)}
                   >

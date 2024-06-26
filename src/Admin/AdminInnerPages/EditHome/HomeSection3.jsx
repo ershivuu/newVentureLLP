@@ -1,6 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { fetchHomeSectionThird, updateHomeSectionThird } from '../../AdminServices'; // Assuming your service file is named 'AdminServices.js'
-import {Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Input } from '@mui/material';
+import React, { useState, useEffect } from "react";
+import {
+  fetchHomeSectionThird,
+  updateHomeSectionThird,
+} from "../../AdminServices"; // Assuming your service file is named 'AdminServices.js'
+import {
+  Button,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Input,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 function HomeSection3() {
@@ -21,10 +41,10 @@ function HomeSection3() {
         content: data.content,
         sectionthird_img_first: null,
         sectionthird_img_second: null,
-        sectionthird_img_third: null
+        sectionthird_img_third: null,
       });
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -39,18 +59,21 @@ function HomeSection3() {
   const handleUpdate = async () => {
     try {
       const formData = new FormData();
-      formData.append('heading', newData.heading);
-      formData.append('content', newData.content);
-      formData.append('sectionthird_img_first', newData.sectionthird_img_first);
-      formData.append('sectionthird_img_second', newData.sectionthird_img_second);
-      formData.append('sectionthird_img_third', newData.sectionthird_img_third);
+      formData.append("heading", newData.heading);
+      formData.append("content", newData.content);
+      formData.append("sectionthird_img_first", newData.sectionthird_img_first);
+      formData.append(
+        "sectionthird_img_second",
+        newData.sectionthird_img_second
+      );
+      formData.append("sectionthird_img_third", newData.sectionthird_img_third);
 
       await updateHomeSectionThird(sectionData.id, formData);
 
       fetchData();
       handleCloseDialog();
     } catch (error) {
-      console.error('Error updating data:', error);
+      console.error("Error updating data:", error);
     }
   };
 
@@ -65,7 +88,7 @@ function HomeSection3() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Home Section 3
+        Edit Testimonial Section
       </Typography>
       {sectionData ? (
         <>
@@ -88,13 +111,25 @@ function HomeSection3() {
                   <TableCell>{sectionData.heading}</TableCell>
                   <TableCell>{sectionData.content}</TableCell>
                   <TableCell>
-                    <img src={sectionData.sectionthird_img_first} alt="Image 1" style={{ width: 100 }} />
+                    <img
+                      src={sectionData.sectionthird_img_first}
+                      alt="Image 1"
+                      style={{ width: 100 }}
+                    />
                   </TableCell>
                   <TableCell>
-                    <img src={sectionData.sectionthird_img_second} alt="Image 2" style={{ width: 100 }}/>
+                    <img
+                      src={sectionData.sectionthird_img_second}
+                      alt="Image 2"
+                      style={{ width: 100 }}
+                    />
                   </TableCell>
                   <TableCell>
-                    <img src={sectionData.sectionthird_img_third} alt="Image 3" style={{ width: 100 }} />
+                    <img
+                      src={sectionData.sectionthird_img_third}
+                      alt="Image 3"
+                      style={{ width: 100 }}
+                    />
                   </TableCell>
                   <TableCell>
                     <Button startIcon={<EditIcon />} onClick={handleEditClick}>

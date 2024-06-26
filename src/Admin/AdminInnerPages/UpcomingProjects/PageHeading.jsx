@@ -69,12 +69,18 @@ function PageHeading() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "heading" && value.length > 20) {
-      setFieldErrors({ ...fieldErrors, heading: "Maximum 20 characters allowed" });
+      setFieldErrors({
+        ...fieldErrors,
+        heading: "Maximum 20 characters allowed",
+      });
       return;
     }
 
     if (name === "content" && value.length > 100) {
-      setFieldErrors({ ...fieldErrors, content: "Maximum 100 characters allowed" });
+      setFieldErrors({
+        ...fieldErrors,
+        content: "Maximum 100 characters allowed",
+      });
       return;
     }
 
@@ -150,6 +156,13 @@ function PageHeading() {
   if (error) {
     return <Typography color="error">Error: {error}</Typography>;
   }
+  const truncateText = (text) => {
+    const words = text.split(" ");
+    if (words.length > 2) {
+      return words.slice(0, 2).join(" ") + "...";
+    }
+    return text;
+  };
 
   return (
     <div>
@@ -171,7 +184,7 @@ function PageHeading() {
               <TableRow key={section.id}>
                 <TableCell>{section.id}</TableCell>
                 <TableCell>{section.heading}</TableCell>
-                <TableCell>{section.content}</TableCell>
+                <TableCell>{truncateText(section.content)}</TableCell>
                 <TableCell>
                   <Button
                     startIcon={<EditIcon />}

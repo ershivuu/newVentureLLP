@@ -1,17 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { fetchAboutUsSectionFirst, updateAboutUsSectionFirst } from '../../AdminServices';
-import { Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useState, useEffect } from "react";
+import {
+  fetchAboutUsSectionFirst,
+  updateAboutUsSectionFirst,
+} from "../../AdminServices";
+import {
+  Button,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 function AboutSection1() {
   const [sectionData, setSectionData] = useState(null);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
-    heading: '',
-    content: '',
+    heading: "",
+    content: "",
     img_first: null,
     img_second: null,
-    img_third: null
+    img_third: null,
   });
 
   useEffect(() => {
@@ -27,10 +46,10 @@ function AboutSection1() {
         content: data.content,
         img_first: data.img_first,
         img_second: data.img_second,
-        img_third: data.img_third
+        img_third: data.img_third,
       });
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -46,7 +65,7 @@ function AboutSection1() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -54,24 +73,27 @@ function AboutSection1() {
     const { name, files } = e.target;
     setFormData({
       ...formData,
-      [name]: files[0]
+      [name]: files[0],
     });
   };
 
   const handleSubmit = async () => {
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append('heading', formData.heading);
-      formDataToSend.append('content', formData.content);
-      if (formData.img_first) formDataToSend.append('img_first', formData.img_first);
-      if (formData.img_second) formDataToSend.append('img_second', formData.img_second);
-      if (formData.img_third) formDataToSend.append('img_third', formData.img_third);
+      formDataToSend.append("heading", formData.heading);
+      formDataToSend.append("content", formData.content);
+      if (formData.img_first)
+        formDataToSend.append("img_first", formData.img_first);
+      if (formData.img_second)
+        formDataToSend.append("img_second", formData.img_second);
+      if (formData.img_third)
+        formDataToSend.append("img_third", formData.img_third);
 
       await updateAboutUsSectionFirst(formDataToSend);
       fetchSectionData();
       handleClose();
     } catch (error) {
-      console.error('Error updating data:', error);
+      console.error("Error updating data:", error);
     }
   };
 
@@ -82,7 +104,7 @@ function AboutSection1() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        About Us Section 1
+        Edit About US
       </Typography>
       <TableContainer component={Paper}>
         <Table>
@@ -103,17 +125,29 @@ function AboutSection1() {
               <TableCell>{sectionData.heading}</TableCell>
               <TableCell>{sectionData.content}</TableCell>
               <TableCell>
-                <img src={sectionData.img_first} alt={sectionData.img_first_originalname} style={{ maxWidth: '100px' }} />
+                <img
+                  src={sectionData.img_first}
+                  alt={sectionData.img_first_originalname}
+                  style={{ maxWidth: "100px" }}
+                />
                 <br />
                 {/* {sectionData.img_first_originalname} */}
               </TableCell>
               <TableCell>
-                <img src={sectionData.img_second} alt={sectionData.img_second_originalname} style={{ maxWidth: '100px' }} />
+                <img
+                  src={sectionData.img_second}
+                  alt={sectionData.img_second_originalname}
+                  style={{ maxWidth: "100px" }}
+                />
                 <br />
                 {/* {sectionData.img_second_originalname} */}
               </TableCell>
               <TableCell>
-                <img src={sectionData.img_third} alt={sectionData.img_third_originalname} style={{ maxWidth: '100px' }} />
+                <img
+                  src={sectionData.img_third}
+                  alt={sectionData.img_third_originalname}
+                  style={{ maxWidth: "100px" }}
+                />
                 <br />
                 {/* {sectionData.img_third_originalname} */}
               </TableCell>
@@ -150,7 +184,7 @@ function AboutSection1() {
           />
           <TextField
             name="img_first"
-            margin='dense'
+            margin="dense"
             fullWidth
             type="file"
             onChange={handleFileChange}
@@ -158,15 +192,15 @@ function AboutSection1() {
           />
           <TextField
             name="img_second"
-             margin='dense'
-             fullWidth
+            margin="dense"
+            fullWidth
             type="file"
             onChange={handleFileChange}
             accept="image/*"
           />
           <TextField
-           margin='dense'
-           fullWidth
+            margin="dense"
+            fullWidth
             name="img_third"
             type="file"
             onChange={handleFileChange}

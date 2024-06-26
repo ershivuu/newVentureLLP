@@ -295,6 +295,14 @@ function SliderContent() {
       setNotificationOpen(true);
     }
   };
+  const truncateText = (text) => {
+    const words = text.split(" ");
+    if (words.length > 2) {
+      return words.slice(0, 2).join(" ") + "...";
+    }
+    return text;
+  };
+
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
@@ -329,8 +337,8 @@ function SliderContent() {
                 <TableRow key={item.content_video_id}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{item.content_video_id}</TableCell>
-                  <TableCell>{item.heading}</TableCell>
-                  <TableCell>{item.content}</TableCell>
+                  <TableCell>{truncateText(item.heading)}</TableCell>
+                  <TableCell>{truncateText(item.content)}</TableCell>
                   <TableCell>
                     <a
                       href={item.video_link}

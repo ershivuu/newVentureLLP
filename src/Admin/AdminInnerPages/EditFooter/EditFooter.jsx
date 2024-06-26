@@ -18,7 +18,7 @@ import {
   Paper,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { ChromePicker } from 'react-color';
+import { ChromePicker } from "react-color";
 
 function EditFooter() {
   const [footerData, setFooterData] = useState([]);
@@ -82,7 +82,7 @@ function EditFooter() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Edit Footer Data
+        Edit Footer
       </Typography>
       <TableContainer component={Paper}>
         <Table>
