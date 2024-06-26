@@ -18,6 +18,7 @@ import NotFoundPage from "./pages/PageNotFound/NotFoundPage.jsx";
 import EditGalleryHeading from "./admin/AdminInnerPages/EditGallery/EditGalleryHeading.jsx";
 import EditGalleryContainer1 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer1.jsx";
 import EditGalleryContainer2 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer2.jsx";
+import GalleryData from "./admin/AdminInnerPages/EditGallery/GalleryData.jsx";
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -144,6 +145,11 @@ function App() {
               key="gallerycontainer2"
               path="gallerycontainer2"
               element={<EditGalleryContainer2 />}
+            />
+            <Route
+              key="gallerydata"
+              path="gallerydata"
+              element={<GalleryData />}
             />
            
           </Route>

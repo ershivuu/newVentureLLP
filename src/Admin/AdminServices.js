@@ -509,3 +509,27 @@ export const updateFooterData = async (id, data) => {
     throw error;
   }
 };
+
+// Get all Gallery Data
+export const getAllGalleryImages = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getAllGalleryImages`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching gallery images:', error);
+    throw error;
+  }
+};
+
+
+// Get Gallery Data
+export const addGalleryImages = async (data) => {
+  const response = await axios.post(`${BASE_URL}/addAllHeadingWithImages`, data);
+  return response.data;
+};
+
+// Delete Gallery Data 
+export const deleteGalleryImage = async (mainTableId) => {
+  const response = await axios.delete(`${BASE_URL}/deleteMainData/${mainTableId}`);
+  return response.data;
+};

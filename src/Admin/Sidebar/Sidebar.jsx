@@ -161,14 +161,18 @@ function Sidebar({ isOpen }) {
                 }`}
                 style={{ display: galleryDropdownOpen ? "block" : "none" }}
               >
+               
                 <Link to="/adminpanel/galleryheading" onClick={handleLinkClick}>
                  Gallery Heading
                 </Link>
                 <Link to="/adminpanel/gallerycontainer1" onClick={handleLinkClick}>
-                 Gallery Image Container 1
+                Image Container 1
                 </Link>
                 <Link to="/adminpanel/gallerycontainer2" onClick={handleLinkClick}>
-                 Gallery Image Container 2
+               Image Container 2
+                </Link>
+                <Link to="/adminpanel/gallerydata" onClick={handleLinkClick}>
+                 Gallery Data
                 </Link>
               </div>
 
