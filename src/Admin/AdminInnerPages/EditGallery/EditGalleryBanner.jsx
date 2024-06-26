@@ -25,6 +25,7 @@ const EditGalleryBanner = () => {
     heading: "",
     banner_img: "",
   });
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchBanner = async () => {
@@ -50,16 +51,14 @@ const EditGalleryBanner = () => {
 
   const handleSave = async () => {
     try {
-      const updatedData = {
-        heading: selectedBanner.heading,
-        banner_img: selectedBanner.banner_img,
-      };
-      await updateGalleryBanner(selectedBanner.id, updatedData);
-      setBanner(
-        banner.map((item) =>
-          item.id === selectedBanner.id ? selectedBanner : item
-        )
-      );
+      const formData = new FormData();
+      formData.append("heading", selectedBanner.heading);
+      if (file) {
+        formData.append("banner_img", file);
+      }
+      await updateGalleryBanner(selectedBanner.id, formData);
+      const updatedBanner = await getGalleryBanner();
+      setBanner([updatedBanner]);
       setOpen(false);
     } catch (error) {
       console.error("Error updating banner:", error);
@@ -69,6 +68,10 @@ const EditGalleryBanner = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSelectedBanner({ ...selectedBanner, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -126,11 +129,7 @@ const EditGalleryBanner = () => {
             type="file"
             fullWidth
             name="banner_img"
-            onChange={(e) =>
-              handleChange({
-                target: { name: "banner_img", value: e.target.files[0] },
-              })
-            }
+            onChange={handleFileChange}
           />
         </DialogContent>
         <DialogActions>
