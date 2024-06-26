@@ -1,79 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Gallery.css";
 import Headers from "../../components/Headers/Headers";
 import Footers from "../../components/Footers/Footers";
-import banner from "../../assets/images/vector-imgs/site-3.jpg";
-import home2 from "../../assets/images/home2.jpg";
-import home3 from "../../assets/images/home3.jpg";
+import defaultBanner from "../../assets/images/vector-imgs/site-3.jpg";
 import ProjectGallery from "./ProjectGallery";
+import { getGalleryBanner } from "../../Services/frontendServices";
+
 function Gallery() {
+  const [banner, setBanner] = useState({
+    banner_img_url: defaultBanner,
+    heading: "Gallery",
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const data = await getGalleryBanner();
+        setBanner(data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBanner();
+  }, []);
+
+  const bannerContent = useMemo(() => {
+    if (loading) {
+      return <p>Loading...</p>;
+    }
+    if (error) {
+      return <img src={defaultBanner} alt="Default Banner" />;
+    }
+    return <img src={banner.banner_img_url} alt="Banner" />;
+  }, [loading, error, banner.banner_img_url]);
+
   return (
     <>
-      <Headers></Headers>
+      <Headers />
       <div className="wrapper">
         <div className="single-banner">
           <div className="single-banner-image">
-            <img src={banner} alt="" />
+            {bannerContent}
             <div className="colored-overlay"></div>
             <div className="single-banner-heading">
-              <p>Gallery</p>
+              <p>{banner.heading}</p>
             </div>
           </div>
         </div>
       </div>
-      {/* <div className="prjoect-gallery">
-        <div className="project-name">
-          <p> Shiddhraj Paradise</p>
-        </div>
-        <div className="image-group image-group-1">
-          <div className="group-1-heading">
-            <p>Front-view</p>
-          </div>
-          <div className="image-section">
-            <img src={home2} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-        </div>
-        <div className="image-group image-group-2">
-          <div className="group-1-heading">
-            <p>Top view</p>
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-          <div className="image-section">
-            <img src={home3} alt="" srcset="" />
-          </div>
-        </div>
-      </div> */}
-      <ProjectGallery></ProjectGallery>
-      <Footers></Footers>
+      <ProjectGallery />
+      <Footers />
     </>
   );
 }

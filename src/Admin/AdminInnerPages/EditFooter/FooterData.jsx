@@ -6,6 +6,10 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Typography,
+  Box,
+  TableContainer,
+  Paper
 } from "@mui/material";
 
 function FooterData() {
@@ -26,8 +30,9 @@ function FooterData() {
 
   const isValidData = (data) => Array.isArray(data) && data.length > 0;
   return (
-    <div>
-      <h1>Footer Data</h1>
+    <Box>
+      <Typography variant="h4" component="h1" gutterBottom>Footer Data</Typography>
+      <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
@@ -54,7 +59,8 @@ function FooterData() {
           )}
         </TableBody>
       </Table>
-    </div>
+      </TableContainer>
+    </Box>
   );
 }
 

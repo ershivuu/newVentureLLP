@@ -15,6 +15,10 @@ import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.j
 import EditFooter from "./admin/AdminInnerPages/EditFooter/EditFooter.jsx";
 import FooterData from "./admin/AdminInnerPages/EditFooter/FooterData.jsx";
 import NotFoundPage from "./pages/PageNotFound/NotFoundPage.jsx";
+import EditGalleryHeading from "./admin/AdminInnerPages/EditGallery/EditGalleryHeading.jsx";
+import EditGalleryContainer1 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer1.jsx";
+import EditGalleryContainer2 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer2.jsx";
+import EditGalleryBanner from "./admin/AdminInnerPages/EditGallery/EditGalleryBanner.jsx";
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -122,11 +126,32 @@ function App() {
               path="editfooter"
               element={<EditFooter />}
             />
-            <Route
-              key="editfooter"
+             <Route
+              key="footerdata"
               path="footerdata"
               element={<FooterData />}
             />
+            <Route
+              key="galleryheading"
+              path="galleryheading"
+              element={<EditGalleryHeading />}
+            />
+            <Route
+              key="gallerycontainer1"
+              path="gallerycontainer1"
+              element={<EditGalleryContainer1 />}
+            />
+            <Route
+              key="gallerycontainer2"
+              path="gallerycontainer2"
+              element={<EditGalleryContainer2 />}
+            />
+            <Route
+              key="editgallerybanner"
+              path="gallerybanner"
+              element={<EditGalleryBanner />}
+            />
+           
           </Route>
 
           <Route key="Projects" path="/projects" element={<Projects />} />

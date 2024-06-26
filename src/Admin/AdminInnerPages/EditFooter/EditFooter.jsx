@@ -12,7 +12,13 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Typography,
+  Box,
+  TableContainer,
+  Paper,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import { ChromePicker } from 'react-color';
 
 function EditFooter() {
   const [footerData, setFooterData] = useState([]);
@@ -50,6 +56,13 @@ function EditFooter() {
     }));
   };
 
+  const handleColorChange = (color) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      footer_color: color.hex,
+    }));
+  };
+
   const handleSave = async () => {
     try {
       await updateFooterData(selectedFooter.id, formData);
@@ -67,74 +80,80 @@ function EditFooter() {
   const isValidData = (data) => Array.isArray(data) && data.length > 0;
 
   return (
-    <div>
-      <h1>Footer Data</h1>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Footer Color</TableCell>
-            <TableCell>Phone Number</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {isValidData(filteredData) ? (
-            filteredData.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.footer_color || "N/A"}</TableCell>
-                <TableCell>{item.mobile || "N/A"}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => handleClickOpen(item)}
-                  >
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
+    <Box>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Edit Footer Data
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan={4}>No data available</TableCell>
+              <TableCell>S No.</TableCell>
+              <TableCell>Footer Color</TableCell>
+              <TableCell>Phone Number</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Footer Data</DialogTitle>
-        <DialogContent>
-          <TextField
-            margin="dense"
-            name="footer_color"
-            label="Footer Color"
-            type="text"
-            fullWidth
-            value={formData.footer_color}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="dense"
-            name="mobile"
-            label="Mobile"
-            type="text"
-            fullWidth
-            value={formData.mobile}
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+          </TableHead>
+          <TableBody>
+            {isValidData(filteredData) ? (
+              filteredData.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.id}</TableCell>
+                  <TableCell>
+                    <div
+                      style={{
+                        width: 50,
+                        height: 30,
+                        backgroundColor: item.footer_color || "N/A",
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell>{item.mobile || "N/A"}</TableCell>
+                  <TableCell>
+                    <Button
+                      startIcon={<EditIcon />}
+                      onClick={() => handleClickOpen(item)}
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={4}>No data available</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Edit Footer Data</DialogTitle>
+          <DialogContent>
+            <ChromePicker
+              color={formData.footer_color}
+              onChangeComplete={handleColorChange}
+            />
+            <TextField
+              margin="dense"
+              name="mobile"
+              label="Mobile"
+              type="text"
+              fullWidth
+              value={formData.mobile}
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="secondary">
+              Cancel
+            </Button>
+            <Button onClick={handleSave} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </TableContainer>
+    </Box>
   );
 }
 

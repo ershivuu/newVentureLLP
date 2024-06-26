@@ -11,6 +11,7 @@ function Sidebar({ isOpen }) {
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [footerDropdownOpen, setFooterDropdownOpen] = useState(false);
   const [nriDropdownOpen, setNriDropdownOpen] = useState(false);
+  const [galleryDropdownOpen, setGalleryDropdownOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -35,6 +36,9 @@ function Sidebar({ isOpen }) {
     // Function to toggle NRI Corner dropdown
     setNriDropdownOpen(!nriDropdownOpen);
   };
+  const handleGalleryDropdown = () => {
+    setGalleryDropdownOpen(!galleryDropdownOpen);
+  };
 
   const handleLinkClick = () => {
     setDropdownOpen(false);
@@ -42,6 +46,8 @@ function Sidebar({ isOpen }) {
     setAboutDropdownOpen(false);
     setNriDropdownOpen(false);
     setAboutDropdownOpen(false);
+    setFooterDropdownOpen(false);
+    setGalleryDropdownOpen(false);
   };
 
   return (
@@ -142,9 +148,39 @@ function Sidebar({ isOpen }) {
                   <a>Contact Details</a>
                 </Link>
               </div>
-              <Link to="/adminpanel/editcontactus" onClick={handleLinkClick}>
-                <a>Contact Us</a>
-              </Link>
+
+              <button className="dropdown-btn" onClick={handleGalleryDropdown}>
+                Gallery
+                <span className="custom-btn">
+                  {galleryDropdownOpen ? "-" : "+"}
+                </span>
+              </button>
+              <div
+                className={`dropdown-container ${
+                  galleryDropdownOpen ? "active" : ""
+                }`}
+                style={{ display: galleryDropdownOpen ? "block" : "none" }}
+              >
+                <Link to="/adminpanel/gallerybanner" onClick={handleLinkClick}>
+                  Gallery Banner
+                </Link>
+                <Link to="/adminpanel/galleryheading" onClick={handleLinkClick}>
+                  Gallery Heading
+                </Link>
+                <Link
+                  to="/adminpanel/gallerycontainer1"
+                  onClick={handleLinkClick}
+                >
+                  Gallery Image Container 1
+                </Link>
+                <Link
+                  to="/adminpanel/gallerycontainer2"
+                  onClick={handleLinkClick}
+                >
+                  Gallery Image Container 2
+                </Link>
+              </div>
+
               {/* --------------------------------------------------------------------------- */}
               <button className="dropdown-btn" onClick={handleFooterDropdown}>
                 Footer
@@ -165,6 +201,13 @@ function Sidebar({ isOpen }) {
                   <a>Edit Footer</a>
                 </Link>
               </div>
+              <Link
+                className="dropdown-btn"
+                to="/adminpanel/editcontactus"
+                onClick={handleLinkClick}
+              >
+                <a>Contact Us</a>
+              </Link>
             </ul>
           </div>
         </div>
