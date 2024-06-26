@@ -1,9 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Box } from '@mui/material';
-import { fetchAboutUsBanner, updateAboutUsBanner, addAboutUsBanner, deleteAboutUsBanner } from '../../AdminServices';
-import EditIcon from '@mui/icons-material/Edit';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useState, useEffect } from "react";
+import {
+  Typography,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Box,
+} from "@mui/material";
+import {
+  fetchAboutUsBanner,
+  updateAboutUsBanner,
+  addAboutUsBanner,
+  deleteAboutUsBanner,
+} from "../../AdminServices";
+import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function AboutBanner() {
   const [bannerData, setBannerData] = useState([]);
@@ -11,7 +32,11 @@ function AboutBanner() {
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedBanner, setSelectedBanner] = useState(null);
-  const [editedData, setEditedData] = useState({ id: '', heading: '', imageFile: null });
+  const [editedData, setEditedData] = useState({
+    id: "",
+    heading: "",
+    imageFile: null,
+  });
 
   useEffect(() => {
     fetchData();
@@ -22,7 +47,7 @@ function AboutBanner() {
       const data = await fetchAboutUsBanner();
       setBannerData(data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -33,7 +58,7 @@ function AboutBanner() {
   };
 
   const handleAddClick = () => {
-    setEditedData({ id: '', heading: '', imageFile: null });
+    setEditedData({ id: "", heading: "", imageFile: null });
     setAddDialogOpen(true);
   };
 
@@ -56,7 +81,7 @@ function AboutBanner() {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'banner_img') {
+    if (name === "banner_img") {
       setEditedData({ ...editedData, imageFile: files[0] });
     } else {
       setEditedData({ ...editedData, [name]: value });
@@ -66,27 +91,30 @@ function AboutBanner() {
   const handleSaveEditedData = async () => {
     try {
       const formData = new FormData();
-      formData.append('id', selectedBanner.id);
-      formData.append('heading', editedData.heading);
-      formData.append('banner_img', editedData.imageFile);
+      formData.append("id", selectedBanner.id);
+      formData.append("heading", editedData.heading);
+      formData.append("banner_img", editedData.imageFile);
 
       await updateAboutUsBanner(selectedBanner.id, formData);
-      updateBannerDataLocally({ id: selectedBanner.id, heading: editedData.heading });
+      updateBannerDataLocally({
+        id: selectedBanner.id,
+        heading: editedData.heading,
+      });
 
       setEditDialogOpen(false);
 
       // Fetch data again after successful save to refresh the table
       fetchData();
     } catch (error) {
-      console.error('Error updating data:', error);
+      console.error("Error updating data:", error);
     }
   };
 
   const handleSaveAddData = async () => {
     try {
       const formData = new FormData();
-      formData.append('heading', editedData.heading);
-      formData.append('banner_img', editedData.imageFile);
+      formData.append("heading", editedData.heading);
+      formData.append("banner_img", editedData.imageFile);
 
       await addAboutUsBanner(formData);
       setAddDialogOpen(false);
@@ -94,7 +122,7 @@ function AboutBanner() {
       // Fetch data again after successful save to refresh the table
       fetchData();
     } catch (error) {
-      console.error('Error adding data:', error);
+      console.error("Error adding data:", error);
     }
   };
 
@@ -106,13 +134,15 @@ function AboutBanner() {
       // Fetch data again after successful delete to refresh the table
       fetchData();
     } catch (error) {
-      console.error('Error deleting data:', error);
+      console.error("Error deleting data:", error);
     }
   };
 
   const updateBannerDataLocally = (updatedBanner) => {
     const updatedData = bannerData.map((banner) =>
-      banner.id === updatedBanner.id ? { ...banner, heading: updatedBanner.heading } : banner
+      banner.id === updatedBanner.id
+        ? { ...banner, heading: updatedBanner.heading }
+        : banner
     );
     setBannerData(updatedData);
   };
@@ -127,7 +157,7 @@ function AboutBanner() {
         variant="contained"
         color="primary"
         onClick={handleAddClick}
-        style={{ marginBottom: '16px' }}
+        style={{ marginBottom: "16px" }}
       >
         Add
       </Button>
@@ -148,15 +178,26 @@ function AboutBanner() {
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{banner.heading}</TableCell>
                 <TableCell>
-                  <img src={banner.banner_img_path} alt={banner.banner_img_originalname} style={{ maxWidth: '100px' }} />
+                  <img
+                    src={banner.banner_img_path}
+                    alt={banner.banner_img_originalname}
+                    style={{ maxWidth: "100px" }}
+                  />
                 </TableCell>
                 <TableCell>
-                  <Button startIcon={<EditIcon />} onClick={() => handleEditClick(banner)}>
+                  <Button
+                    startIcon={<EditIcon />}
+                    onClick={() => handleEditClick(banner)}
+                  >
                     Edit
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Button startIcon={<DeleteIcon />} color="secondary" onClick={() => handleDeleteClick(banner)}>
+                  <Button
+                    startIcon={<DeleteIcon />}
+                    color="error"
+                    onClick={() => handleDeleteClick(banner)}
+                  >
                     Delete
                   </Button>
                 </TableCell>
@@ -180,12 +221,12 @@ function AboutBanner() {
             onChange={handleInputChange}
           />
           <TextField
-          margin="dense"
-          fullWidth
+            margin="dense"
+            fullWidth
             type="file"
             name="banner_img"
             onChange={handleInputChange}
-            style={{ margin: '10px 0' }}
+            style={{ margin: "10px 0" }}
           />
           {/* {editedData.imageFile && (
             <img src={URL.createObjectURL(editedData.imageFile)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />
@@ -211,12 +252,12 @@ function AboutBanner() {
             onChange={handleInputChange}
           />
           <TextField
-          margin="dense"
-          fullWidth
+            margin="dense"
+            fullWidth
             type="file"
             name="banner_img"
             onChange={handleInputChange}
-            style={{ margin: '10px 0' }}
+            style={{ margin: "10px 0" }}
           />
           {/* {editedData.imageFile && (
             <img src={URL.createObjectURL(editedData.imageFile)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />
@@ -236,7 +277,9 @@ function AboutBanner() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDeleteDialogClose}>Cancel</Button>
-          <Button color="secondary" onClick={handleDeleteData}>Delete</Button>
+          <Button color="secondary" onClick={handleDeleteData}>
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

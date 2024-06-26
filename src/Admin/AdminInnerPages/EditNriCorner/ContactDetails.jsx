@@ -32,7 +32,7 @@ function ContactDetails() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell>S No.</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Contact</TableCell>
               <TableCell>Email</TableCell>

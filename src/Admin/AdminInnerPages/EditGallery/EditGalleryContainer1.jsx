@@ -1,4 +1,3 @@
-// src/ImageTable.js
 import React, { useState, useEffect } from "react";
 import {
   getAllGalleryImages,
@@ -24,16 +23,27 @@ import {
   FormControl,
   Select,
   MenuItem,
+  Box,
+  Typography,
+  TextField,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 const EditGalleryContainer1 = () => {
   const [galleryImages, setGalleryImages] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [selectedImage, setSelectedImage] = useState({
     id: null,
     image1: null,
     main_table_id: null,
+  });
+  const [imageToDelete, setImageToDelete] = useState({
+    main_table_id: null,
+    container1_image_id: null,
   });
   const [newImage, setNewImage] = useState({
     image1: null,
@@ -66,6 +76,10 @@ const EditGalleryContainer1 = () => {
     setOpenAdd(false);
   };
 
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+  };
+
   const handleSave = async () => {
     await updateContainer1Image(
       selectedImage.id,
@@ -92,127 +106,166 @@ const EditGalleryContainer1 = () => {
     setNewImage({ ...newImage, image1: e.target.files[0] });
   };
 
-  const handleDeleteClick = async (main_table_id, container1_image_id) => {
-    await deleteContainer1Image(main_table_id, container1_image_id);
+  const handleDeleteClick = (main_table_id, container1_image_id) => {
+    setImageToDelete({ main_table_id, container1_image_id });
+    setOpenDelete(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    await deleteContainer1Image(
+      imageToDelete.main_table_id,
+      imageToDelete.container1_image_id
+    );
     const updatedImages = await getAllGalleryImages();
     setGalleryImages(updatedImages);
+    setOpenDelete(false);
   };
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleAddClick}>
-        Add Image
-      </Button>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr.No</TableCell>
-              <TableCell>Project Name</TableCell>
-              <TableCell>Front-View Image</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {galleryImages.map((row, index) =>
-              row.container1_image.map((image) => (
-                <TableRow key={image.id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.main_heading}</TableCell>
-                  <TableCell>
-                    <img
-                      src={image.img1}
-                      alt={`Container 1 - ${image.id}`}
-                      width="100"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() =>
-                        handleEditClick(image.id, row.main_table_id)
-                      }
-                    >
-                      Edit
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() =>
-                        handleDeleteClick(row.main_table_id, image.id)
-                      }
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Dialog open={openEdit} onClose={handleCloseEdit}>
-        <DialogTitle>Edit Image</DialogTitle>
-        <DialogContent>
-          <FormControl fullWidth margin="dense">
-            <InputLabel htmlFor="upload-image">Upload Image</InputLabel>
-            <Input
-              id="upload-image"
-              type="file"
-              onChange={handleFileChangeEdit}
-            />
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEdit} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog open={openAdd} onClose={handleCloseAdd}>
-        <DialogTitle>Add Image</DialogTitle>
-        <DialogContent>
-          <FormControl fullWidth margin="dense">
-            <InputLabel htmlFor="main-table-id">Select Project</InputLabel>
-            <Select
-              id="main-table-id"
-              value={newImage.main_table_id}
-              onChange={(e) =>
-                setNewImage({ ...newImage, main_table_id: e.target.value })
-              }
-            >
-              {galleryImages.map((row) => (
-                <MenuItem key={row.main_table_id} value={row.main_table_id}>
-                  {row.main_heading}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth margin="dense">
-            <InputLabel htmlFor="upload-new-image">Upload Image</InputLabel>
-            <Input
-              id="upload-new-image"
-              type="file"
-              onChange={handleFileChangeAdd}
-            />
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseAdd} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleAddSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Box>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Front View Image
+        </Typography>
+        <Button
+          startIcon={<AddIcon />}
+          variant="contained"
+          color="primary"
+          onClick={handleAddClick}
+          style={{ marginBottom: "16px" }}
+        >
+          Add Image
+        </Button>
+
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>S.No</TableCell>
+                <TableCell>Project Name</TableCell>
+                <TableCell>Front-View Image</TableCell>
+                <TableCell>Edit</TableCell>
+                <TableCell>Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {galleryImages.map((item, index) =>
+                item.container1_image.map((image) => (
+                  <TableRow key={image.id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{item.main_heading}</TableCell>
+                    <TableCell>
+                      <img
+                        src={image.img1}
+                        alt={`Container 1 - ${image.id}`}
+                        width="100"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        startIcon={<EditIcon />}
+                        onClick={() =>
+                          handleEditClick(image.id, item.main_table_id)
+                        }
+                      >
+                        Edit
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        startIcon={<DeleteIcon />}
+                        color="error"
+                        onClick={() =>
+                          handleDeleteClick(item.main_table_id, image.id)
+                        }
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Dialog open={openEdit} onClose={handleCloseEdit}>
+          <DialogTitle>Edit Image</DialogTitle>
+          <DialogContent>
+            <FormControl fullWidth margin="dense">
+              
+              <TextField
+              fullWidth
+                id="upload-image"
+                type="file"
+                onChange={handleFileChangeEdit}
+              />
+            </FormControl>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseEdit} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleSave} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog open={openAdd} onClose={handleCloseAdd}>
+          <DialogTitle>Add Image</DialogTitle>
+          <DialogContent>
+            <FormControl fullWidth margin="dense">
+              <InputLabel htmlFor="main-table-id">Select Project</InputLabel>
+              <Select
+                id="main-table-id"
+                value={newImage.main_table_id}
+                onChange={(e) =>
+                  setNewImage({ ...newImage, main_table_id: e.target.value })
+                }
+              >
+                {galleryImages.map((item) => (
+                  <MenuItem key={item.main_table_id} value={item.main_table_id}>
+                    {item.main_heading}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="dense">
+      
+              <TextField
+              fullWidth
+                id="upload-new-image"
+                type="file"
+                onChange={handleFileChangeAdd}
+              />
+            </FormControl>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseAdd} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleAddSave} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog open={openDelete} onClose={handleCloseDelete}>
+          <DialogTitle>Confirm Delete</DialogTitle>
+          <DialogContent>
+            <Typography>Are you sure you want to delete this image?</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDelete} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleDeleteConfirm} color="error">
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
     </>
   );
 };

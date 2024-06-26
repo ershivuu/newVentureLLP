@@ -27,6 +27,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import Notification from "../../../Notification/Notification";
 
@@ -285,7 +286,7 @@ function SliderContent() {
       handleCloseDeleteDialog();
       getData();
       setNotificationSeverity("success");
-      setNotificationMessage(response.message); 
+      setNotificationMessage(response.message);
       setNotificationOpen(true);
     } catch (error) {
       console.error("Error deleting content:", error);
@@ -299,7 +300,12 @@ function SliderContent() {
       <Typography variant="h4" gutterBottom>
         Project Content & Video
       </Typography>
-      <Button className="add-btn" variant="contained" color="success" onClick={handleOpenAddDialog}>
+      <Button
+        startIcon={<AddIcon />}
+        variant="contained"
+        color="primary"
+        onClick={handleOpenAddDialog}
+      >
         Add New Projects
       </Button>
       <Box className="set-table">
@@ -341,7 +347,7 @@ function SliderContent() {
                           src={image.slider_img_path}
                           alt={image.file_name}
                           style={{ width: "100px" }}
-                             className="slider-image"
+                          className="slider-image"
                         />
                       </div>
                     ))}
@@ -359,7 +365,6 @@ function SliderContent() {
                     <Button
                       startIcon={<EditIcon />}
                       onClick={() => handleOpenEditDialog(item)}
-
                     >
                       Edit
                     </Button>
@@ -369,7 +374,6 @@ function SliderContent() {
                       startIcon={<DeleteIcon />}
                       color="error"
                       onClick={() => handleOpenDeleteDialog(item)}
-                      
                     >
                       Delete
                     </Button>

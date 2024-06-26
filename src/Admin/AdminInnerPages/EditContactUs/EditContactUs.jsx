@@ -83,7 +83,7 @@ function EditContactUs() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
+                <TableCell>S No.</TableCell>
                 <TableCell>Heading</TableCell>
                 <TableCell>Banner Image</TableCell>
                 <TableCell>Email</TableCell>

@@ -1,4 +1,3 @@
-// src/pages/Gallery/GalleryTable.js
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -14,8 +13,12 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Input,
+  Box,
+  Typography
 } from "@mui/material";
 import { getGalleryBanner, updateGalleryBanner } from "../../AdminServices";
+import EditIcon from '@mui/icons-material/Edit';
 
 const EditGalleryBanner = () => {
   const [banner, setBanner] = useState([]);
@@ -23,7 +26,7 @@ const EditGalleryBanner = () => {
   const [selectedBanner, setSelectedBanner] = useState({
     id: null,
     heading: "",
-    banner_img: "",
+    banner_img: null, // Changed from "" to null
   });
   const [file, setFile] = useState(null);
 
@@ -66,8 +69,12 @@ const EditGalleryBanner = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSelectedBanner({ ...selectedBanner, [name]: value });
+    const { name, value, files } = e.target;
+    if (files) {
+      setSelectedBanner({ ...selectedBanner, [name]: files[0] });
+    } else {
+      setSelectedBanner({ ...selectedBanner, [name]: value });
+    }
   };
 
   const handleFileChange = (e) => {
@@ -76,31 +83,36 @@ const EditGalleryBanner = () => {
 
   return (
     <>
+    <Box>
+    <Typography variant="h4" component="h1" gutterBottom>
+     Edit Banner
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>S No.</TableCell>
               <TableCell>Heading</TableCell>
               <TableCell>Banner Image</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {banner.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.heading}</TableCell>
+            {banner.map((item,index) => (
+              <TableRow key={item.id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{item.heading}</TableCell>
                 <TableCell>
                   <img
-                    src={row.banner_img_url}
-                    alt={row.original_name}
+                    src={item.banner_img_url}
+                    alt={item.original_name}
                     width="100"
                   />
                 </TableCell>
                 <TableCell>
                   <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => handleEditClick(row)}
+                  startIcon={<EditIcon />}
+                    onClick={() => handleEditClick(item)}
                   >
                     Edit
                   </Button>
@@ -115,7 +127,7 @@ const EditGalleryBanner = () => {
         <DialogTitle>Edit Banner</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
+           
             margin="dense"
             label="Heading"
             type="text"
@@ -141,6 +153,8 @@ const EditGalleryBanner = () => {
           </Button>
         </DialogActions>
       </Dialog>
+    </Box>
+    
     </>
   );
 };

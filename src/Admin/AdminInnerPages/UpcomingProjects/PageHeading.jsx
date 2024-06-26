@@ -160,7 +160,7 @@ function PageHeading() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell>S No.</TableCell>
               <TableCell>Heading</TableCell>
               <TableCell>Content</TableCell>
               <TableCell>Edit</TableCell>

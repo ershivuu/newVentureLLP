@@ -61,6 +61,7 @@ function AboutSection2() {
             <Table>
               <TableHead>
                 <TableRow>
+                  
                   <TableCell>Heading First</TableCell>
                   <TableCell>Content First</TableCell>
                   <TableCell>Heading Second</TableCell>

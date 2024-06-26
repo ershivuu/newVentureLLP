@@ -25,6 +25,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import Notification from "../../../Notification/Notification";
 import "./UpcomingProjects.css";
 
@@ -210,10 +211,11 @@ function BannerImages() {
         Banner Images
       </Typography>
       <Button
+        startIcon={<AddIcon />}
         variant="contained"
-        color="success"
+        color="primary"
         onClick={handleClickOpenAddDialog}
-        className="add-btn"
+        // className="add-btn"
       >
         Add Images
       </Button>
@@ -222,7 +224,7 @@ function BannerImages() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
+                <TableCell>S No.</TableCell>
                 <TableCell>Image Name</TableCell>
                 <TableCell>Image</TableCell>
                 <TableCell>Edit</TableCell>
