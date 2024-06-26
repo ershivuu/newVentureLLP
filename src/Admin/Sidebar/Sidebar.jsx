@@ -68,16 +68,16 @@ function Sidebar({ isOpen }) {
                 }`}
               >
                 <Link to="/adminpanel/edithome" onClick={handleLinkClick}>
-                  <a>Home</a>
-                </Link>
-                <Link to="/adminpanel/homesection1" onClick={handleLinkClick}>
-                  <a>Home Section 1</a>
+                  <a>Edit Banner</a>
                 </Link>
                 <Link to="/adminpanel/homesection2" onClick={handleLinkClick}>
-                  <a>Home Section 2</a>
+                  <a>Edit Slider</a>
+                </Link>
+                <Link to="/adminpanel/homesection1" onClick={handleLinkClick}>
+                  <a>About Section</a>
                 </Link>
                 <Link to="/adminpanel/homesection3" onClick={handleLinkClick}>
-                  <a>Home Section 3</a>
+                  <a>Testimonial Section</a>
                 </Link>
               </div>
 
@@ -94,13 +94,13 @@ function Sidebar({ isOpen }) {
                 style={{ display: aboutDropdownOpen ? "block" : "none" }}
               >
                 <Link to="/adminpanel/aboutbanner" onClick={handleLinkClick}>
-                  <a>About Banner</a>
+                  <a>Edit Banner</a>
                 </Link>
                 <Link to="/adminpanel/aboutsection1" onClick={handleLinkClick}>
-                  <a>About Section 1</a>
+                  <a>About Section</a>
                 </Link>
                 <Link to="/adminpanel/aboutsection2" onClick={handleLinkClick}>
-                  <a>About Section 2</a>
+                  <a>Mission & Vision</a>
                 </Link>
               </div>
 
@@ -142,7 +142,7 @@ function Sidebar({ isOpen }) {
                 style={{ display: nriDropdownOpen ? "block" : "none" }}
               >
                 <Link to="/adminpanel/nribanner" onClick={handleLinkClick}>
-                  <a>NRI Banner</a>
+                  <a>Edit Banner & Content</a>
                 </Link>
                 <Link to="/adminpanel/contactdetails" onClick={handleLinkClick}>
                   <a>Contact Details</a>
@@ -162,22 +162,25 @@ function Sidebar({ isOpen }) {
                 style={{ display: galleryDropdownOpen ? "block" : "none" }}
               >
                 <Link to="/adminpanel/gallerybanner" onClick={handleLinkClick}>
-                  Gallery Banner
+                  Edit Banner
+                </Link>
+                <Link to="/adminpanel/gallerydata" onClick={handleLinkClick}>
+                  Create Project
                 </Link>
                 <Link to="/adminpanel/galleryheading" onClick={handleLinkClick}>
-                  Gallery Heading
-                </Link>
-                <Link
-                  to="/adminpanel/gallerycontainer1"
-                  onClick={handleLinkClick}
-                >
-                  Gallery Image Container 1
+                  Edit Project Name
                 </Link>
                 <Link
                   to="/adminpanel/gallerycontainer2"
                   onClick={handleLinkClick}
                 >
-                  Gallery Image Container 2
+                  Top-View Images
+                </Link>
+                <Link
+                  to="/adminpanel/gallerycontainer1"
+                  onClick={handleLinkClick}
+                >
+                  Front-View Images
                 </Link>
               </div>
 

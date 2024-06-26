@@ -596,3 +596,32 @@ export const addContainer2Image = async (image2, main_table_id) => {
   );
   return response.data;
 };
+
+// Get all Gallery Data
+
+// Get Gallery Data
+export const addGalleryImages = async (data) => {
+  const response = await axios.post(
+    `${BASE_URL}/addAllHeadingWithImages`,
+    data
+  );
+  return response.data;
+};
+
+// Delete Gallery Data
+export const deleteGalleryImage = async (mainTableId) => {
+  const response = await axios.delete(
+    `${BASE_URL}/deleteMainData/${mainTableId}`
+  );
+  return response.data;
+};
+
+export const getGalleryBanner = async () => {
+  const response = await axios.get(`${BASE_URL}/galleryBanner`);
+  return response.data;
+};
+
+export const updateGalleryBanner = async (id, data) => {
+  const response = await axios.put(`${BASE_URL}/galleryBanner`, data);
+  return response.data;
+};

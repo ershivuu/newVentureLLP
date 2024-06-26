@@ -144,6 +144,7 @@ function HomeSection2() {
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
+        
         onClick={handleAddClick}
         style={{ marginBottom: "16px" }}
       >
