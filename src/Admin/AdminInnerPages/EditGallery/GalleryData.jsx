@@ -1,20 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { getAllGalleryImages, addGalleryImages, deleteGalleryImage } from '../../AdminServices';
-import {Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Input } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useEffect, useState } from "react";
+import {
+  getAllGalleryImages,
+  addGalleryImages,
+  deleteGalleryImage,
+} from "../../AdminServices";
+import {
+  Typography,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  Input,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function GalleryData() {
   const [galleryData, setGalleryData] = useState([]);
   const [open, setOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
-    main_heading: '',
+    main_heading: "",
     container1_image: null,
-    container2_image: null
+    container2_image: null,
   });
   const [deleteItemId, setDeleteItemId] = useState(null);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +43,7 @@ function GalleryData() {
         const data = await getAllGalleryImages();
         setGalleryData(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -54,7 +75,7 @@ function GalleryData() {
       setGalleryData(data);
       handleDeleteDialogClose();
     } catch (error) {
-      console.error('Error deleting data:', error);
+      console.error("Error deleting data:", error);
       alert(`Error deleting data: ${error.message}`);
     }
   };
@@ -70,9 +91,9 @@ function GalleryData() {
 
   const handleSubmit = async () => {
     const form = new FormData();
-    form.append('main_heading', formData.main_heading);
-    form.append('container1_image', formData.container1_image);
-    form.append('container2_image', formData.container2_image);
+    form.append("main_heading", formData.main_heading);
+    form.append("container1_image", formData.container1_image);
+    form.append("container2_image", formData.container2_image);
 
     try {
       await addGalleryImages(form);
@@ -81,28 +102,27 @@ function GalleryData() {
       setGalleryData(data);
       // Reset the form fields
       setFormData({
-        main_heading: '',
+        main_heading: "",
         container1_image: null,
-        container2_image: null
+        container2_image: null,
       });
     } catch (error) {
-      console.error('Error adding data:', error);
+      console.error("Error adding data:", error);
       alert(`Error adding data: ${error.message}`);
     }
   };
 
   return (
-    
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-       Gallery Data
+        Create Project
       </Typography>
       <Button
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
         // className="add-btn"
-        style={{marginBottom:"16px"}}
+        style={{ marginBottom: "16px" }}
         onClick={handleClickOpen}
       >
         Add Projects
@@ -110,36 +130,27 @@ function GalleryData() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Gallery Images</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Please fill out the form to add new gallery images.
-          </DialogContentText>
           <TextField
-            autoFocus
             margin="dense"
             name="main_heading"
             label="Main Heading"
             type="text"
             fullWidth
-            variant="standard"
             value={formData.main_heading}
             onChange={handleChange}
           />
-          <Input
+          <TextField
             margin="dense"
             name="container1_image"
-            label="Container 1 Image"
             type="file"
             fullWidth
-            variant="standard"
             onChange={handleChange}
           />
-          <Input
+          <TextField
             margin="dense"
             name="container2_image"
-            label="Container 2 Image"
             type="file"
             fullWidth
-            variant="standard"
             onChange={handleChange}
           />
         </DialogContent>
@@ -156,47 +167,52 @@ function GalleryData() {
               <TableCell>Project Heading</TableCell>
               <TableCell>Front View Images</TableCell>
               <TableCell>Top View Images</TableCell>
-              <TableCell>Delete Project</TableCell>
+              <TableCell>Delete </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {galleryData.map((item,index) => (
+            {galleryData.map((item, index) => (
               <TableRow key={item.main_table_id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{item.main_heading}</TableCell>
                 <TableCell>
                   {item.container1_image.length > 0 && (
-                    <img src={item.container1_image[0].img1} alt="Container 1" style={{ width: 100, height: 100, margin: 4 }} />
+                    <img
+                      src={item.container1_image[0].img1}
+                      alt="Container 1"
+                      style={{ width: 100, height: 100, margin: 4 }}
+                    />
                   )}
                 </TableCell>
                 <TableCell>
                   {item.container2_image.length > 0 && (
-                    <img src={item.container2_image[0].img2} alt="Container 2" style={{ width: 100, height: 100, margin: 4 }} />
+                    <img
+                      src={item.container2_image[0].img2}
+                      alt="Container 2"
+                      style={{ width: 100, height: 100, margin: 4 }}
+                    />
                   )}
                 </TableCell>
                 <TableCell>
                   <Button
-                   startIcon={<DeleteIcon />} 
+                    startIcon={<DeleteIcon />}
                     color="error"
                     onClick={() => handleDeleteDialogOpen(item.main_table_id)}
                   >
                     Delete
                   </Button>
-               
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Dialog
-        open={deleteDialogOpen}
-        onClose={handleDeleteDialogClose}
-      >
+      <Dialog open={deleteDialogOpen} onClose={handleDeleteDialogClose}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete this item? This action cannot be undone.
+            Are you sure you want to delete this item? This action cannot be
+            undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

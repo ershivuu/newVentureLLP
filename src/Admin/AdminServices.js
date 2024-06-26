@@ -621,7 +621,11 @@ export const getGalleryBanner = async () => {
   return response.data;
 };
 
-export const updateGalleryBanner = async (id, data) => {
-  const response = await axios.put(`${BASE_URL}/galleryBanner`, data);
+export const updateGalleryBanner = async (id, formData) => {
+  const response = await axios.put(`${BASE_URL}/galleryBanner/`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response.data;
 };

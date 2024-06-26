@@ -183,6 +183,7 @@ function HomeSection2() {
                 </TableCell>
                 <TableCell>
                   <Button
+                  color="error"
                     startIcon={<DeleteIcon />}
                     onClick={() => handleDeleteClick(item.id)}
                   >

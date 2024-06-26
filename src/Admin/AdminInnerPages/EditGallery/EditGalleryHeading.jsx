@@ -15,7 +15,10 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Box,
+  Typography,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const EditGalleryHeading = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -61,59 +64,63 @@ const EditGalleryHeading = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr.No</TableCell>
-              <TableCell>Project Name</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {galleryImages.map((row, index) => (
-              <TableRow key={row.main_table_id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{row.main_heading}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() =>
-                      handleEditClick(row.main_table_id, row.main_heading)
-                    }
-                  >
-                    Edit
-                  </Button>
-                </TableCell>
+      <Box>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Edit Project Name
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>S.No</TableCell>
+                <TableCell>Project Name</TableCell>
+                <TableCell>Edit</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {galleryImages.map((row, index) => (
+                <TableRow key={row.main_table_id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{row.main_heading}</TableCell>
+                  <TableCell>
+                    <Button
+                      startIcon={<EditIcon />}
+                      onClick={() =>
+                        handleEditClick(row.main_table_id, row.main_heading)
+                      }
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Main Heading</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Main Heading"
-            type="text"
-            fullWidth
-            value={selectedHeading.main_heading}
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Edit Main Heading</DialogTitle>
+          <DialogContent>
+            <TextField
+              margin="dense"
+              label="Main Heading"
+              type="text"
+              fullWidth
+              value={selectedHeading.main_heading}
+              onChange={handleChange}
+            />
+            
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleSave} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
     </>
   );
 };

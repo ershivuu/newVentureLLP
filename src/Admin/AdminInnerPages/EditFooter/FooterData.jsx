@@ -36,7 +36,7 @@ function FooterData() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
+            <TableCell>S No.</TableCell>
             {/* <TableCell>Footer Color</TableCell> */}
             <TableCell>Email</TableCell>
             {/* <TableCell>Mobile</TableCell> */}

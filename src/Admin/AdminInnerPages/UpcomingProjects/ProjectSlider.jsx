@@ -166,7 +166,7 @@ function ProjectSlider() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell>S No.</TableCell>
               <TableCell>File Name</TableCell>
               <TableCell>Image</TableCell>
               <TableCell>Edit</TableCell>

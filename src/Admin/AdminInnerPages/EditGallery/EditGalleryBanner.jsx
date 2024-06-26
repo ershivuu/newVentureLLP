@@ -14,8 +14,11 @@ import {
   DialogTitle,
   TextField,
   Input,
+  Box,
+  Typography
 } from "@mui/material";
 import { getGalleryBanner, updateGalleryBanner } from "../../AdminServices";
+import EditIcon from '@mui/icons-material/Edit';
 
 const EditGalleryBanner = () => {
   const [banner, setBanner] = useState([]);
@@ -25,6 +28,7 @@ const EditGalleryBanner = () => {
     heading: "",
     banner_img: null, // Changed from "" to null
   });
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchBanner = async () => {
@@ -52,21 +56,12 @@ const EditGalleryBanner = () => {
     try {
       const formData = new FormData();
       formData.append("heading", selectedBanner.heading);
-      if (selectedBanner.banner_img) {
-        formData.append("banner_img", selectedBanner.banner_img);
+      if (file) {
+        formData.append("banner_img", file);
       }
-
       await updateGalleryBanner(selectedBanner.id, formData);
-
-      // Update the state with the new data
-      setBanner((prevBanner) =>
-        prevBanner.map((item) =>
-          item.id === selectedBanner.id
-            ? { ...item, heading: selectedBanner.heading, banner_img: URL.createObjectURL(selectedBanner.banner_img) }
-            : item
-        )
-      );
-
+      const updatedBanner = await getGalleryBanner();
+      setBanner([updatedBanner]);
       setOpen(false);
     } catch (error) {
       console.error("Error updating banner:", error);
@@ -82,33 +77,42 @@ const EditGalleryBanner = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   return (
     <>
+    <Box>
+    <Typography variant="h4" component="h1" gutterBottom>
+     Edit Banner
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>S No.</TableCell>
               <TableCell>Heading</TableCell>
               <TableCell>Banner Image</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {banner.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.heading}</TableCell>
+            {banner.map((item,index) => (
+              <TableRow key={item.id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{item.heading}</TableCell>
                 <TableCell>
                   <img
-                    src={row.banner_img_url}
-                    alt={row.original_name}
+                    src={item.banner_img_url}
+                    alt={item.original_name}
                     width="100"
                   />
                 </TableCell>
                 <TableCell>
                   <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => handleEditClick(row)}
+                  startIcon={<EditIcon />}
+                    onClick={() => handleEditClick(item)}
                   >
                     Edit
                   </Button>
@@ -123,7 +127,7 @@ const EditGalleryBanner = () => {
         <DialogTitle>Edit Banner</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
+           
             margin="dense"
             label="Heading"
             type="text"
@@ -132,12 +136,12 @@ const EditGalleryBanner = () => {
             value={selectedBanner.heading}
             onChange={handleChange}
           />
-          <Input
+          <TextField
             margin="dense"
             type="file"
             fullWidth
             name="banner_img"
-            onChange={handleChange}
+            onChange={handleFileChange}
           />
         </DialogContent>
         <DialogActions>
@@ -149,6 +153,8 @@ const EditGalleryBanner = () => {
           </Button>
         </DialogActions>
       </Dialog>
+    </Box>
+    
     </>
   );
 };
