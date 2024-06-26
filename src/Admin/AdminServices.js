@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const BASE_URL = "http://192.168.1.2:5000";
+import { API_URL } from "../Config/config";
+const BASE_URL = API_URL;
 
 //get upcoming project heading
 export const getAllSectionFirst = async () => {

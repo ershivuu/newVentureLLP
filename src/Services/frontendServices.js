@@ -174,3 +174,12 @@ export const getFooterData = async () => {
     throw error;
   }
 };
+export const getAllGalleryImages = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/getAllGalleryImages`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};

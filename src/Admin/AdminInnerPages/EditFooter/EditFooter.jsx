@@ -25,17 +25,15 @@ function EditFooter() {
   const [open, setOpen] = useState(false);
   const [selectedFooter, setSelectedFooter] = useState(null);
   const [formData, setFormData] = useState({ footer_color: "", mobile: "" });
-
+  const fetchFooterData = async () => {
+    try {
+      const data = await getAllFooterData();
+      setFooterData(data.data);
+    } catch (error) {
+      console.error("Error fetching footer data", error);
+    }
+  };
   useEffect(() => {
-    const fetchFooterData = async () => {
-      try {
-        const data = await getAllFooterData();
-        setFooterData(data.data);
-      } catch (error) {
-        console.error("Error fetching footer data", error);
-      }
-    };
-
     fetchFooterData();
   }, []);
 

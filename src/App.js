@@ -14,6 +14,10 @@ import ContactDetails from "./admin/AdminInnerPages/EditNriCorner/ContactDetails
 import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx";
 import EditFooter from "./admin/AdminInnerPages/EditFooter/EditFooter.jsx";
 import FooterData from "./admin/AdminInnerPages/EditFooter/FooterData.jsx";
+import NotFoundPage from "./pages/PageNotFound/NotFoundPage.jsx";
+import EditGalleryHeading from "./admin/AdminInnerPages/EditGallery/EditGalleryHeading.jsx";
+import EditGalleryContainer1 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer1.jsx";
+import EditGalleryContainer2 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer2.jsx";
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -121,11 +125,27 @@ function App() {
               path="editfooter"
               element={<EditFooter />}
             />
-            <Route
-              key="editfooter"
+             <Route
+              key="footerdata"
               path="footerdata"
               element={<FooterData />}
             />
+            <Route
+              key="galleryheading"
+              path="galleryheading"
+              element={<EditGalleryHeading />}
+            />
+            <Route
+              key="gallerycontainer1"
+              path="gallerycontainer1"
+              element={<EditGalleryContainer1 />}
+            />
+            <Route
+              key="gallerycontainer2"
+              path="gallerycontainer2"
+              element={<EditGalleryContainer2 />}
+            />
+           
           </Route>
 
           <Route key="Projects" path="/projects" element={<Projects />} />
@@ -136,6 +156,7 @@ function App() {
           <Route key="Contact" path="/contact-us" element={<Contact />} />
           <Route key="test" path="/test" element={<Test />} />
           <Route key="counter" path="/counter" element={<CharCounter />} />
+          <Route key="NotFoundPage" path="/*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>

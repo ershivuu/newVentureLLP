@@ -5,6 +5,7 @@ import Footers from "../../components/Footers/Footers";
 import banner from "../../assets/images/vector-imgs/site-3.jpg";
 import home2 from "../../assets/images/home2.jpg";
 import home3 from "../../assets/images/home3.jpg";
+import ProjectGallery from "./ProjectGallery";
 function Gallery() {
   return (
     <>
@@ -20,7 +21,7 @@ function Gallery() {
           </div>
         </div>
       </div>
-      <div className="prjoect-gallery">
+      {/* <div className="prjoect-gallery">
         <div className="project-name">
           <p> Shiddhraj Paradise</p>
         </div>
@@ -47,7 +48,7 @@ function Gallery() {
             <img src={home3} alt="" srcset="" />
           </div>
         </div>
-        <div className="image-group image-group-1">
+        <div className="image-group image-group-2">
           <div className="group-1-heading">
             <p>Top view</p>
           </div>
@@ -70,8 +71,8 @@ function Gallery() {
             <img src={home3} alt="" srcset="" />
           </div>
         </div>
-      </div>
-
+      </div> */}
+      <ProjectGallery></ProjectGallery>
       <Footers></Footers>
     </>
   );
