@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./Gallery.css";
 import home2 from "../../assets/images/home2.jpg";
-import home3 from "../../assets/images/home3.jpg";
+import venture1 from "../../assets/images/siteimgs/Picture1.jpg";
+import venture2 from "../../assets/images/siteimgs/Picture2.jpg";
+import venture3 from "../../assets/images/siteimgs/Picture3.jpg";
+import venture4 from "../../assets/images/siteimgs/Picture4.jpg";
+import venture5 from "../../assets/images/siteimgs/Picture5.jpg";
+import venture6 from "../../assets/images/siteimgs/Picture6.jpg";
+import venture7 from "../../assets/images/vector-imgs/siddhraj.jpg";
+import venture8 from "../../assets/images/vector-imgs/site-1.jpg";
+import venture9 from "../../assets/images/vector-imgs/site-2.jpg";
+import venture10 from "../../assets/images/vector-imgs/site-3.jpg";
+import venture11 from "../../assets/images/vector-imgs/site-4.jpg";
+import venture12 from "../../assets/images/vector-imgs/site-5.jpg";
 import { getAllGalleryImages } from "../../Services/frontendServices";
 
 function ProjectGallery() {
@@ -41,13 +52,22 @@ function ProjectGallery() {
           </div>
           <div className="image-section-container">
             <div className="image-section">
-              <img src={home2} alt="siddhraj Paradise" />
+              <img src={venture1} alt="siddhraj Paradise" />
             </div>
             <div className="image-section">
-              <img src={home2} alt="siddhraj Paradise" />
+              <img src={venture2} alt="siddhraj Paradise" />
             </div>
             <div className="image-section">
-              <img src={home2} alt="siddhraj Paradise" />
+              <img src={venture3} alt="siddhraj Paradise" />
+            </div>
+            <div className="image-section">
+              <img src={venture4} alt="siddhraj Paradise" />
+            </div>
+            <div className="image-section">
+              <img src={venture5} alt="siddhraj Paradise" />
+            </div>
+            <div className="image-section">
+              <img src={venture6} alt="siddhraj Paradise" />
             </div>
           </div>
         </div>
@@ -57,13 +77,22 @@ function ProjectGallery() {
           </div>
           <div className="image-section-container">
             <div className="image-section">
-              <img src={home2} alt="siddhraj Paradise" />
+              <img src={venture7} alt="siddhraj Paradise" />
             </div>
             <div className="image-section">
-              <img src={home2} alt="siddhraj Paradise" />
+              <img src={venture8} alt="siddhraj Paradise" />
             </div>
             <div className="image-section">
-              <img src={home2} alt="siddhraj Paradise" />
+              <img src={venture9} alt="siddhraj Paradise" />
+            </div>
+            <div className="image-section">
+              <img src={venture10} alt="siddhraj Paradise" />
+            </div>
+            <div className="image-section">
+              <img src={venture11} alt="siddhraj Paradise" />
+            </div>
+            <div className="image-section">
+              <img src={venture12} alt="siddhraj Paradise" />
             </div>
           </div>
         </div>

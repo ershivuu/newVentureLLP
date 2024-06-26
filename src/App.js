@@ -14,6 +14,7 @@ import ContactDetails from "./admin/AdminInnerPages/EditNriCorner/ContactDetails
 import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx";
 import EditFooter from "./admin/AdminInnerPages/EditFooter/EditFooter.jsx";
 import FooterData from "./admin/AdminInnerPages/EditFooter/FooterData.jsx";
+import NotFoundPage from "./pages/PageNotFound/NotFoundPage.jsx";
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -136,6 +137,7 @@ function App() {
           <Route key="Contact" path="/contact-us" element={<Contact />} />
           <Route key="test" path="/test" element={<Test />} />
           <Route key="counter" path="/counter" element={<CharCounter />} />
+          <Route key="NotFoundPage" path="/*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>

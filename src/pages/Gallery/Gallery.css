@@ -106,13 +106,11 @@
     text-align: justify;
   }
   .image-section {
-    /* margin: auto; */
     width: 300px;
   }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Your tablet styles for landscape orientation here */
   .single-banner-image {
     height: 40vh;
   }
@@ -122,20 +120,21 @@
   .nri-content {
     text-align: justify;
   }
-  /* .image-section {
-    margin: auto;
-    width: 300px;
-  } */
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Your tablet styles for portrait orientation here */
 }
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
-  /* Your styles for the larger iPad Pro landscape orientation here */
-  /* Your tablet styles for portrait orientation here */
 }
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
   /* Your styles for the larger iPad Pro portrait orientation here */
+}
+.modal-image {
+  object-fit: contain !important;
+  object-position: top !important;
+}
+.modal-content {
+  object-fit: contain !important;
+  object-position: top !important;
 }
