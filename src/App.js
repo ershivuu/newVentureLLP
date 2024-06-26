@@ -1,25 +1,5 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Test from "../src/admin/Test.jsx";
-
-import EditHome from "./admin/AdminInnerPages/EditHome/EditHome.jsx";
-import HomeSection1 from "./admin/AdminInnerPages/EditHome/HomeSection1.jsx";
-import HomeSection2 from "./admin/AdminInnerPages/EditHome/HomeSection2.jsx";
-import HomeSection3 from "./admin/AdminInnerPages/EditHome/HomeSection3.jsx";
-import AboutBanner from "./admin/AdminInnerPages/EditAboutUs/AboutBanner.jsx";
-import AboutSection1 from "./admin/AdminInnerPages/EditAboutUs/AboutSection1.jsx";
-import AboutSection2 from "./admin/AdminInnerPages/EditAboutUs/AboutSection2.jsx";
-import NriBanner from "./admin/AdminInnerPages/EditNriCorner/NriBanner.jsx";
-import ContactDetails from "./admin/AdminInnerPages/EditNriCorner/ContactDetails.jsx";
-import EditContactUs from "./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx";
-import EditFooter from "./admin/AdminInnerPages/EditFooter/EditFooter.jsx";
-import FooterData from "./admin/AdminInnerPages/EditFooter/FooterData.jsx";
-import NotFoundPage from "./pages/PageNotFound/NotFoundPage.jsx";
-import EditGalleryHeading from "./admin/AdminInnerPages/EditGallery/EditGalleryHeading.jsx";
-import EditGalleryContainer1 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer1.jsx";
-import EditGalleryContainer2 from "./admin/AdminInnerPages/EditGallery/EditGalleryContainer2.jsx";
-import EditGalleryBanner from "./admin/AdminInnerPages/EditGallery/EditGalleryBanner.jsx";
-import GalleryData from "./admin/AdminInnerPages/EditGallery/GalleryData.jsx";
 
 // Lazy load the components
 const AdminPanel = lazy(() => import("./admin/AdminPanel/AdminPanel.jsx"));
@@ -45,129 +25,106 @@ const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
 const CharCounter = lazy(() => import("./pages/CharCounter/Counter.jsx"));
+const Test = lazy(() => import("../src/admin/Test.jsx"));
+const EditHome = lazy(() =>
+  import("./admin/AdminInnerPages/EditHome/EditHome.jsx")
+);
+const HomeSection1 = lazy(() =>
+  import("./admin/AdminInnerPages/EditHome/HomeSection1.jsx")
+);
+const HomeSection2 = lazy(() =>
+  import("./admin/AdminInnerPages/EditHome/HomeSection2.jsx")
+);
+const HomeSection3 = lazy(() =>
+  import("./admin/AdminInnerPages/EditHome/HomeSection3.jsx")
+);
+const AboutBanner = lazy(() =>
+  import("./admin/AdminInnerPages/EditAboutUs/AboutBanner.jsx")
+);
+const AboutSection1 = lazy(() =>
+  import("./admin/AdminInnerPages/EditAboutUs/AboutSection1.jsx")
+);
+const AboutSection2 = lazy(() =>
+  import("./admin/AdminInnerPages/EditAboutUs/AboutSection2.jsx")
+);
+const NriBanner = lazy(() =>
+  import("./admin/AdminInnerPages/EditNriCorner/NriBanner.jsx")
+);
+const ContactDetails = lazy(() =>
+  import("./admin/AdminInnerPages/EditNriCorner/ContactDetails.jsx")
+);
+const EditContactUs = lazy(() =>
+  import("./admin/AdminInnerPages/EditContactUs/EditContactUs.jsx")
+);
+const EditFooter = lazy(() =>
+  import("./admin/AdminInnerPages/EditFooter/EditFooter.jsx")
+);
+const FooterData = lazy(() =>
+  import("./admin/AdminInnerPages/EditFooter/FooterData.jsx")
+);
+const NotFoundPage = lazy(() =>
+  import("./pages/PageNotFound/NotFoundPage.jsx")
+);
+const EditGalleryHeading = lazy(() =>
+  import("./admin/AdminInnerPages/EditGallery/EditGalleryHeading.jsx")
+);
+const EditGalleryContainer1 = lazy(() =>
+  import("./admin/AdminInnerPages/EditGallery/EditGalleryContainer1.jsx")
+);
+const EditGalleryContainer2 = lazy(() =>
+  import("./admin/AdminInnerPages/EditGallery/EditGalleryContainer2.jsx")
+);
+const EditGalleryBanner = lazy(() =>
+  import("./admin/AdminInnerPages/EditGallery/EditGalleryBanner.jsx")
+);
+const GalleryData = lazy(() =>
+  import("./admin/AdminInnerPages/EditGallery/GalleryData.jsx")
+);
+
 function App() {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route key="adminpanel" path="adminpanel" element={<AdminPanel />}>
+          <Route path="/adminpanel" element={<AdminPanel />}>
+            <Route path="upcomingprojects" element={<UpcomingProjects />} />
+            <Route path="pageheading" element={<PageHeading />} />
+            <Route path="bannerimages" element={<BannerImages />} />
+            <Route path="projectslider" element={<ProjectSlider />} />
+            <Route path="slidercontent" element={<SliderContent />} />
+            <Route path="edithome" element={<EditHome />} />
+            <Route path="homesection1" element={<HomeSection1 />} />
+            <Route path="homesection2" element={<HomeSection2 />} />
+            <Route path="homesection3" element={<HomeSection3 />} />
+            <Route path="aboutbanner" element={<AboutBanner />} />
+            <Route path="aboutsection1" element={<AboutSection1 />} />
+            <Route path="aboutsection2" element={<AboutSection2 />} />
+            <Route path="nribanner" element={<NriBanner />} />
+            <Route path="contactdetails" element={<ContactDetails />} />
+            <Route path="editcontactus" element={<EditContactUs />} />
+            <Route path="editfooter" element={<EditFooter />} />
+            <Route path="footerdata" element={<FooterData />} />
+            <Route path="galleryheading" element={<EditGalleryHeading />} />
             <Route
-              key="upcomingprojects"
-              path="upcomingprojects"
-              element={<UpcomingProjects />}
-            />
-            <Route
-              key="pageheading"
-              path="pageheading"
-              element={<PageHeading />}
-            />
-            <Route
-              key="bannerimages"
-              path="bannerimages"
-              element={<BannerImages />}
-            />
-            <Route
-              key="projectslider"
-              path="projectslider"
-              element={<ProjectSlider />}
-            />
-            <Route
-              key="slidercontent"
-              path="slidercontent"
-              element={<SliderContent />}
-            />
-            <Route key="edithome" path="edithome" element={<EditHome />} />
-            <Route
-              key="homesection1"
-              path="homesection1"
-              element={<HomeSection1 />}
-            />
-            <Route
-              key="homesection2"
-              path="homesection2"
-              element={<HomeSection2 />}
-            />
-
-            <Route
-              key="homesection3"
-              path="homesection3"
-              element={<HomeSection3 />}
-            />
-
-            <Route
-              key="aboutbanner"
-              path="aboutbanner"
-              element={<AboutBanner />}
-            />
-            <Route
-              key="aboutsection1"
-              path="aboutsection1"
-              element={<AboutSection1 />}
-            />
-            <Route
-              key="aboutsection2"
-              path="aboutsection2"
-              element={<AboutSection2 />}
-            />
-            <Route key="nribanner" path="nribanner" element={<NriBanner />} />
-            <Route
-              key="contactdetails"
-              path="contactdetails"
-              element={<ContactDetails />}
-            />
-
-            <Route
-              key="editcontactus"
-              path="editcontactus"
-              element={<EditContactUs />}
-            />
-
-            <Route
-              key="editfooter"
-              path="editfooter"
-              element={<EditFooter />}
-            />
-             <Route
-              key="footerdata"
-              path="footerdata"
-              element={<FooterData />}
-            />
-            <Route
-              key="galleryheading"
-              path="galleryheading"
-              element={<EditGalleryHeading />}
-            />
-            <Route
-              key="gallerycontainer1"
               path="gallerycontainer1"
               element={<EditGalleryContainer1 />}
             />
             <Route
-              key="gallerycontainer2"
               path="gallerycontainer2"
               element={<EditGalleryContainer2 />}
             />
-            <Route
-              key="gallerydata"
-              path="gallerydata"
-              element={<GalleryData />}
-            />
-            <Route
-              key="editgallerybanner"
-              path="gallerybanner"
-              element={<EditGalleryBanner />}
-            />
+            <Route path="gallerydata" element={<GalleryData />} />
+            <Route path="gallerybanner" element={<EditGalleryBanner />} />
           </Route>
-
-          <Route key="Projects" path="/projects" element={<Projects />} />
-          <Route key="Home" path="/" element={<Home />} />
-          <Route key="About" path="/about" element={<About />} />
-          <Route key="NriCorner" path="/nri-corner" element={<NriCorner />} />
-          <Route key="Gallery" path="/gallery" element={<Gallery />} />
-          <Route key="Contact" path="/contact-us" element={<Contact />} />
-          <Route key="test" path="/test" element={<Test />} />
-          <Route key="counter" path="/counter" element={<CharCounter />} />
-          <Route key="NotFoundPage" path="/*" element={<NotFoundPage />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/nri-corner" element={<NriCorner />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/counter" element={<CharCounter />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>

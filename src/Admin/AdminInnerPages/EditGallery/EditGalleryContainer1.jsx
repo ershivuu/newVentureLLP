@@ -103,7 +103,6 @@ const EditGalleryContainer1 = () => {
       <Button variant="contained" color="primary" onClick={handleAddClick}>
         Add Image
       </Button>
-   
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -156,7 +155,6 @@ const EditGalleryContainer1 = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
       <Dialog open={openEdit} onClose={handleCloseEdit}>
         <DialogTitle>Edit Image</DialogTitle>
         <DialogContent>
@@ -178,7 +176,6 @@ const EditGalleryContainer1 = () => {
           </Button>
         </DialogActions>
       </Dialog>
-
       <Dialog open={openAdd} onClose={handleCloseAdd}>
         <DialogTitle>Add Image</DialogTitle>
         <DialogContent>
