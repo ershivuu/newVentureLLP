@@ -1,4 +1,3 @@
-// src/pages/Gallery/GalleryTable.js
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -14,6 +13,7 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Input,
 } from "@mui/material";
 import { getGalleryBanner, updateGalleryBanner } from "../../AdminServices";
 
@@ -23,7 +23,7 @@ const EditGalleryBanner = () => {
   const [selectedBanner, setSelectedBanner] = useState({
     id: null,
     heading: "",
-    banner_img: "",
+    banner_img: null, // Changed from "" to null
   });
 
   useEffect(() => {
@@ -50,16 +50,23 @@ const EditGalleryBanner = () => {
 
   const handleSave = async () => {
     try {
-      const updatedData = {
-        heading: selectedBanner.heading,
-        banner_img: selectedBanner.banner_img,
-      };
-      await updateGalleryBanner(selectedBanner.id, updatedData);
-      setBanner(
-        banner.map((item) =>
-          item.id === selectedBanner.id ? selectedBanner : item
+      const formData = new FormData();
+      formData.append("heading", selectedBanner.heading);
+      if (selectedBanner.banner_img) {
+        formData.append("banner_img", selectedBanner.banner_img);
+      }
+
+      await updateGalleryBanner(selectedBanner.id, formData);
+
+      // Update the state with the new data
+      setBanner((prevBanner) =>
+        prevBanner.map((item) =>
+          item.id === selectedBanner.id
+            ? { ...item, heading: selectedBanner.heading, banner_img: URL.createObjectURL(selectedBanner.banner_img) }
+            : item
         )
       );
+
       setOpen(false);
     } catch (error) {
       console.error("Error updating banner:", error);
@@ -67,8 +74,12 @@ const EditGalleryBanner = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSelectedBanner({ ...selectedBanner, [name]: value });
+    const { name, value, files } = e.target;
+    if (files) {
+      setSelectedBanner({ ...selectedBanner, [name]: files[0] });
+    } else {
+      setSelectedBanner({ ...selectedBanner, [name]: value });
+    }
   };
 
   return (
@@ -121,16 +132,12 @@ const EditGalleryBanner = () => {
             value={selectedBanner.heading}
             onChange={handleChange}
           />
-          <TextField
+          <Input
             margin="dense"
             type="file"
             fullWidth
             name="banner_img"
-            onChange={(e) =>
-              handleChange({
-                target: { name: "banner_img", value: e.target.files[0] },
-              })
-            }
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
