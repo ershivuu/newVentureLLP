@@ -21,11 +21,10 @@ import {
   DialogContentText,
   DialogTitle,
   TextField,
-  Input,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import Notification from "../../../Notification/Notification";
 function GalleryData() {
   const [galleryData, setGalleryData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -36,19 +35,27 @@ function GalleryData() {
     container2_image: null,
   });
   const [deleteItemId, setDeleteItemId] = useState(null);
+  const [formErrors, setFormErrors] = useState({
+    main_heading: false,
+    container1_image: false,
+    container2_image: false,
+  });
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllGalleryImages();
-        setGalleryData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await getAllGalleryImages();
+      setGalleryData(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -68,48 +75,101 @@ function GalleryData() {
     setDeleteItemId(null);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (deleteItemId) => {
     try {
-      await deleteGalleryImage(deleteItemId);
-      const data = await getAllGalleryImages();
-      setGalleryData(data);
-      handleDeleteDialogClose();
+      const response = await deleteGalleryImage(deleteItemId);
+      await fetchData(); // Refresh data after delete
+      handleNotification(response.message, "success"); 
     } catch (error) {
       console.error("Error deleting data:", error);
-      alert(`Error deleting data: ${error.message}`);
+      handleNotification("Error deleting data", "error"); 
     }
   };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (files) {
+  
+    // Check for file type and size validation
+    if (files && files[0]) {
+      const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+      const maxFileSize = 20 * 1024 * 1024; // 20 MB in bytes
+  
+      if (!allowedTypes.includes(files[0].type)) {
+        handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+        // Clear the file input
+        e.target.value = null;
+        return;
+      }
+  
+      if (files[0].size > maxFileSize) {
+        handleNotification("File size exceeds 20 MB limit", "error");
+        // Clear the file input
+        e.target.value = null;
+        return;
+      }
+  
       setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  
+    // Clear error for the field if it's now filled
+    if (formErrors[name]) {
+      setFormErrors({ ...formErrors, [name]: false });
+    }
   };
-
+  
   const handleSubmit = async () => {
+    let hasError = false;
+    const errors = {
+      main_heading: !formData.main_heading,
+      container1_image: !formData.container1_image,
+      container2_image: !formData.container2_image,
+    };
+
+    setFormErrors(errors);
+
+    // Check if any required fields are empty
+    for (const key in errors) {
+      if (errors[key]) {
+        hasError = true;
+      }
+    }
+
+    if (hasError) {
+      return;
+    }
+
     const form = new FormData();
     form.append("main_heading", formData.main_heading);
     form.append("container1_image", formData.container1_image);
     form.append("container2_image", formData.container2_image);
 
     try {
-      await addGalleryImages(form);
-      handleClose();
-      const data = await getAllGalleryImages();
-      setGalleryData(data);
-      // Reset the form fields
+      const response = await addGalleryImages(form);
+      await fetchData(); 
+      handleNotification(response.message, "success"); 
+     
       setFormData({
         main_heading: "",
         container1_image: null,
         container2_image: null,
       });
+      handleClose();
     } catch (error) {
       console.error("Error adding data:", error);
-      alert(`Error adding data: ${error.message}`);
+      handleNotification("Error adding data", "error"); 
     }
+  };
+
+  const handleNotification = (message, severity) => {
+    setNotificationMessage(message);
+    setNotificationSeverity(severity);
+    setNotificationOpen(true);
+  };
+
+  const closeNotification = () => {
+    setNotificationOpen(false);
   };
 
   return (
@@ -121,7 +181,6 @@ function GalleryData() {
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
-        // className="add-btn"
         style={{ marginBottom: "16px" }}
         onClick={handleClickOpen}
       >
@@ -138,6 +197,8 @@ function GalleryData() {
             fullWidth
             value={formData.main_heading}
             onChange={handleChange}
+            error={formErrors.main_heading}
+            helperText={formErrors.main_heading && "This feild is required"}
           />
           <TextField
             margin="dense"
@@ -145,6 +206,10 @@ function GalleryData() {
             type="file"
             fullWidth
             onChange={handleChange}
+            error={formErrors.container1_image}
+            helperText={
+              formErrors.container1_image && "This feild is required"
+            }
           />
           <TextField
             margin="dense"
@@ -152,6 +217,10 @@ function GalleryData() {
             type="file"
             fullWidth
             onChange={handleChange}
+            error={formErrors.container2_image}
+            helperText={
+              formErrors.container2_image && "This feild is required"
+            }
           />
         </DialogContent>
         <DialogActions>
@@ -167,7 +236,7 @@ function GalleryData() {
               <TableCell>Project Heading</TableCell>
               <TableCell>Front View Images</TableCell>
               <TableCell>Top View Images</TableCell>
-              <TableCell>Delete </TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -219,11 +288,23 @@ function GalleryData() {
           <Button onClick={handleDeleteDialogClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleDelete} color="secondary">
+          <Button
+            onClick={() => {
+              handleDelete(deleteItemId);
+              handleDeleteDialogClose();
+            }}
+            color="secondary"
+          >
             Delete
           </Button>
         </DialogActions>
       </Dialog>
+      <Notification
+        open={notificationOpen}
+        handleClose={closeNotification}
+        alertMessage={notificationMessage}
+        alertSeverity={notificationSeverity}
+      />
     </Box>
   );
 }

@@ -103,7 +103,6 @@ function AboutBanner() {
 
       setEditDialogOpen(false);
 
-      // Fetch data again after successful save to refresh the table
       fetchData();
     } catch (error) {
       console.error("Error updating data:", error);

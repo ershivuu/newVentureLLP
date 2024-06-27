@@ -1,4 +1,3 @@
-// src/ImageTable.js
 import React, { useState, useEffect } from "react";
 import {
   getAllGalleryImages,
@@ -30,31 +29,42 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Notification from "../../../Notification/Notification"; 
 
 const EditGalleryContainer2 = () => {
   const [galleryImages, setGalleryImages] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false); // New state for delete confirmation
+  const [openDelete, setOpenDelete] = useState(false);
   const [selectedImage, setSelectedImage] = useState({
     id: null,
     image2: null,
     main_table_id: null,
   });
-  const [deleteImage, setDeleteImage] = useState(null); // New state for the image to be deleted
+  const [deleteImage, setDeleteImage] = useState(null);
   const [newImage, setNewImage] = useState({
     image2: null,
     main_table_id: "",
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllGalleryImages();
-      setGalleryImages(data);
-    };
+  // Notification states
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
 
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await getAllGalleryImages();
+      setGalleryImages(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      handleNotification("Error fetching data", "error");
+    }
+  };
 
   const handleEditClick = (id, main_table_id) => {
     setSelectedImage({ id, image2: null, main_table_id });
@@ -64,34 +74,64 @@ const EditGalleryContainer2 = () => {
   const handleClose = () => {
     setOpenEdit(false);
     setOpenAdd(false);
-    setOpenDelete(false); // Close the delete confirmation dialog
+    setOpenDelete(false);
   };
 
   const handleSave = async () => {
-    await updateContainer2Image(
-      selectedImage.id,
-      selectedImage.image2,
-      selectedImage.main_table_id
-    );
-    const updatedImages = await getAllGalleryImages();
-    setGalleryImages(updatedImages);
-    setOpenEdit(false);
+    try {
+      const response = await updateContainer2Image(
+        selectedImage.id,
+        selectedImage.image2,
+        selectedImage.main_table_id
+      );
+      console.log(response, "check");
+      await fetchData(); // Fetch updated data
+      setOpenEdit(false);
+
+      handleNotification(response.message, "success");
+    } catch (error) {
+      console.error("Error updating image:", error);
+      handleNotification("Error updating image", "error");
+    }
   };
 
   const handleFileChange = (e) => {
-    setSelectedImage({ ...selectedImage, image2: e.target.files[0] });
+    const file = e.target.files[0];
+    const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+
+    if (!validTypes.includes(file.type)) {
+      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      handleNotification("Image size should not exceed 20 MB", "error");
+      return;
+    }
+
+    setSelectedImage({ ...selectedImage, image2: file });
   };
 
   const handleDeleteClick = (main_table_id, container2_image_id) => {
     setDeleteImage({ main_table_id, container2_image_id });
-    setOpenDelete(true); // Open the delete confirmation dialog
+    setOpenDelete(true);
   };
 
   const handleConfirmDelete = async () => {
-    await deleteContainer2Image(deleteImage.main_table_id, deleteImage.container2_image_id);
-    const updatedImages = await getAllGalleryImages();
-    setGalleryImages(updatedImages);
-    setOpenDelete(false); // Close the delete confirmation dialog
+    try {
+      const response = await deleteContainer2Image(
+        deleteImage.main_table_id,
+        deleteImage.container2_image_id
+      );
+
+      handleNotification(response.data.message, "success");
+
+      await fetchData(); // Fetch updated data
+      setOpenDelete(false);
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      handleNotification("Error deleting image", "error");
+    }
   };
 
   const handleAddClick = () => {
@@ -100,18 +140,55 @@ const EditGalleryContainer2 = () => {
   };
 
   const handleAddSave = async () => {
-    await addContainer2Image(newImage.image2, newImage.main_table_id);
-    const updatedImages = await getAllGalleryImages();
-    setGalleryImages(updatedImages);
-    setOpenAdd(false);
+    if (!newImage.main_table_id) {
+      handleNotification("Please select a project", "error");
+      return;
+    }
+
+    try {
+      const response = await addContainer2Image(
+        newImage.image2,
+        newImage.main_table_id
+      );
+
+      await fetchData(); // Fetch updated data
+      setOpenAdd(false);
+
+      handleNotification(response.message, "success");
+    } catch (error) {
+      console.error("Error adding image:", error);
+      handleNotification("Error adding image", "error");
+    }
   };
 
   const handleAddFileChange = (e) => {
-    setNewImage({ ...newImage, image2: e.target.files[0] });
-  };
+    const file = e.target.files[0];
+    const validTypes = ["image/jpeg", "image/jpg", "image/png"];
 
+    if (!validTypes.includes(file.type)) {
+      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      handleNotification("Image size should not exceed 20 MB", "error");
+      return;
+    }
+
+    setNewImage({ ...newImage, image2: file });
+  };
   const handleMainTableIdChange = (e) => {
     setNewImage({ ...newImage, main_table_id: e.target.value });
+  };
+
+  const handleNotification = (message, severity) => {
+    setNotificationMessage(message);
+    setNotificationSeverity(severity);
+    setNotificationOpen(true);
+  };
+
+  const closeNotification = () => {
+    setNotificationOpen(false);
   };
 
   return (
@@ -181,6 +258,7 @@ const EditGalleryContainer2 = () => {
           </Table>
         </TableContainer>
 
+{/* // Update Image Dialog  */}
         <Dialog open={openEdit} onClose={handleClose}>
           <DialogTitle>Edit Image</DialogTitle>
           <DialogContent>
@@ -203,6 +281,8 @@ const EditGalleryContainer2 = () => {
           </DialogActions>
         </Dialog>
 
+
+{/* // add image dialog  */}
         <Dialog open={openAdd} onClose={handleClose}>
           <DialogTitle>Add Image</DialogTitle>
           <DialogContent>
@@ -253,6 +333,14 @@ const EditGalleryContainer2 = () => {
             </Button>
           </DialogActions>
         </Dialog>
+
+        {/* Notification component */}
+        <Notification
+          open={notificationOpen}
+          handleClose={closeNotification}
+          alertMessage={notificationMessage}
+          alertSeverity={notificationSeverity}
+        />
       </Box>
     </>
   );

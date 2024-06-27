@@ -499,6 +499,8 @@ export const getAllFooterData = async () => {
   }
 };
 
+// Update Footer Data
+
 export const updateFooterData = async (id, data) => {
   try {
     const response = await axios.put(`${BASE_URL}/updateFooter`, data);
@@ -508,10 +510,14 @@ export const updateFooterData = async (id, data) => {
     throw error;
   }
 };
+
+// Get All gallery data 
 export const getAllGalleryImages = async () => {
   const response = await axios.get(`${BASE_URL}/getAllGalleryImages`);
   return response.data;
 };
+
+// update main heading
 
 export const updateMainHeading = async (id, main_heading) => {
   const response = await axios.put(`${BASE_URL}/updateMainHeading/${id}`, {
@@ -519,13 +525,8 @@ export const updateMainHeading = async (id, main_heading) => {
   });
   return response.data;
 };
-// export const updateContainer1Image = async (id, image1, main_table_id) => {
-//   const response = await axios.put(
-//     `${BASE_URL}/galleryImages/container1_image/${id}`,
-//     { image1, main_table_id }
-//   );
-//   return response.data;
-// };
+
+// Update Container 1 image 
 export const updateContainer1Image = async (id, imageFile, main_table_id) => {
   const formData = new FormData();
   formData.append("image1", imageFile);
@@ -542,6 +543,8 @@ export const updateContainer1Image = async (id, imageFile, main_table_id) => {
   );
   return response.data;
 };
+
+// Update Container 2 Image
 export const updateContainer2Image = async (id, imageFile, main_table_id) => {
   const formData = new FormData();
   formData.append("image2", imageFile);
@@ -558,28 +561,51 @@ export const updateContainer2Image = async (id, imageFile, main_table_id) => {
   );
   return response.data;
 };
+
+
+// Deleye Container 1 Image 
 export const deleteContainer1Image = async (
   main_table_id,
   container1_image_id
 ) => {
-  await axios.delete(
+ const response = await axios.delete(
     `${BASE_URL}/galleryImages/container1_image/${main_table_id}/${container1_image_id}`
   );
+  return response.data;
 };
+
+
+// Delete Container 2 Image
 export const deleteContainer2Image = async (
   main_table_id,
   container2_image_id
 ) => {
-  await axios.delete(
+ const response= await axios.delete(
     `${BASE_URL}/galleryImages/container2_image/${main_table_id}/${container2_image_id}`
   );
+  return response;
 };
+
+// Add Container 1 Image
 export const addContainer1Image = async (image1, main_table_id) => {
   const formData = new FormData();
   formData.append("image1", image1);
   formData.append("main_table_id", main_table_id);
-  await axios.post(`${BASE_URL}/galleryImages/container1_image`, formData);
+
+  const response = await axios.post(
+    `${BASE_URL}/galleryImages/container1_image`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
 };
+
+
+// Add Container 2 Image
 export const addContainer2Image = async (image2, main_table_id) => {
   const formData = new FormData();
   formData.append("image2", image2);
@@ -599,7 +625,7 @@ export const addContainer2Image = async (image2, main_table_id) => {
 
 // Get all Gallery Data
 
-// Get Gallery Data
+
 export const addGalleryImages = async (data) => {
   const response = await axios.post(
     `${BASE_URL}/addAllHeadingWithImages`,
@@ -616,11 +642,15 @@ export const deleteGalleryImage = async (mainTableId) => {
   return response.data;
 };
 
+
+// Get Gallery Banner 
 export const getGalleryBanner = async () => {
   const response = await axios.get(`${BASE_URL}/galleryBanner`);
   return response.data;
 };
 
+
+// Update Gallery Banner
 export const updateGalleryBanner = async (id, formData) => {
   const response = await axios.put(`${BASE_URL}/galleryBanner/`, formData, {
     headers: {

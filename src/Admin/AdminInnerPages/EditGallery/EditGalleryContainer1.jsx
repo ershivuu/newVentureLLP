@@ -30,6 +30,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import Notification from "../../../Notification/Notification"; 
 
 const EditGalleryContainer1 = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -49,7 +50,9 @@ const EditGalleryContainer1 = () => {
     image1: null,
     main_table_id: "",
   });
-
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAllGalleryImages();
@@ -81,28 +84,77 @@ const EditGalleryContainer1 = () => {
   };
 
   const handleSave = async () => {
-    await updateContainer1Image(
-      selectedImage.id,
-      selectedImage.image1,
-      selectedImage.main_table_id
-    );
-    const updatedImages = await getAllGalleryImages();
-    setGalleryImages(updatedImages);
-    setOpenEdit(false);
+    try {
+      const response = await updateContainer1Image(
+        selectedImage.id,
+        selectedImage.image1,
+        selectedImage.main_table_id
+      );
+  
+      // Fetch updated data and update state
+      const updatedImages = await getAllGalleryImages();
+      setGalleryImages(updatedImages);
+  
+      setOpenEdit(false);
+      handleNotification(response.message, "success");
+    } catch (error) {
+      console.error("Error updating image:", error);
+      handleNotification("Error updating image", "error");
+    }
   };
+  
+
 
   const handleAddSave = async () => {
-    await addContainer1Image(newImage.image1, newImage.main_table_id);
-    const updatedImages = await getAllGalleryImages();
-    setGalleryImages(updatedImages);
-    setOpenAdd(false);
+    if (!newImage.main_table_id) {
+      handleNotification("Please select a project", "error");
+      return;
+    }
+  
+    try {
+   const response =   await addContainer1Image(newImage.image1, newImage.main_table_id);
+      const updatedImages = await getAllGalleryImages();
+      setGalleryImages(updatedImages);
+      setOpenAdd(false);
+  
+      handleNotification(response.message, "success");
+    } catch (error) {
+      console.error("Error adding image:", error);
+      handleNotification("Error adding image", "error");
+    }
   };
+  
 
   const handleFileChangeEdit = (e) => {
+    const file = e.target.files[0];
+    const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+
+    if (!validTypes.includes(file.type)) {
+      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      handleNotification("Image size should not exceed 20 MB", "error");
+      return;
+    }
     setSelectedImage({ ...selectedImage, image1: e.target.files[0] });
   };
 
   const handleFileChangeAdd = (e) => {
+
+    const file = e.target.files[0];
+    const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+
+    if (!validTypes.includes(file.type)) {
+      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      handleNotification("Image size should not exceed 20 MB", "error");
+      return;
+    }
     setNewImage({ ...newImage, image1: e.target.files[0] });
   };
 
@@ -112,14 +164,34 @@ const EditGalleryContainer1 = () => {
   };
 
   const handleDeleteConfirm = async () => {
-    await deleteContainer1Image(
-      imageToDelete.main_table_id,
-      imageToDelete.container1_image_id
-    );
-    const updatedImages = await getAllGalleryImages();
-    setGalleryImages(updatedImages);
-    setOpenDelete(false);
+    try {
+    const response =  await deleteContainer1Image(
+        imageToDelete.main_table_id,
+        imageToDelete.container1_image_id
+      );
+  
+      const updatedImages = await getAllGalleryImages();
+      setGalleryImages(updatedImages);
+      setOpenDelete(false);
+  
+      handleNotification(response.message, "success");
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      handleNotification("Error deleting image", "error");
+    }
   };
+  
+
+  const handleNotification = (message, severity) => {
+    setNotificationMessage(message);
+    setNotificationSeverity(severity);
+    setNotificationOpen(true);
+  };
+
+  const closeNotification = () => {
+    setNotificationOpen(false);
+  };
+
 
   return (
     <>
@@ -264,7 +336,14 @@ const EditGalleryContainer1 = () => {
               Delete
             </Button>
           </DialogActions>
+          
         </Dialog>
+        <Notification
+          open={notificationOpen}
+          handleClose={closeNotification}
+          alertMessage={notificationMessage}
+          alertSeverity={notificationSeverity}
+        />
       </Box>
     </>
   );

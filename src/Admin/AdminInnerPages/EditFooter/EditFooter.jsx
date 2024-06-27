@@ -18,13 +18,21 @@ import {
   Paper,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { ChromePicker } from 'react-color';
+import { ChromePicker } from "react-color";
+import Notification from "../../../Notification/Notification"; // Adjust the import path based on your file structure
 
 function EditFooter() {
   const [footerData, setFooterData] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedFooter, setSelectedFooter] = useState(null);
   const [formData, setFormData] = useState({ footer_color: "", mobile: "" });
+  const [errors, setErrors] = useState({ footer_color: "", mobile: "" });
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "",
+  });
+
   const fetchFooterData = async () => {
     try {
       const data = await getAllFooterData();
@@ -33,6 +41,7 @@ function EditFooter() {
       console.error("Error fetching footer data", error);
     }
   };
+
   useEffect(() => {
     fetchFooterData();
   }, []);
@@ -40,12 +49,14 @@ function EditFooter() {
   const handleClickOpen = (footer) => {
     setSelectedFooter(footer);
     setFormData({ footer_color: footer.footer_color, mobile: footer.mobile });
+    setErrors({ footer_color: "", mobile: "" });
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
     setSelectedFooter(null);
+    setErrors({ footer_color: "", mobile: "" });
   };
 
   const handleChange = (e) => {
@@ -54,6 +65,7 @@ function EditFooter() {
       ...prevFormData,
       [name]: value,
     }));
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleColorChange = (color) => {
@@ -61,18 +73,40 @@ function EditFooter() {
       ...prevFormData,
       footer_color: color.hex,
     }));
+    setErrors({ ...errors, footer_color: "" });
   };
 
   const handleSave = async () => {
+    const newErrors = {};
+    if (!formData.footer_color) newErrors.footer_color = "Footer color is required";
+    if (!formData.mobile) newErrors.mobile = "Mobile is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     try {
       await updateFooterData(selectedFooter.id, formData);
-      // Refresh data
-      const data = await getAllFooterData();
-      setFooterData(data.data);
+      setNotification({
+        open: true,
+        message: "Update successful!",
+        severity: "success",
+      });
+      fetchFooterData();
       handleClose();
     } catch (error) {
-      console.error("Error updating footer data", error);
+      setNotification({
+        open: true,
+        message: "Error updating footer data: " + error.message,
+        severity: "error",
+      });
+      console.error("Error updating footer data:", error);
     }
+  };
+
+  const handleNotificationClose = () => {
+    setNotification({ ...notification, open: false });
   };
 
   const filteredData = footerData.filter((item) => item.id === 1);
@@ -141,6 +175,8 @@ function EditFooter() {
               fullWidth
               value={formData.mobile}
               onChange={handleChange}
+              error={!!errors.mobile}
+              helperText={errors.mobile}
             />
           </DialogContent>
           <DialogActions>
@@ -153,6 +189,12 @@ function EditFooter() {
           </DialogActions>
         </Dialog>
       </TableContainer>
+      <Notification
+        open={notification.open}
+        handleClose={handleNotificationClose}
+        alertMessage={notification.message}
+        alertSeverity={notification.severity}
+      />
     </Box>
   );
 }

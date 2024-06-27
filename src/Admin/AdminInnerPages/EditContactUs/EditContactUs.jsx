@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import {
   Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
-  Dialog, DialogActions, DialogContent, DialogTitle, TextField, Input
+  Dialog, DialogActions, DialogContent, DialogTitle, TextField
 } from '@mui/material';
 import { getContactPageData, updateContactPageData } from '../../AdminServices'; // Adjust the import path based on your file structure
 import EditIcon from "@mui/icons-material/Edit";
+import Notification from '../../../Notification/Notification'; // Adjust the import path based on your file structure
 
 function EditContactUs() {
   const [contactData, setContactData] = useState(null);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     id: '',
+    heading: '',
+    banner_img: '',
+    email: '',
+    phone: ''
+  });
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: ''
+  });
+  const [errors, setErrors] = useState({
     heading: '',
     banner_img: '',
     email: '',
@@ -34,6 +46,12 @@ function EditContactUs() {
       email: data.email,
       phone: data.phone
     });
+    setErrors({
+      heading: '',
+      banner_img: '',
+      email: '',
+      phone: ''
+    });
     setOpen(true);
   };
 
@@ -46,18 +64,36 @@ function EditContactUs() {
       email: '',
       phone: ''
     });
+    setErrors({
+      heading: '',
+      banner_img: '',
+      email: '',
+      phone: ''
+    });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
   };
 
   const handleFileChange = (e) => {
     setFormData({ ...formData, banner_img: e.target.files[0] });
+    setErrors({ ...errors, banner_img: '' });
   };
 
   const handleFormSubmit = async () => {
+    const newErrors = {};
+    if (!formData.heading) newErrors.heading = 'Heading is required';
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.phone) newErrors.phone = 'Phone is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('heading', formData.heading);
@@ -67,12 +103,26 @@ function EditContactUs() {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('phone', formData.phone);
 
-      await updateContactPageData(formData.id, formDataToSend);
+      const response = await updateContactPageData(formData.id, formDataToSend);
+      setNotification({
+        open: true,
+        message: response.message || 'Update successful!',
+        severity: 'success'
+      });
       handleClose();
       fetchContactData();
     } catch (error) {
+      setNotification({
+        open: true,
+        message: 'Error updating data: ' + error.message,
+        severity: 'error'
+      });
       console.error('Error updating data:', error);
     }
+  };
+
+  const handleNotificationClose = () => {
+    setNotification({ ...notification, open: false });
   };
 
   return (
@@ -96,7 +146,7 @@ function EditContactUs() {
                 <TableCell>{contactData.id}</TableCell>
                 <TableCell>{contactData.heading}</TableCell>
                 <TableCell>
-                  <img src={contactData.banner_img} alt="Banner" style={{ maxWidth: '100px',maxHeight:"100px" }} />
+                  <img src={contactData.banner_img} alt="Banner" style={{ maxWidth: '100px', maxHeight: "100px" }} />
                 </TableCell>
                 <TableCell>{contactData.email}</TableCell>
                 <TableCell>{contactData.phone}</TableCell>
@@ -122,6 +172,8 @@ function EditContactUs() {
             fullWidth
             value={formData.heading}
             onChange={handleChange}
+            error={!!errors.heading}
+            helperText={errors.heading}
           />
           <TextField
             margin="dense"
@@ -129,6 +181,8 @@ function EditContactUs() {
             type="file"
             fullWidth
             onChange={handleFileChange}
+            error={!!errors.banner_img}
+            helperText={errors.banner_img}
           />
           <TextField
             margin="dense"
@@ -138,6 +192,8 @@ function EditContactUs() {
             fullWidth
             value={formData.email}
             onChange={handleChange}
+            error={!!errors.email}
+            helperText={errors.email}
           />
           <TextField
             margin="dense"
@@ -147,6 +203,8 @@ function EditContactUs() {
             fullWidth
             value={formData.phone}
             onChange={handleChange}
+            error={!!errors.phone}
+            helperText={errors.phone}
           />
         </DialogContent>
         <DialogActions>
@@ -158,6 +216,13 @@ function EditContactUs() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Notification
+        open={notification.open}
+        handleClose={handleNotificationClose}
+        alertMessage={notification.message}
+        alertSeverity={notification.severity}
+      />
     </div>
   );
 }
