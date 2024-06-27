@@ -57,7 +57,7 @@
   max-width: 600px;
 }
 .nri-heading p {
-  font-family: "Cormorant", serif;
+  font-family: "Playfair Display", serif;
   font-size: 60px;
   font-style: italic;
 }
@@ -118,7 +118,7 @@
   font-size: 50px;
   font-style: italic;
   text-align: center;
-  font-family: "Cormorant", serif;
+  font-family: "Playfair Display", serif;
   font-weight: bold;
 }
 .submit-btns button {

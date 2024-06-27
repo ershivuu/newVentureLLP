@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 import Headers from "../../components/Headers/Headers";
 import Footers from "../../components/Footers/Footers";
 import bannerHomeStatic from "../../assets/images/vector-imgs/siddhraj.jpg";
@@ -115,7 +116,7 @@ function Home() {
 
           <div className="view-btn">
             <button>
-              <a href="/about">View About Us</a>
+              <Link to="/about">View About Us</Link>
             </button>
           </div>
         </div>
@@ -207,7 +208,7 @@ function Home() {
       </div>
       <div className="gallery-btn">
         <button>
-          <a href="/gallery">View Gallery</a>
+          <Link to="/gallery">View Gallery</Link>
         </button>
       </div>
       {/* ------------------------------------------------------------- */}
@@ -221,7 +222,7 @@ function Home() {
 
           <div className="view-btn">
             <button>
-              <a href="/projects">View Testimonial</a>
+              <Link to="/projects">View Testimonial</Link>
             </button>
           </div>
         </div>

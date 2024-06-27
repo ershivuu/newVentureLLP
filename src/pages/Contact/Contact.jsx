@@ -72,11 +72,7 @@ function Contact() {
               <img src={instagramLogo} alt="" />
             </a>
           </div>
-          <div>
-            <a href="" target="_blank">
-              <img src={twitterLogo} alt="" />
-            </a>
-          </div>
+
           <div>
             <a href="" target="_blank"></a>
             <img src={youtubeLogo} alt="" />

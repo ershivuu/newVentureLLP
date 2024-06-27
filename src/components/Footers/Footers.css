@@ -28,14 +28,12 @@
   -webkit-box-pack: space-evenly;
   -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
-  font-size: 18px;
+  font-size: 16px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-weight: 600;
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.619);
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.486);
   max-width: 1536px;
   margin: auto;
 }
@@ -58,8 +56,10 @@
   font-style: italic;
   color: rgba(255, 255, 255, 0.619);
 }
-.email {
-  position: relative;
+.email form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 .email input {
   background-color: transparent;
@@ -69,6 +69,7 @@
   font-size: 20px;
   font-family: "Playfair Display", serif;
   font-style: italic;
+  max-width: 180px;
 }
 .email input:focus {
   outline: none;
@@ -116,27 +117,21 @@ a:hover {
   -o-object-fit: contain;
   object-fit: contain;
 }
+
 .submit-btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: absolute;
-  border: 2px solid white;
-  width: 100px;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  background-color: transparent;
+  border: none;
   border-radius: 30px;
   padding: 5px 2px 5px 2px;
   cursor: pointer;
-  background-color: #004338;
-  right: 0;
-  top: 0;
-  margin-top: 38px;
-  margin-right: -18px;
+  border: 2px solid white;
+  width: 80px;
 }
 
 @media only screen and (max-width: 767px) {
+  .email form {
+    flex-direction: column;
+  }
   .inner-wrapper {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -160,10 +155,10 @@ a:hover {
     text-align: center;
     line-height: 1;
   }
-  /* .submit-btn {
-    margin-bottom: 0px;
-    margin-right: 0px;
-  } */
+
+  .footer-wrapper-2 span {
+    display: none;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -189,6 +184,9 @@ a:hover {
     align-items: center;
     text-align: center;
     line-height: 1;
+  }
+  .footer-wrapper-2 span {
+    display: none;
   }
 }
 

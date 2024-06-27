@@ -48,7 +48,7 @@ function ProjectGallery() {
         </div>
         <div className="image-group image-group-1">
           <div className="group-1-heading">
-            <p>Front-view</p>
+            <p>Real site images</p>
           </div>
           <div className="image-section-container">
             <div className="image-section">
@@ -73,7 +73,7 @@ function ProjectGallery() {
         </div>
         <div className="image-group image-group-2">
           <div className="group-1-heading">
-            <p>Top view</p>
+            <p>Site images</p>
           </div>
           <div className="image-section-container">
             <div className="image-section">
@@ -109,7 +109,7 @@ function ProjectGallery() {
           </div>
           <div className="image-group image-group-1">
             <div className="group-1-heading">
-              <p>Front-view</p>
+              <p>Real site images</p>
             </div>
             <div className="image-section-container">
               {project.container1_image.map((image, idx) => (
@@ -121,7 +121,7 @@ function ProjectGallery() {
           </div>
           <div className="image-group image-group-2">
             <div className="group-1-heading">
-              <p>Top view</p>
+              <p>Site images</p>
             </div>
             <div className="image-section-container">
               {project.container2_image.map((image, idx) => (

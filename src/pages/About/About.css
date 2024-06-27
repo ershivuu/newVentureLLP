@@ -110,8 +110,9 @@
 .mission-heading,
 .vision-heading {
   max-width: 600px;
-  font-family: "Cormorant", serif;
-  font-size: 46px;
+  font-family: "Playfair Display", serif;
+  font-size: 60px;
+  /* font-weight: 600; */
 }
 .vision {
   -webkit-box-orient: horizontal;
@@ -136,6 +137,7 @@
   gap: 100px;
   background-color: #101802;
   padding-block: 100px;
+  padding-inline: 20px;
 }
 .about-content {
   color: white;
@@ -231,6 +233,10 @@
     gap: 30px;
     margin-left: 30px;
   }
+  .vert-img {
+    width: 350px;
+    height: 180px;
+  }
 }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .about-page-heading {
@@ -257,5 +263,10 @@
     flex-direction: column-reverse;
     text-align: center;
     padding-block: 30px;
+  }
+  .about-section {
+    gap: 10px;
+    padding-block: 50px;
+    text-align: center;
   }
 }
