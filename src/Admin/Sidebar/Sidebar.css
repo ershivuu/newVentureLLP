@@ -6,7 +6,10 @@
   height: 688px !important;
   background-color: white;
   color: white;
+  -webkit-transition: left 0.3s ease;
+  -o-transition: left 0.3s ease;
   transition: left 0.3s ease;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin-top: -40px;
 }
@@ -66,10 +69,15 @@
 }
 
 .front-side-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .side-bar {
+  max-width: -webkit-fit-content !important;
+  max-width: -moz-fit-content !important;
   max-width: fit-content !important;
 }
 
@@ -84,9 +92,16 @@
   border: none;
   margin-left: 1px;
   font-family: "Poppins", sans-serif !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   width: 100%;
 }
@@ -101,6 +116,7 @@
   display: none;
   min-width: 160px;
   margin-top: -18px;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   font-family: "Poppins", sans-serif;
   z-index: 1;
@@ -153,10 +169,14 @@
     height: 100%;
     width: 250px;
     background-color: #333;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
     transform: translateX(-100%);
   }
 
   .side-bar.open {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
     transform: translateX(0);
   }
 

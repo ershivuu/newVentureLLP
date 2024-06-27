@@ -25,7 +25,6 @@ const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
 const CharCounter = lazy(() => import("./pages/CharCounter/Counter.jsx"));
-const Test = lazy(() => import("../src/admin/Test.jsx"));
 const EditHome = lazy(() =>
   import("./admin/AdminInnerPages/EditHome/EditHome.jsx")
 );
@@ -122,7 +121,6 @@ function App() {
           <Route path="/nri-corner" element={<NriCorner />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/counter" element={<CharCounter />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

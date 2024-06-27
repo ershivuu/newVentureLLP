@@ -6,6 +6,7 @@
 .single-banner-image img {
   width: inherit;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 .colored-overlay {
@@ -22,6 +23,8 @@
   z-index: 9999;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 100;
   word-wrap: break-word !important;
@@ -67,8 +70,13 @@
   border-bottom: 2px solid #12302a;
 }
 .image-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin-bottom: 30px;
 }
@@ -78,14 +86,20 @@
 }
 
 .image-section-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 50px;
 }
 .image-section img {
   width: inherit;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 @media screen and (min-width: 321px) and (max-width: 480px) {
@@ -131,10 +145,14 @@
   /* Your styles for the larger iPad Pro portrait orientation here */
 }
 .modal-image {
+  -o-object-fit: contain !important;
   object-fit: contain !important;
+  -o-object-position: top !important;
   object-position: top !important;
 }
 .modal-content {
+  -o-object-fit: contain !important;
   object-fit: contain !important;
+  -o-object-position: top !important;
   object-position: top !important;
 }

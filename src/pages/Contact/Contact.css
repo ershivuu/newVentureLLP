@@ -6,6 +6,7 @@
 .single-banner-image img {
   width: inherit;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 .colored-overlay {
@@ -22,6 +23,8 @@
   z-index: 9999;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 100;
   word-wrap: break-word !important;
@@ -35,8 +38,13 @@
   line-height: 1;
 }
 .contact-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
   max-width: 1000px;
   margin: auto;
@@ -55,8 +63,13 @@
   padding-block: 50px;
 }
 .social-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 50px;
 }

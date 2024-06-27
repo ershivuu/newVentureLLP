@@ -15,10 +15,17 @@
 .welcome-section {
   margin-top: 50px;
   margin-bottom: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 100px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: 20px;
 }
@@ -37,8 +44,13 @@
 }
 
 .welcome-imgs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 30px;
 }
@@ -50,6 +62,7 @@
 .portrait-img img {
   width: inherit;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 /* word-wrap: break-word; */
@@ -57,7 +70,12 @@
   width: 350px;
   height: 200px;
   border: 2px solid white;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 40px;
 }
@@ -70,6 +88,7 @@
 .landscape-img-2 img {
   width: inherit;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 .view-btn button {
@@ -89,11 +108,21 @@
 .testimonial-section {
   margin-top: 50px;
   margin-bottom: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 100px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: 20px;
 }
@@ -113,11 +142,13 @@
 .carousel-item-home {
   width: 100%;
   height: 550px;
+  -o-object-fit: contain;
   object-fit: contain;
 }
 .carousel-item-home img {
   width: 100%;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 .home-slider {
@@ -155,11 +186,13 @@
   .carousel-item-home {
     width: 100%;
     height: auto;
+    -o-object-fit: contain;
     object-fit: contain;
   }
   .carousel-item-home img {
     width: 100%;
     height: auto;
+    -o-object-fit: cover;
     object-fit: cover;
   }
 }
