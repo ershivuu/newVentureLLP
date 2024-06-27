@@ -83,7 +83,9 @@ function HomeSection2() {
     if (selectedImage && imageFile) {
       const formData = new FormData();
       formData.append("slider_img", imageFile);
+      
       const idToUpdate = selectedImage.second_id;
+      console.log(idToUpdate,"F?DCGC")
       const result = await updateHomeSectionSecond(idToUpdate, formData);
       if (result && result.data && result.data.slider_img_path) {
         console.log("Image updated successfully:", result);
@@ -95,6 +97,7 @@ function HomeSection2() {
           return item;
         });
         setData(updatedData);
+      
       } else {
         console.error("Error updating image");
       }

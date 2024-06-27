@@ -1,6 +1,8 @@
-// src/MainHeadingTable.js
 import React, { useState, useEffect } from "react";
-import { getAllGalleryImages, updateMainHeading } from "../../AdminServices";
+import {
+  getAllGalleryImages,
+  updateMainHeading,
+} from "../../AdminServices";
 import {
   Table,
   TableBody,
@@ -19,6 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import Notification from "../../../Notification/Notification";
 
 const EditGalleryHeading = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -27,6 +30,14 @@ const EditGalleryHeading = () => {
     id: null,
     main_heading: "",
   });
+
+  // Notification state
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
+
+  // State for validation error
+  const [validationError, setValidationError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,22 +55,54 @@ const EditGalleryHeading = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setValidationError(false); // Reset validation error on close
   };
 
   const handleSave = async () => {
-    await updateMainHeading(selectedHeading.id, selectedHeading.main_heading);
-    setGalleryImages(
-      galleryImages.map((item) =>
-        item.main_table_id === selectedHeading.id
-          ? { ...item, main_heading: selectedHeading.main_heading }
-          : item
-      )
-    );
-    setOpen(false);
+    if (!selectedHeading.main_heading.trim()) {
+      setValidationError(true);
+      return;
+    }
+
+    try {
+      const response = await updateMainHeading(
+        selectedHeading.id,
+        selectedHeading.main_heading
+      );
+
+      // Handle success
+      setGalleryImages(
+        galleryImages.map((item) =>
+          item.main_table_id === selectedHeading.id
+            ? { ...item, main_heading: selectedHeading.main_heading }
+            : item
+        )
+      );
+
+      // Show success notification
+      handleNotification(response.message, "success");
+    } catch (error) {
+      console.error("Error updating data:", error);
+      // Show error notification
+      handleNotification("Error updating data", "error");
+    } finally {
+      setOpen(false); // Close dialog regardless of success or failure
+    }
   };
 
   const handleChange = (e) => {
     setSelectedHeading({ ...selectedHeading, main_heading: e.target.value });
+    setValidationError(false); // Reset validation error on input change
+  };
+
+  const handleNotification = (message, severity) => {
+    setNotificationMessage(message);
+    setNotificationSeverity(severity);
+    setNotificationOpen(true);
+  };
+
+  const closeNotification = () => {
+    setNotificationOpen(false);
   };
 
   return (
@@ -108,8 +151,9 @@ const EditGalleryHeading = () => {
               fullWidth
               value={selectedHeading.main_heading}
               onChange={handleChange}
+              error={validationError} // Show error state if validation fails
+              helperText={validationError ? "This field is required" : ""}
             />
-            
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -120,6 +164,14 @@ const EditGalleryHeading = () => {
             </Button>
           </DialogActions>
         </Dialog>
+
+        {/* Notification component */}
+        <Notification
+          open={notificationOpen}
+          handleClose={closeNotification}
+          alertMessage={notificationMessage}
+          alertSeverity={notificationSeverity}
+        />
       </Box>
     </>
   );
