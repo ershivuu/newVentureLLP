@@ -26,7 +26,7 @@ function NriBanner() {
     setOpenEditDialog(true);
     setFormData({
       banner_heading: nriData.banner_heading,
-      banner_img: null,
+      banner_img:null,
       section_one_heading: nriData.section_one_heading,
       section_one_content: nriData.section_one_content,
     });
@@ -81,6 +81,7 @@ function NriBanner() {
     if (!formData.banner_heading) errors.banner_heading = 'This field is required';
     if (!formData.section_one_heading) errors.section_one_heading = 'This field is required';
     if (!formData.section_one_content) errors.section_one_content = 'This field is required';
+   
 
     setFormErrors(errors);
 
@@ -105,7 +106,7 @@ function NriBanner() {
       fetchData();
     } catch (error) {
       console.error('Error updating data:', error);
-      setNotificationMessage('Error updating data');
+      setNotificationMessage(error);
       setNotificationSeverity('error');
       setNotificationOpen(true);
     }
