@@ -37,7 +37,7 @@ function HomeSection3() {
       const data = await fetchHomeSectionThird();
       setSectionData(data);
       setNewData({
-        heading: data.heading,
+        // heading: data.heading,
         content: data.content,
         sectionthird_img_first: null,
         sectionthird_img_second: null,
@@ -59,7 +59,7 @@ function HomeSection3() {
   const handleUpdate = async () => {
     try {
       const formData = new FormData();
-      formData.append("heading", newData.heading);
+      // formData.append("heading", newData.heading);
       formData.append("content", newData.content);
       formData.append("sectionthird_img_first", newData.sectionthird_img_first);
       formData.append(
@@ -97,7 +97,7 @@ function HomeSection3() {
               <TableHead>
                 <TableRow>
                   <TableCell>S No.</TableCell>
-                  <TableCell>Heading</TableCell>
+                  {/* <TableCell>Heading</TableCell> */}
                   <TableCell>Content</TableCell>
                   <TableCell>Image 1</TableCell>
                   <TableCell>Image 2</TableCell>
@@ -108,7 +108,7 @@ function HomeSection3() {
               <TableBody>
                 <TableRow>
                   <TableCell>{sectionData.id}</TableCell>
-                  <TableCell>{sectionData.heading}</TableCell>
+                  {/* <TableCell>{sectionData.heading}</TableCell> */}
                   <TableCell>{sectionData.content}</TableCell>
                   <TableCell>
                     <img
@@ -144,15 +144,7 @@ function HomeSection3() {
           <Dialog open={openDialog} onClose={handleCloseDialog}>
             <DialogTitle>Edit Section 3</DialogTitle>
             <DialogContent>
-              <TextField
-                label="Heading"
-                defaultValue={sectionData.heading}
-                fullWidth
-                variant="outlined"
-                name="heading"
-                onChange={handleInputChange}
-                style={{ marginTop: 10 }}
-              />
+             
               <TextField
                 label="Content"
                 defaultValue={sectionData.content}

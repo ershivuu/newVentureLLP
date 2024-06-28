@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { getContactPageData } from "../../Services/frontendServices";
-import { addContactFormData } from "../../Services/frontendServices";
-
-import "./Contact.css";
 import Headers from "../../components/Headers/Headers";
 import Footers from "../../components/Footers/Footers";
+import "./Contact.css";
 import banner from "../../assets/images/vector-imgs/site-3.jpg";
 import facebookLogo from "../../assets/logos/facebook-black.png";
 import instagramLogo from "../../assets/logos/instagram-black.png";
-import twitterLogo from "../../assets/logos/twitter-black.png";
 import youtubeLogo from "../../assets/logos/youtube-black.png";
+import {
+  getContactPageData,
+  addContactFormData,
+} from "../../Services/frontendServices";
+
 function Contact() {
   const [bannerData, setBannerData] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-
+    comment: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    name: "",
+    phone: "",
     comment: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -34,28 +39,62 @@ function Contact() {
       ...prevData,
       [name]: value,
     }));
+
+    // Clear the error message when user starts typing again
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation logic
+    let errors = {};
+    if (formData.name.trim() === "") {
+      errors.name = "! Name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+      errors.name = "! Only alphabets are allowed";
+    }
+    if (formData.phone.trim() === "") {
+      errors.phone = "! Phone is required";
+    } else if (!/^\d+$/.test(formData.phone)) {
+      errors.phone = "! Only numbers are allowed";
+    }
+    if (formData.comment.trim() === "") {
+      errors.comment = "! Comment is required";
+    }
+
+    // If there are errors, set them and prevent form submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    // If no errors, submit the form
     try {
       await addContactFormData(formData);
       setFormSubmitted(true);
-      setFormData({ name: "", phone: "", comment: "" });
+      setFormData({ name: "", phone: "", comment: "" }); // Reset the form
     } catch (error) {
       alert("Internal server error!");
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getContactPageData();
-      if (data) {
+      try {
+        const data = await getContactPageData();
         setContactData(data);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
       }
     };
 
     fetchData();
   }, []);
+
   return (
     <>
       <Headers></Headers>
@@ -111,34 +150,40 @@ function Contact() {
       <div className="nri-form">
         <p>Contact Us</p>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="input-fields">
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Name"
-              required
             />
+            {formErrors.name && (
+              <span className="error">{formErrors.name}</span>
+            )}
           </div>
-          <div>
+          <div className="input-fields">
             <input
               type="text"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               placeholder="phone"
-              required
             />
+            {formErrors.phone && (
+              <span className="error">{formErrors.phone}</span>
+            )}
           </div>
-          <div>
+          <div className="input-fields">
             <input
               name="comment"
               value={formData.comment}
               onChange={handleChange}
               placeholder="Comment"
-              required
             />
+            {formErrors.comment && (
+              <span className="error">{formErrors.comment}</span>
+            )}
           </div>
           <div className="submit-btns">
             <button type="submit">Submit</button>

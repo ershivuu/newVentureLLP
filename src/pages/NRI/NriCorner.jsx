@@ -16,7 +16,14 @@ function NriCorner() {
     email: "",
     comment: "",
   });
+  const [formErrors, setFormErrors] = useState({
+    name: "",
+    contact: "",
+    email: "",
+    comment: "",
+  });
   const [formSubmitted, setFormSubmitted] = useState(false);
+
   const getNriBanner = async () => {
     try {
       const data = await getNriPageData();
@@ -40,10 +47,45 @@ function NriCorner() {
       ...prevData,
       [name]: value,
     }));
+
+    // Clear the error message when user starts typing again
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation logic
+    let errors = {};
+    if (formData.name.trim() === "") {
+      errors.name = "! Name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+      errors.name = "Only alphabets are allowed";
+    }
+    if (formData.contact.trim() === "") {
+      errors.contact = "! Contact is required";
+    } else if (!/^\d*$/.test(formData.contact)) {
+      errors.contact = "! Only numbers are allowed";
+    }
+    if (formData.email.trim() === "") {
+      errors.email = "! Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Email is invalid";
+    }
+    if (formData.comment.trim() === "") {
+      errors.comment = "! Comment is required";
+    }
+
+    // If there are errors, set them and prevent form submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    // If no errors, submit the form
     try {
       await addNriPageFormData(formData);
       setFormSubmitted(true);
@@ -52,6 +94,7 @@ function NriCorner() {
       alert("Internal server error!");
     }
   };
+
   useEffect(() => {
     getNriBanner();
   }, []);
@@ -84,7 +127,7 @@ function NriCorner() {
       <div className="nri-form">
         <p>Get Quote</p>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="input-fields">
             <input
               type="text"
               name="name"
@@ -92,8 +135,11 @@ function NriCorner() {
               onChange={handleChange}
               placeholder="Name"
             />
+            {formErrors.name && (
+              <span className="error">{formErrors.name}</span>
+            )}
           </div>
-          <div>
+          <div className="input-fields">
             <input
               type="text"
               name="contact"
@@ -101,8 +147,11 @@ function NriCorner() {
               onChange={handleChange}
               placeholder="Contact"
             />
+            {formErrors.contact && (
+              <span className="error">{formErrors.contact}</span>
+            )}
           </div>
-          <div>
+          <div className="input-fields">
             <input
               type="email"
               name="email"
@@ -110,14 +159,20 @@ function NriCorner() {
               onChange={handleChange}
               placeholder="Email"
             />
+            {formErrors.email && (
+              <span className="error">{formErrors.email}</span>
+            )}
           </div>
-          <div>
+          <div className="input-fields">
             <input
               name="comment"
               value={formData.comment}
               onChange={handleChange}
               placeholder="Comment"
             />
+            {formErrors.comment && (
+              <span className="error">{formErrors.comment}</span>
+            )}
           </div>
           <div className="submit-btns">
             <button type="submit">Submit</button>

@@ -201,3 +201,13 @@
   float: right;
   margin-top: 15px;
 }
+.input-fields {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.input-fields span {
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 0, 0, 0.701);
+}
