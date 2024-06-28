@@ -192,3 +192,16 @@ export const getGalleryBanner = async () => {
     throw error;
   }
 };
+export const addContactFormData = async (formData) => {
+  try {
+    const response = await axios.post(`${apiUrl}/addContactUsForm`, {
+      name: formData.name,
+      phone: formData.phone,
+      comment: formData.comment,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error adding data:", error);
+    throw error; // Propagate the error back to the caller
+  }
+};

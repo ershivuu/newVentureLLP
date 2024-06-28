@@ -10,6 +10,7 @@ function Sidebar({ isOpen }) {
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [footerDropdownOpen, setFooterDropdownOpen] = useState(false);
+  const [contactDropdownOpen, setContactDropdownOpen] = useState(false);
   const [nriDropdownOpen, setNriDropdownOpen] = useState(false);
   const [galleryDropdownOpen, setGalleryDropdownOpen] = useState(false);
 
@@ -39,6 +40,9 @@ function Sidebar({ isOpen }) {
   const handleGalleryDropdown = () => {
     setGalleryDropdownOpen(!galleryDropdownOpen);
   };
+  const handleContactDropdown = () => {
+    setContactDropdownOpen(!contactDropdownOpen);
+  };
 
   const handleLinkClick = () => {
     setDropdownOpen(false);
@@ -48,6 +52,7 @@ function Sidebar({ isOpen }) {
     setAboutDropdownOpen(false);
     setFooterDropdownOpen(false);
     setGalleryDropdownOpen(false);
+    setContactDropdownOpen(false);
   };
 
   return (
@@ -80,7 +85,6 @@ function Sidebar({ isOpen }) {
                   <a>Testimonial Section</a>
                 </Link>
               </div>
-
               <button className="dropdown-btn" onClick={handleAboutDropdown}>
                 About
                 <span className="custom-btn">
@@ -103,52 +107,6 @@ function Sidebar({ isOpen }) {
                   <a>Mission & Vision</a>
                 </Link>
               </div>
-
-              <button className="dropdown-btn" onClick={handleDropdown}>
-                Upcoming Projects
-                <span className="custom-btn">{dropdownOpen ? "-" : "+"}</span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  dropdownOpen ? "active" : ""
-                }`}
-                style={{ display: dropdownOpen ? "block" : "none" }}
-              >
-                <Link to="/adminpanel/pageheading" onClick={handleLinkClick}>
-                  <a href="#">Page Heading </a>
-                </Link>
-                <Link to="/adminpanel/bannerimages" onClick={handleLinkClick}>
-                  <a href="#">Banner Images </a>
-                </Link>
-                <Link to="/adminpanel/projectslider" onClick={handleLinkClick}>
-                  <a href="#">Project Slider Images</a>
-                </Link>
-                <Link to="/adminpanel/slidercontent" onClick={handleLinkClick}>
-                  <a href="#">Slider Content And Vedio</a>
-                </Link>
-              </div>
-
-              <button className="dropdown-btn" onClick={handleNriDropdown}>
-                NRI Corner
-                <span className="custom-btn">
-                  {nriDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-
-              <div
-                className={`dropdown-container  ${
-                  nriDropdownOpen ? "active" : ""
-                }`}
-                style={{ display: nriDropdownOpen ? "block" : "none" }}
-              >
-                <Link to="/adminpanel/nribanner" onClick={handleLinkClick}>
-                  <a>Edit Banner & Content</a>
-                </Link>
-                <Link to="/adminpanel/contactdetails" onClick={handleLinkClick}>
-                  <a>Contact Details</a>
-                </Link>
-              </div>
-
               <button className="dropdown-btn" onClick={handleGalleryDropdown}>
                 Gallery
                 <span className="custom-btn">
@@ -184,7 +142,73 @@ function Sidebar({ isOpen }) {
                 </Link>
               </div>
 
+              <button className="dropdown-btn" onClick={handleNriDropdown}>
+                NRI Corner
+                <span className="custom-btn">
+                  {nriDropdownOpen ? "-" : "+"}
+                </span>
+              </button>
+              <div
+                className={`dropdown-container  ${
+                  nriDropdownOpen ? "active" : ""
+                }`}
+                style={{ display: nriDropdownOpen ? "block" : "none" }}
+              >
+                <Link to="/adminpanel/nribanner" onClick={handleLinkClick}>
+                  <a>Edit Banner & Content</a>
+                </Link>
+                <Link to="/adminpanel/contactdetails" onClick={handleLinkClick}>
+                  <a>Contact Details</a>
+                </Link>
+              </div>
+
               {/* --------------------------------------------------------------------------- */}
+              <button className="dropdown-btn" onClick={handleContactDropdown}>
+                Contact Page
+                <span className="custom-btn">
+                  {contactDropdownOpen ? "-" : "+"}
+                </span>
+              </button>
+              <div
+                className={`dropdown-container  ${
+                  contactDropdownOpen ? "active" : ""
+                }`}
+                style={{ display: contactDropdownOpen ? "block" : "none" }}
+              >
+                <Link
+                  className="dropdown-btn"
+                  to="/adminpanel/editcontactus"
+                  onClick={handleLinkClick}
+                >
+                  <a>Edit Contact Page</a>
+                </Link>
+                <Link to="/adminpanel/contactform" onClick={handleLinkClick}>
+                  <a>Contact Form Data</a>
+                </Link>
+              </div>
+              <button className="dropdown-btn" onClick={handleDropdown}>
+                Upcoming Projects
+                <span className="custom-btn">{dropdownOpen ? "-" : "+"}</span>
+              </button>
+              <div
+                className={`dropdown-container  ${
+                  dropdownOpen ? "active" : ""
+                }`}
+                style={{ display: dropdownOpen ? "block" : "none" }}
+              >
+                <Link to="/adminpanel/pageheading" onClick={handleLinkClick}>
+                  <a href="#">Edit Heading</a>
+                </Link>
+                <Link to="/adminpanel/bannerimages" onClick={handleLinkClick}>
+                  <a href="#">Edit Banner</a>
+                </Link>
+                <Link to="/adminpanel/slidercontent" onClick={handleLinkClick}>
+                  <a href="#">Create Project</a>
+                </Link>
+                <Link to="/adminpanel/projectslider" onClick={handleLinkClick}>
+                  <a href="#">Project Images</a>
+                </Link>
+              </div>
               <button className="dropdown-btn" onClick={handleFooterDropdown}>
                 Footer
                 <span className="custom-btn">
@@ -204,13 +228,6 @@ function Sidebar({ isOpen }) {
                   <a>Edit Footer</a>
                 </Link>
               </div>
-              <Link
-                className="dropdown-btn"
-                to="/adminpanel/editcontactus"
-                onClick={handleLinkClick}
-              >
-                <a>Contact Us</a>
-              </Link>
             </ul>
           </div>
         </div>

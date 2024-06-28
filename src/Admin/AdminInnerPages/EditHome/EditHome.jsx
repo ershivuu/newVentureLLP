@@ -22,7 +22,7 @@ import { ChromePicker } from "react-color";
 import Notification from "../../../Notification/Notification"; // Adjust the import path as needed
 
 const EditHome = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     head_color: "",
@@ -42,10 +42,10 @@ const EditHome = () => {
     const fetchData = async () => {
       try {
         const result = await getHomeData();
-        setData(result.data);
+        setData(result.data || {}); // Set data to an empty object if result.data is null/undefined
         setFormData({
-          head_color: result.data.head_color,
-          banner_img_path: result.data.banner_img_path,
+          head_color: result.data.head_color || "",
+          banner_img_path: result.data.banner_img_path || "",
           banner_img: null,
         });
       } catch (error) {
@@ -161,10 +161,6 @@ const EditHome = () => {
     }
   };
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -182,31 +178,37 @@ const EditHome = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>{data.id}</TableCell>
-              <TableCell>
-                <div
-                  style={{
-                    width: 50,
-                    height: 30,
-                    backgroundColor: data.head_color,
-                  }}
-                />
-              </TableCell>
-              <TableCell>
-                <img
-                  src={data.banner_img_path}
-                  alt={data.banner_img_originalname}
-                  width="100"
-                />
-              </TableCell>
-              <TableCell>{data.banner_img_originalname}</TableCell>
-              <TableCell>
-                <Button startIcon={<EditIcon />} onClick={handleClickOpen}>
-                  Edit
-                </Button>
-              </TableCell>
-            </TableRow>
+            {Object.keys(data).length === 0 ? ( // Check if data is empty
+              <TableRow>
+                <TableCell colSpan={5}>No data available</TableCell>
+              </TableRow>
+            ) : (
+              <TableRow>
+                <TableCell>{data.id}</TableCell>
+                <TableCell>
+                  <div
+                    style={{
+                      width: 50,
+                      height: 30,
+                      backgroundColor: data.head_color,
+                    }}
+                  />
+                </TableCell>
+                <TableCell>
+                  <img
+                    src={data.banner_img_path}
+                    alt={data.banner_img_originalname}
+                    width="100"
+                  />
+                </TableCell>
+                <TableCell>{data.banner_img_originalname}</TableCell>
+                <TableCell>
+                  <Button startIcon={<EditIcon />} onClick={handleClickOpen}>
+                    Edit
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
 

@@ -1,8 +1,5 @@
-// ContactDetails.js
-
 import React, { useEffect, useState } from "react";
-import { getNriPageFormData } from "../../AdminServices";
-
+import { getNriPageFormData, deleteNriPageFormData } from "../../AdminServices";
 import {
   Table,
   TableBody,
@@ -11,7 +8,9 @@ import {
   TableHead,
   TableRow,
   Paper,
+  IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function ContactDetails() {
   const [formData, setFormData] = useState([]);
@@ -21,8 +20,22 @@ function ContactDetails() {
   }, []);
 
   const fetchFormData = async () => {
-    const data = await getNriPageFormData();
-    setFormData(data);
+    try {
+      const data = await getNriPageFormData();
+      setFormData(data);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteNriPageFormData(id);
+      // Fetch the updated data after deletion
+      fetchFormData();
+    } catch (error) {
+      console.error(`Error deleting form data with id ${id}:`, error);
+    }
   };
 
   return (
@@ -37,16 +50,25 @@ function ContactDetails() {
               <TableCell>Contact</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Comment</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {formData.map((item) => (
+            {formData.map((item, index) => (
               <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
+                <TableCell>{index + 1}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.contact}</TableCell>
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.comment}</TableCell>
+                <TableCell>
+                  <IconButton
+                    onClick={() => handleDelete(item.id)}
+                    color="secondary"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

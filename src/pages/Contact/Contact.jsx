@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getContactPageData } from "../../Services/frontendServices";
+import { addContactFormData } from "../../Services/frontendServices";
+
 import "./Contact.css";
 import Headers from "../../components/Headers/Headers";
 import Footers from "../../components/Footers/Footers";
@@ -9,6 +11,14 @@ import instagramLogo from "../../assets/logos/instagram-black.png";
 import twitterLogo from "../../assets/logos/twitter-black.png";
 import youtubeLogo from "../../assets/logos/youtube-black.png";
 function Contact() {
+  const [bannerData, setBannerData] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+
+    comment: "",
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const dummyData = {
     id: 0,
     heading: "Contact",
@@ -18,6 +28,24 @@ function Contact() {
   };
   const [contactData, setContactData] = useState(dummyData);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addContactFormData(formData);
+      setFormSubmitted(true);
+      setFormData({ name: "", phone: "", comment: "" });
+    } catch (error) {
+      alert("Internal server error!");
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       const data = await getContactPageData();
@@ -78,6 +106,44 @@ function Contact() {
             <img src={youtubeLogo} alt="" />
           </div>
         </div>
+      </div>
+
+      <div className="nri-form">
+        <p>Contact Us</p>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name"
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="phone"
+              required
+            />
+          </div>
+          <div>
+            <input
+              name="comment"
+              value={formData.comment}
+              onChange={handleChange}
+              placeholder="Comment"
+              required
+            />
+          </div>
+          <div className="submit-btns">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       </div>
       <Footers></Footers>
     </>
