@@ -282,20 +282,19 @@ function About() {
           <div className="vision">
             <div className="vision-content">
               <p>
-                At Corusview Venture LLP, our goal is to constantly surpass our
-                clients' expectations by providing outstanding real estate
-                solutions. Driven by the values of honesty, competence, and
-                customer-first mentality, we are committed to generating value
-                for all of the people we serve. Our intentions are to maintain
-                moral corporate conduct, build long-lasting connections, and
-                make a significant impact on the communities we serve. Our
-                mission is to be known as a trendsetter in the real estate
-                industry, turning aspirations into reality one project at a
-                time, by means of an uncompromising pursuit of excellence.
+                At Corusview Venture LLP, we strive to create living experiences
+                that are in line with our clients' dreams in addition to
+                developing structures. Our vision is to lead the way in
+                innovative architectural and design practises, establishing
+                thriving and sustainable communities that foster a sense of
+                community. Our vision is to create a lasting impact on the urban
+                landscape, redefine the future of real estate, and set new
+                standards for unmatched excellence by utilising innovation and
+                adapting to changing market conditions.
               </p>
             </div>
             <div className="vision-heading">
-              <p>Our Mission</p>
+              <p>Our Vision</p>
             </div>
           </div>
         )}

@@ -185,7 +185,7 @@ export const getAllGalleryImages = async () => {
 };
 export const getGalleryBanner = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/galleryBanner `);
+    const response = await axios.get(`${apiUrl}/galleryBanner`);
     return response.data;
   } catch (error) {
     console.error("Error fetching banner data:", error);

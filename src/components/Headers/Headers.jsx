@@ -101,11 +101,6 @@ function Headers() {
                     CONTACT US
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/counter" className="nav-link" aria-current="page">
-                    COUNTER
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>

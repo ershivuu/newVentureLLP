@@ -63,24 +63,28 @@ function Footers() {
             <img src={logo} alt="" />
           </div>
           <div className="email">
+            <p>Join Our List</p>
             <form onSubmit={handleSubmit}>
-              <p>Join Our List</p>
               <div>
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
-              <button
-                className="submit-btn"
-                type="submit"
-                style={{ backgroundColor: footerColor }}
-              >
-                <img src={mailicon} alt="Submit" />
-              </button>
+              <div>
+                <button
+                  className="submit-btn"
+                  type="submit"
+                  style={{ backgroundColor: footerColor }}
+                >
+                  <img src={mailicon} alt="Submit" />
+                </button>
+              </div>
             </form>
           </div>
 
@@ -112,14 +116,7 @@ function Footers() {
                 <FontAwesomeIcon className="fs-icons" icon={faArrowRight} />
               </span>
             </p>
-            <p>
-              <a href="" target="_blank" rel="noopener noreferrer">
-                Twitter
-              </a>
-              <span>
-                <FontAwesomeIcon className="fs-icons" icon={faArrowRight} />
-              </span>
-            </p>
+
             <p>
               <a href="" target="_blank" rel="noopener noreferrer">
                 Youtube
@@ -133,19 +130,17 @@ function Footers() {
 
         <div className="footer-wrapper-2">
           <div>
-            <p>Copyright 2023. All rights reserved Corusview Venture LLP</p>
+            <p>
+              Copyright&#169;2023, All rights reserved Corusview Venture LLP
+            </p>
           </div>
-          <div>
-            <span>~</span>
-          </div>
+          <div></div>
           <div>
             <p>Designed & Developed By CorusView</p>
           </div>
+          <div></div>
           <div>
-            <span>~</span>
-          </div>
-          <div>
-            <p>Privacy Policy Terms of Use Apply</p>
+            <p>Privacy Policy | Terms of Use Apply</p>
           </div>
         </div>
       </div>

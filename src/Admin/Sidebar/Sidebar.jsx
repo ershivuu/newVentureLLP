@@ -174,13 +174,13 @@ function Sidebar({ isOpen }) {
                   to="/adminpanel/gallerycontainer2"
                   onClick={handleLinkClick}
                 >
-                  Top-View Images
+                  Site Images
                 </Link>
                 <Link
                   to="/adminpanel/gallerycontainer1"
                   onClick={handleLinkClick}
                 >
-                  Front-View Images
+                  Real Site Images
                 </Link>
               </div>
 

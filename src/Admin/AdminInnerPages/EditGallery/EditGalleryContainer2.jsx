@@ -29,7 +29,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Notification from "../../../Notification/Notification"; 
+import Notification from "../../../Notification/Notification";
 
 const EditGalleryContainer2 = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -100,7 +100,10 @@ const EditGalleryContainer2 = () => {
     const validTypes = ["image/jpeg", "image/jpg", "image/png"];
 
     if (!validTypes.includes(file.type)) {
-      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      handleNotification(
+        "Only JPG, JPEG, and PNG formats are allowed",
+        "error"
+      );
       return;
     }
 
@@ -166,7 +169,10 @@ const EditGalleryContainer2 = () => {
     const validTypes = ["image/jpeg", "image/jpg", "image/png"];
 
     if (!validTypes.includes(file.type)) {
-      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      handleNotification(
+        "Only JPG, JPEG, and PNG formats are allowed",
+        "error"
+      );
       return;
     }
 
@@ -195,7 +201,7 @@ const EditGalleryContainer2 = () => {
     <>
       <Box>
         <Typography variant="h4" component="h1" gutterBottom>
-          Top View Image
+          Site Image
         </Typography>
         <Button
           startIcon={<AddIcon />}
@@ -212,7 +218,7 @@ const EditGalleryContainer2 = () => {
               <TableRow>
                 <TableCell>S No.</TableCell>
                 <TableCell>Project Name</TableCell>
-                <TableCell>Top-View Image</TableCell>
+                <TableCell>Site Image</TableCell>
                 <TableCell>Edit</TableCell>
                 <TableCell>Delete</TableCell>
               </TableRow>
@@ -258,7 +264,7 @@ const EditGalleryContainer2 = () => {
           </Table>
         </TableContainer>
 
-{/* // Update Image Dialog  */}
+        {/* // Update Image Dialog  */}
         <Dialog open={openEdit} onClose={handleClose}>
           <DialogTitle>Edit Image</DialogTitle>
           <DialogContent>
@@ -281,8 +287,7 @@ const EditGalleryContainer2 = () => {
           </DialogActions>
         </Dialog>
 
-
-{/* // add image dialog  */}
+        {/* // add image dialog  */}
         <Dialog open={openAdd} onClose={handleClose}>
           <DialogTitle>Add Image</DialogTitle>
           <DialogContent>

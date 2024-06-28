@@ -268,7 +268,7 @@ export const getHomeSectionSecond = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching HomeSectionSecond data:", error);
-    return null;
+    throw error;
   }
 };
 
@@ -282,7 +282,7 @@ export const updateHomeSectionSecond = async (id, updatedData) => {
     return response.data;
   } catch (error) {
     console.error("Error updating HomeSectionSecond data:", error);
-    return null;
+    throw error;
   }
 };
 
@@ -303,13 +303,23 @@ export const addHomeSectionSecond = async (formData) => {
 
 // Delete Home Section Second Data
 
+// export const deleteHomeSectionSecond = async (id) => {
+//   try {
+//     const response = await axios.delete(`${BASE_URL}/homeSectionSecond/${id}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error deleting Home Section Second data:", error);
+//     return null;
+//   }
+// };
+
 export const deleteHomeSectionSecond = async (id) => {
   try {
     const response = await axios.delete(`${BASE_URL}/homeSectionSecond/${id}`);
-    return response.data;
+    return response;
   } catch (error) {
-    console.error("Error deleting Home Section Second data:", error);
-    return null;
+    console.error("Error deleting image:", error);
+    throw error;
   }
 };
 

@@ -25,6 +25,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Notification from "../../../Notification/Notification"; // Adjust the import path as needed
 
 function AboutBanner() {
   const [bannerData, setBannerData] = useState([]);
@@ -38,6 +39,10 @@ function AboutBanner() {
     imageFile: null,
   });
 
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,7 +53,14 @@ function AboutBanner() {
       setBannerData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      showNotification("Error fetching data", "error");
     }
+  };
+
+  const showNotification = (message, severity) => {
+    setNotificationMessage(message);
+    setNotificationSeverity(severity);
+    setNotificationOpen(true);
   };
 
   const handleEditClick = (banner) => {
@@ -94,18 +106,19 @@ function AboutBanner() {
       formData.append("id", selectedBanner.id);
       formData.append("heading", editedData.heading);
       formData.append("banner_img", editedData.imageFile);
-
-      await updateAboutUsBanner(selectedBanner.id, formData);
+  
+      const response = await updateAboutUsBanner(selectedBanner.id, formData);
       updateBannerDataLocally({
         id: selectedBanner.id,
         heading: editedData.heading,
       });
-
+  
       setEditDialogOpen(false);
-
       fetchData();
+      showNotification(response.message, "success"); // Show success notification
     } catch (error) {
       console.error("Error updating data:", error);
+      showNotification("Error updating data", "error"); // Show error notification
     }
   };
 
@@ -114,26 +127,26 @@ function AboutBanner() {
       const formData = new FormData();
       formData.append("heading", editedData.heading);
       formData.append("banner_img", editedData.imageFile);
-
-      await addAboutUsBanner(formData);
+  
+      const response = await addAboutUsBanner(formData);
       setAddDialogOpen(false);
-
-      // Fetch data again after successful save to refresh the table
       fetchData();
+      showNotification(response.message, "success"); // Show success notification
     } catch (error) {
       console.error("Error adding data:", error);
+      showNotification("Error adding data", "error"); // Show error notification
     }
   };
 
   const handleDeleteData = async () => {
     try {
-      await deleteAboutUsBanner(selectedBanner.id);
+      const response = await deleteAboutUsBanner(selectedBanner.id);
       setDeleteDialogOpen(false);
-
-      // Fetch data again after successful delete to refresh the table
       fetchData();
+      showNotification(response.message, "success"); // Show success notification
     } catch (error) {
       console.error("Error deleting data:", error);
+      showNotification("Error deleting data", "error"); // Show error notification
     }
   };
 
@@ -149,7 +162,7 @@ function AboutBanner() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        About Us Banner
+        Edit Banner
       </Typography>
       <Button
         startIcon={<AddIcon />}
@@ -227,9 +240,6 @@ function AboutBanner() {
             onChange={handleInputChange}
             style={{ margin: "10px 0" }}
           />
-          {/* {editedData.imageFile && (
-            <img src={URL.createObjectURL(editedData.imageFile)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />
-          )} */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditDialogClose}>Cancel</Button>
@@ -258,9 +268,6 @@ function AboutBanner() {
             onChange={handleInputChange}
             style={{ margin: "10px 0" }}
           />
-          {/* {editedData.imageFile && (
-            <img src={URL.createObjectURL(editedData.imageFile)} alt="Uploaded" style={{ maxWidth: '100px', marginTop: '10px' }} />
-          )} */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleAddDialogClose}>Cancel</Button>
@@ -276,11 +283,17 @@ function AboutBanner() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDeleteDialogClose}>Cancel</Button>
-          <Button color="secondary" onClick={handleDeleteData}>
-            Delete
-          </Button>
+          <Button onClick={handleDeleteData}>Delete</Button>
         </DialogActions>
       </Dialog>
+
+      {/* Notification */}
+      <Notification
+        open={notificationOpen}
+        onClose={() => setNotificationOpen(false)}
+        message={notificationMessage}
+        severity={notificationSeverity}
+      />
     </Box>
   );
 }

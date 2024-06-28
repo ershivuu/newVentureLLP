@@ -1,41 +1,52 @@
 .footer-wrapper {
   padding-top: 20px;
-  /* background: radial-gradient(
-    150.55% 150.55% at 50% 50%,
-    #004c3f 0%,
-    #000000 100%
-  ); */
 }
 .inner-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   max-width: 1536px;
   margin: auto;
 }
 .footer-wrapper-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
-  font-size: 18px;
+  font-size: 16px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
-  font-weight: 600;
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.619);
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.486);
   max-width: 1536px;
   margin: auto;
 }
 .venture-logo img {
   width: 100%;
   height: 100%;
+  -o-object-fit: contain;
   object-fit: contain;
 }
 .venture-logo {
   width: 285px;
   height: 133px;
+  -o-object-fit: contain;
   object-fit: contain;
 }
 .email p {
@@ -45,8 +56,10 @@
   font-style: italic;
   color: rgba(255, 255, 255, 0.619);
 }
-.email {
-  position: relative;
+.email form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 .email input {
   background-color: transparent;
@@ -56,6 +69,7 @@
   font-size: 20px;
   font-family: "Playfair Display", serif;
   font-style: italic;
+  max-width: 180px;
 }
 .email input:focus {
   outline: none;
@@ -86,6 +100,8 @@ a {
 }
 .fs-icons {
   margin-left: 10px;
+  -webkit-transform: rotate(-50deg);
+  -ms-transform: rotate(-50deg);
   transform: rotate(-50deg);
 }
 .social-links p[class^="link-heading"]:hover {
@@ -98,57 +114,79 @@ a:hover {
 .submit-btn img {
   width: 50px;
   height: 30px;
+  -o-object-fit: contain;
   object-fit: contain;
 }
+
 .submit-btn {
-  display: flex;
-  position: absolute;
-  border: 2px solid white;
-  width: 100px;
-  justify-content: center;
+  background-color: transparent;
+  border: none;
   border-radius: 30px;
   padding: 5px 2px 5px 2px;
   cursor: pointer;
-  background-color: #004338;
-  right: 0;
-  top: 0;
-  margin-top: 38px;
-  margin-right: -18px;
+  border: 2px solid white;
+  width: 80px;
 }
 
 @media only screen and (max-width: 767px) {
-  .inner-wrapper {
+  .email form {
     flex-direction: column;
+  }
+  .inner-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 50px;
     text-align: center;
   }
   .footer-wrapper-2 {
     margin-top: 30px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     text-align: center;
     line-height: 1;
   }
-  /* .submit-btn {
-    margin-bottom: 0px;
-    margin-right: 0px;
-  } */
+
+  .footer-wrapper-2 span {
+    display: none;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .inner-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 50px;
     text-align: center;
   }
   .footer-wrapper-2 {
     margin-top: 30px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     text-align: center;
     line-height: 1;
+  }
+  .footer-wrapper-2 span {
+    display: none;
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
   Dialog, DialogActions, DialogContent, DialogTitle, TextField
@@ -11,11 +11,11 @@ function EditContactUs() {
   const [contactData, setContactData] = useState(null);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
-    id: '',
-    heading: '',
-    banner_img: '',
-    email: '',
-    phone: ''
+    id: "",
+    heading: "",
+    banner_img: "",
+    email: "",
+    phone: "",
   });
   const [notification, setNotification] = useState({
     open: false,
@@ -42,9 +42,9 @@ function EditContactUs() {
     setFormData({
       id: data.id,
       heading: data.heading,
-      banner_img: '',
+      banner_img: "",
       email: data.email,
-      phone: data.phone
+      phone: data.phone,
     });
     setErrors({
       heading: '',
@@ -58,11 +58,11 @@ function EditContactUs() {
   const handleClose = () => {
     setOpen(false);
     setFormData({
-      id: '',
-      heading: '',
-      banner_img: '',
-      email: '',
-      phone: ''
+      id: "",
+      heading: "",
+      banner_img: "",
+      email: "",
+      phone: "",
     });
     setErrors({
       heading: '',
@@ -96,12 +96,12 @@ function EditContactUs() {
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append('heading', formData.heading);
+      formDataToSend.append("heading", formData.heading);
       if (formData.banner_img) {
-        formDataToSend.append('banner_img', formData.banner_img);
+        formDataToSend.append("banner_img", formData.banner_img);
       }
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
 
       const response = await updateContactPageData(formData.id, formDataToSend);
       setNotification({
@@ -127,7 +127,7 @@ function EditContactUs() {
 
   return (
     <div>
-      <h2>Contact Page Data</h2>
+      <h2>Edit Contact Page</h2>
       {contactData ? (
         <TableContainer component={Paper}>
           <Table>
@@ -151,7 +151,12 @@ function EditContactUs() {
                 <TableCell>{contactData.email}</TableCell>
                 <TableCell>{contactData.phone}</TableCell>
                 <TableCell>
-                  <Button startIcon={<EditIcon />} onClick={() => handleClickOpen(contactData)}>Edit</Button>
+                  <Button
+                    startIcon={<EditIcon />}
+                    onClick={() => handleClickOpen(contactData)}
+                  >
+                    Edit
+                  </Button>
                 </TableCell>
               </TableRow>
             </TableBody>

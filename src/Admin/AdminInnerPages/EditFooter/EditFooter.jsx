@@ -116,7 +116,7 @@ function EditFooter() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Edit Footer Data
+        Edit Footer
       </Typography>
       <TableContainer component={Paper}>
         <Table>

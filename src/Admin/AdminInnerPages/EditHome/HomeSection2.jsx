@@ -25,6 +25,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Notification from "../../../Notification/Notification"; // Adjust the import path as needed
 
 function HomeSection2() {
   const [data, setData] = useState([]);
@@ -34,17 +35,24 @@ function HomeSection2() {
   const [imageFile, setImageFile] = useState(null);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
-  const fetchData = async () => {
-    const result = await getHomeSectionSecond();
-    if (result) {
-      setData(result.data || []);
-    }
-  };
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success", // Default severity for success
+  });
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await getHomeSectionSecond();
+      setData(response.data || []);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleEditClick = (imageData) => {
     setSelectedImage(imageData);
@@ -56,12 +64,8 @@ function HomeSection2() {
     setOpenAddDialog(true);
   };
 
-  const handleCloseAddDialog = () => {
+  const handleCloseAddUpdateDialog = () => {
     setOpenAddDialog(false);
-    setImageFile(null);
-  };
-
-  const handleCloseUpdateDialog = () => {
     setOpenUpdateDialog(false);
     setImageFile(null);
   };
@@ -70,84 +74,104 @@ function HomeSection2() {
     setImageFile(e.target.files[0]);
   };
 
-  const handleDeleteClick = (id) => {
-    setDeleteId(id);
-    setOpenDeleteDialog(true);
-  };
-
-  const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false);
-  };
-
   const handleUpdateImage = async () => {
-    if (selectedImage && imageFile) {
+    try {
       const formData = new FormData();
       formData.append("slider_img", imageFile);
-      
       const idToUpdate = selectedImage.second_id;
-      console.log(idToUpdate,"F?DCGC")
-      const result = await updateHomeSectionSecond(idToUpdate, formData);
-      if (result && result.data && result.data.slider_img_path) {
-        console.log("Image updated successfully:", result);
-
-        const updatedData = data.map((item) => {
-          if (item.id === idToUpdate) {
-            return { ...item, slider_img_path: result.data.slider_img_path };
-          }
-          return item;
-        });
+      const response = await updateHomeSectionSecond(idToUpdate, formData);
+      if (response && response.data && response.data.slider_img_path) {
+        const updatedData = data.map((item) =>
+          item.id === idToUpdate
+            ? { ...item, slider_img_path: response.data.slider_img_path }
+            : item
+        );
         setData(updatedData);
-      
+        setNotification({
+          open: true,
+          message: response.data.message,
+          severity: "success",
+        });
       } else {
-        console.error("Error updating image");
+        throw new Error("Invalid response from server");
       }
+    } catch (error) {
+      console.error("Error updating image:", error);
+      
+    } finally {
+      handleCloseAddUpdateDialog();
+      fetchData();
     }
-    fetchData();
-    handleCloseUpdateDialog();
   };
 
   const handleAddImage = async () => {
-    if (imageFile) {
+    try {
       const formData = new FormData();
       formData.append("slider_img", imageFile);
-      const result = await addHomeSectionSecond(formData);
-      if (result && result.data) {
-        console.log("Image added successfully:", result);
-
-        setData([...data, result.data]);
-        handleCloseAddDialog(); // Close the dialog after adding the image
+      const response = await addHomeSectionSecond(formData);
+      if (response && response.data) {
+        setData([...data, response.data]);
+        setNotification({
+          open: true,
+          message: response.data.message,
+          severity: "success",
+        });
       } else {
-        console.error("Error adding image");
+        throw new Error("Invalid response from server");
       }
+    } catch (error) {
+      console.error("Error adding image:", error);
+     
+    } finally {
+      handleCloseAddUpdateDialog();
+      fetchData();
     }
-    handleCloseAddDialog();
+  };
+
+  const handleDeleteClick = (item) => {
+    console.log(item.second_id,"bahdbahcwbh")
+    setDeleteId(item.second_id);
+    setOpenDeleteDialog(true);
   };
 
   const handleConfirmDelete = async () => {
-    if (deleteId) {
-      const result = await deleteHomeSectionSecond(deleteId);
-      if (result && result.success) {
-        console.log("Image deleted successfully");
-        setData(data.filter((item) => item.id !== deleteId)); // Remove deleted item from the data
-        setOpenDeleteDialog(false);
-        handleCloseDeleteDialog();
+    try {
+      const response = await deleteHomeSectionSecond(deleteId);
+      if (response && response.data && response.data.message) {
+        setData(data.filter((item) => item.id !== deleteId));
+        setNotification({
+          open: true,
+          message: response.data.message,
+          severity: "success",
+        });
       } else {
-        console.error("Error deleting image");
+        throw new Error("Invalid response from server");
       }
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      
+    } finally {
+      setOpenDeleteDialog(false);
+      fetchData();
     }
-    handleCloseDeleteDialog();
+  };
+
+  const handleNotificationClose = () => {
+    setNotification((prevState) => ({
+      ...prevState,
+      open: false,
+    }));
   };
 
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        Home Section 2
+        Edit Slider
       </Typography>
       <Button
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
-        
         onClick={handleAddClick}
         style={{ marginBottom: "16px" }}
       >
@@ -186,9 +210,9 @@ function HomeSection2() {
                 </TableCell>
                 <TableCell>
                   <Button
-                  color="error"
+                    color="error"
                     startIcon={<DeleteIcon />}
-                    onClick={() => handleDeleteClick(item.id)}
+                    onClick={() => handleDeleteClick(item)}
                   >
                     Delete
                   </Button>
@@ -199,43 +223,26 @@ function HomeSection2() {
         </Table>
       </TableContainer>
 
-      {/* Add Dialog */}
-      <Dialog open={openAddDialog} onClose={handleCloseAddDialog}>
-        <DialogTitle>Add Image</DialogTitle>
+      {/* Add and Update Dialog */}
+      <Dialog open={openAddDialog || openUpdateDialog} onClose={handleCloseAddUpdateDialog}>
+        <DialogTitle>{openAddDialog ? "Add Image" : "Edit Image"}</DialogTitle>
         <DialogContent>
           <TextField fullWidth type="file" onChange={handleImageChange} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseAddDialog}>Cancel</Button>
-          <Button onClick={handleAddImage} variant="contained" color="primary">
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Update Dialog */}
-      <Dialog open={openUpdateDialog} onClose={handleCloseUpdateDialog}>
-        <DialogTitle>Edit Image</DialogTitle>
-        <DialogContent>
-          <TextField fullWidth type="file" onChange={handleImageChange} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseUpdateDialog}>Cancel</Button>
+          <Button onClick={handleCloseAddUpdateDialog}>Cancel</Button>
           <Button
-            onClick={handleUpdateImage}
+            onClick={openAddDialog ? handleAddImage : handleUpdateImage}
             variant="contained"
             color="primary"
           >
-            Update
+            {openAddDialog ? "Add" : "Update"}
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Delete Dialog */}
-      <Dialog
-        open={openDeleteDialog}
-        onClose={() => setOpenDeleteDialog(false)}
-      >
+      <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           Are you sure you want to delete this image?
@@ -251,6 +258,14 @@ function HomeSection2() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Notification */}
+      <Notification
+        open={notification.open}
+        handleClose={handleNotificationClose}
+        alertMessage={notification.message}
+        alertSeverity={notification.severity}
+      />
     </Box>
   );
 }

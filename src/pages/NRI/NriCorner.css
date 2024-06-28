@@ -6,6 +6,7 @@
 .single-banner-image img {
   width: inherit;
   height: inherit;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 .colored-overlay {
@@ -22,6 +23,8 @@
   z-index: 9999;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 100;
   word-wrap: break-word !important;
@@ -35,9 +38,15 @@
   line-height: 1;
 }
 .nri-data {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   max-width: 1440px;
   margin: auto;
@@ -48,7 +57,7 @@
   max-width: 600px;
 }
 .nri-heading p {
-  font-family: "Cormorant", serif;
+  font-family: "Playfair Display", serif;
   font-size: 60px;
   font-style: italic;
 }
@@ -63,11 +72,29 @@
   background-color: #333333;
   color: white !important;
   margin: auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   padding: 30px 50px 100px 50px;
   border-radius: 80px;
 
   margin-block: 50px;
+}
+.nri-form ::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form :-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
 }
 .nri-form ::placeholder {
   color: rgba(255, 255, 255, 0.685);
@@ -91,7 +118,7 @@
   font-size: 50px;
   font-style: italic;
   text-align: center;
-  font-family: "Cormorant", serif;
+  font-family: "Playfair Display", serif;
   font-weight: bold;
 }
 .submit-btns button {

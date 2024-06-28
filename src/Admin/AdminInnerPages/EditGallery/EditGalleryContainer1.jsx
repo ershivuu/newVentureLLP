@@ -30,7 +30,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import Notification from "../../../Notification/Notification"; 
+import Notification from "../../../Notification/Notification";
 
 const EditGalleryContainer1 = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -90,11 +90,11 @@ const EditGalleryContainer1 = () => {
         selectedImage.image1,
         selectedImage.main_table_id
       );
-  
+
       // Fetch updated data and update state
       const updatedImages = await getAllGalleryImages();
       setGalleryImages(updatedImages);
-  
+
       setOpenEdit(false);
       handleNotification(response.message, "success");
     } catch (error) {
@@ -102,35 +102,38 @@ const EditGalleryContainer1 = () => {
       handleNotification("Error updating image", "error");
     }
   };
-  
-
 
   const handleAddSave = async () => {
     if (!newImage.main_table_id) {
       handleNotification("Please select a project", "error");
       return;
     }
-  
+
     try {
-   const response =   await addContainer1Image(newImage.image1, newImage.main_table_id);
+      const response = await addContainer1Image(
+        newImage.image1,
+        newImage.main_table_id
+      );
       const updatedImages = await getAllGalleryImages();
       setGalleryImages(updatedImages);
       setOpenAdd(false);
-  
+
       handleNotification(response.message, "success");
     } catch (error) {
       console.error("Error adding image:", error);
       handleNotification("Error adding image", "error");
     }
   };
-  
 
   const handleFileChangeEdit = (e) => {
     const file = e.target.files[0];
     const validTypes = ["image/jpeg", "image/jpg", "image/png"];
 
     if (!validTypes.includes(file.type)) {
-      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      handleNotification(
+        "Only JPG, JPEG, and PNG formats are allowed",
+        "error"
+      );
       return;
     }
 
@@ -142,12 +145,14 @@ const EditGalleryContainer1 = () => {
   };
 
   const handleFileChangeAdd = (e) => {
-
     const file = e.target.files[0];
     const validTypes = ["image/jpeg", "image/jpg", "image/png"];
 
     if (!validTypes.includes(file.type)) {
-      handleNotification("Only JPG, JPEG, and PNG formats are allowed", "error");
+      handleNotification(
+        "Only JPG, JPEG, and PNG formats are allowed",
+        "error"
+      );
       return;
     }
 
@@ -165,22 +170,21 @@ const EditGalleryContainer1 = () => {
 
   const handleDeleteConfirm = async () => {
     try {
-    const response =  await deleteContainer1Image(
+      const response = await deleteContainer1Image(
         imageToDelete.main_table_id,
         imageToDelete.container1_image_id
       );
-  
+
       const updatedImages = await getAllGalleryImages();
       setGalleryImages(updatedImages);
       setOpenDelete(false);
-  
+
       handleNotification(response.message, "success");
     } catch (error) {
       console.error("Error deleting image:", error);
       handleNotification("Error deleting image", "error");
     }
   };
-  
 
   const handleNotification = (message, severity) => {
     setNotificationMessage(message);
@@ -192,12 +196,11 @@ const EditGalleryContainer1 = () => {
     setNotificationOpen(false);
   };
 
-
   return (
     <>
       <Box>
         <Typography variant="h4" component="h1" gutterBottom>
-          Front View Image
+          Real Site Image
         </Typography>
         <Button
           startIcon={<AddIcon />}
@@ -215,7 +218,7 @@ const EditGalleryContainer1 = () => {
               <TableRow>
                 <TableCell>S.No</TableCell>
                 <TableCell>Project Name</TableCell>
-                <TableCell>Front-View Image</TableCell>
+                <TableCell>Real Site Image</TableCell>
                 <TableCell>Edit</TableCell>
                 <TableCell>Delete</TableCell>
               </TableRow>
@@ -265,9 +268,8 @@ const EditGalleryContainer1 = () => {
           <DialogTitle>Edit Image</DialogTitle>
           <DialogContent>
             <FormControl fullWidth margin="dense">
-              
               <TextField
-              fullWidth
+                fullWidth
                 id="upload-image"
                 type="file"
                 onChange={handleFileChangeEdit}
@@ -304,9 +306,8 @@ const EditGalleryContainer1 = () => {
               </Select>
             </FormControl>
             <FormControl fullWidth margin="dense">
-      
               <TextField
-              fullWidth
+                fullWidth
                 id="upload-new-image"
                 type="file"
                 onChange={handleFileChangeAdd}
@@ -336,7 +337,6 @@ const EditGalleryContainer1 = () => {
               Delete
             </Button>
           </DialogActions>
-          
         </Dialog>
         <Notification
           open={notificationOpen}
