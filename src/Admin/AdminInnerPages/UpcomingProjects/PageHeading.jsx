@@ -175,7 +175,7 @@ function PageHeading() {
             <TableRow>
               <TableCell>S No.</TableCell>
               <TableCell>Heading</TableCell>
-              <TableCell>Content</TableCell>
+              {/* <TableCell>Content</TableCell> */}
               <TableCell>Edit</TableCell>
             </TableRow>
           </TableHead>
@@ -184,7 +184,7 @@ function PageHeading() {
               <TableRow key={section.id}>
                 <TableCell>{section.id}</TableCell>
                 <TableCell>{section.heading}</TableCell>
-                <TableCell>{truncateText(section.content)}</TableCell>
+                {/* <TableCell>{truncateText(section.content)}</TableCell> */}
                 <TableCell>
                   <Button
                     startIcon={<EditIcon />}

@@ -79,6 +79,9 @@ const EditGalleryBanner = lazy(() =>
 const GalleryData = lazy(() =>
   import("./admin/AdminInnerPages/EditGallery/GalleryData.jsx")
 );
+const ContactForm = lazy(() =>
+  import("./admin/AdminInnerPages/EditContactUs/ContactForm.jsx")
+);
 
 function App() {
   return (
@@ -114,6 +117,7 @@ function App() {
             />
             <Route path="gallerydata" element={<GalleryData />} />
             <Route path="gallerybanner" element={<EditGalleryBanner />} />
+            <Route path="contactform" element={<ContactForm />} />
           </Route>
           <Route path="/projects" element={<Projects />} />
           <Route path="/" element={<Home />} />

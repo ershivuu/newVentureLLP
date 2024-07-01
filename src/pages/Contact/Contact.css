@@ -136,3 +136,68 @@
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
   /* Your styles for the larger iPad Pro portrait orientation here */
 }
+.nri-form {
+  background-color: #333333;
+  color: white !important;
+  margin: auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding: 30px 50px 100px 50px;
+  border-radius: 80px;
+
+  margin-block: 50px;
+}
+.nri-form ::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form :-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: transparent !important;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  width: 250px;
+  font-family: "Poppins", sans-serif;
+}
+.nri-form input:focus {
+  outline: none;
+  color: white;
+}
+.nri-form p {
+  font-size: 50px;
+  font-style: italic;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+}
+.submit-btns button {
+  background-color: #88c128;
+  color: black;
+  font-size: 16px;
+  font-style: italic;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px 5px 15px;
+  float: right;
+  margin-top: 15px;
+}

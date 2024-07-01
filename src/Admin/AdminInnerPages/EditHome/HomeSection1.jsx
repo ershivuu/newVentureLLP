@@ -148,122 +148,118 @@ const HomeSection1 = () => {
   };
   
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
         Edit About Section
       </Typography>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Heading</TableCell>
-              <TableCell>Content</TableCell>
-              <TableCell>Image 1</TableCell>
-              <TableCell>Image 2</TableCell>
-              <TableCell>Image 3</TableCell>
-              <TableCell>Edit</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>{data.id}</TableCell>
-              <TableCell>{data.heading}</TableCell>
-              <TableCell>{data.content}</TableCell>
-              <TableCell>
-                <img
-                  src={data.img_first}
-                  alt="Image 1"
-                  style={{ width: 100 }}
-                />
-                {/* <div>{data.img_first_originalname}</div>   */}
-              </TableCell>
-              <TableCell>
-                <img
-                  src={data.img_second}
-                  alt="Image 2"
-                  style={{ width: 100 }}
-                />
-                {/* <div>{data.img_second_originalname}</div> */}
-              </TableCell>
-              <TableCell>
-                <img
-                  src={data.img_third}
-                  alt="Image 3"
-                  style={{ width: 100 }}
-                />
-                {/* <div>{data.img_third_originalname}</div> */}
-              </TableCell>
-              <TableCell>
-                <Button
-                  startIcon={<EditIcon />}
-                  onClick={() => handleOpenDialog(data)}
-                >
-                  Edit
-                </Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+      {data ? (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Heading</TableCell>
+                <TableCell>Content</TableCell>
+                <TableCell>Image 1</TableCell>
+                <TableCell>Image 2</TableCell>
+                <TableCell>Image 3</TableCell>
+                <TableCell>Edit</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>{data.id}</TableCell>
+                <TableCell>{data.heading}</TableCell>
+                <TableCell>{data.content}</TableCell>
+                <TableCell>
+                  <img
+                    src={data.img_first}
+                    alt="Image 1"
+                    style={{ width: 100 }}
+                  />
+                  {/* <div>{data.img_first_originalname}</div>   */}
+                </TableCell>
+                <TableCell>
+                  <img
+                    src={data.img_second}
+                    alt="Image 2"
+                    style={{ width: 100 }}
+                  />
+                  {/* <div>{data.img_second_originalname}</div> */}
+                </TableCell>
+                <TableCell>
+                  <img
+                    src={data.img_third}
+                    alt="Image 3"
+                    style={{ width: 100 }}
+                  />
+                  {/* <div>{data.img_third_originalname}</div> */}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    startIcon={<EditIcon />}
+                    onClick={() => handleOpenDialog(data)}
+                  >
+                    Edit
+                  </Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
 
-        <Dialog open={openDialog} onClose={handleCloseDialog}>
-          <DialogTitle>Edit Section 1</DialogTitle>
-          <DialogContent>
-            <TextField
-              label="Heading"
-              fullWidth
-              value={heading}
-              margin="dense"
-              onChange={(e) => setHeading(e.target.value)}
-              error={!heading.trim()} // Check if heading is empty
-              helperText={!heading.trim() ? "Heading cannot be empty" : ""}
-            />
-            <TextField
-              label="Content"
-              fullWidth
-              multiline
-              margin="dense"
-              rows={4}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              error={!content.trim()} // Check if content is empty
-              helperText={!content.trim() ? "Content cannot be empty" : ""}
-            />
-            <Typography>Image 1</Typography>
-            <TextField
-              fullWidth
-              type="file"
-              margin="dense"
-              onChange={(e) => handleFileChange(e, setImage1)}
-            />
-            <Typography>Image 2</Typography>
-            <TextField
-              fullWidth
-              margin="dense"
-              type="file"
-              onChange={(e) => handleFileChange(e, setImage2)}
-            />
-            <Typography>Image 3</Typography>
-            <TextField
-              fullWidth
-              margin="dense"
-              type="file"
-              onChange={(e) => handleFileChange(e, setImage3)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog}>Cancel</Button>
-            <Button variant="contained" color="primary" onClick={handleSave}>
-              Save
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </TableContainer>
+          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>Edit Section 1</DialogTitle>
+            <DialogContent>
+              <TextField
+                label="Heading"
+                fullWidth
+                value={heading}
+                margin="dense"
+                onChange={(e) => setHeading(e.target.value)}
+              />
+              <TextField
+                label="Content"
+                fullWidth
+                multiline
+                margin="dense"
+                rows={4}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <Typography>Image 1</Typography>
+              <TextField
+                fullWidth
+                type="file"
+                margin="dense"
+                onChange={(e) => setImage1(e.target.files[0])}
+              />
+              <Typography>Image 2</Typography>
+              <TextField
+                fullWidth
+                margin="dense"
+                type="file"
+                onChange={(e) => setImage2(e.target.files[0])}
+              />
+              <Typography>Image 3</Typography>
+              <TextField
+                fullWidth
+                margin="dense"
+                type="file"
+                onChange={(e) => setImage3(e.target.files[0])}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog}>Cancel</Button>
+              <Button variant="contained" color="primary" onClick={handleSave}>
+                Save
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </TableContainer>
+      ) : (
+        <Typography variant="body1">No data found</Typography>
+      )}
       <Notification
         open={notificationOpen}
         handleClose={() => setNotificationOpen(false)}

@@ -521,7 +521,7 @@ export const updateFooterData = async (id, data) => {
   }
 };
 
-// Get All gallery data 
+// Get All gallery data
 export const getAllGalleryImages = async () => {
   const response = await axios.get(`${BASE_URL}/getAllGalleryImages`);
   return response.data;
@@ -536,7 +536,7 @@ export const updateMainHeading = async (id, main_heading) => {
   return response.data;
 };
 
-// Update Container 1 image 
+// Update Container 1 image
 export const updateContainer1Image = async (id, imageFile, main_table_id) => {
   const formData = new FormData();
   formData.append("image1", imageFile);
@@ -572,25 +572,23 @@ export const updateContainer2Image = async (id, imageFile, main_table_id) => {
   return response.data;
 };
 
-
-// Deleye Container 1 Image 
+// Deleye Container 1 Image
 export const deleteContainer1Image = async (
   main_table_id,
   container1_image_id
 ) => {
- const response = await axios.delete(
+  const response = await axios.delete(
     `${BASE_URL}/galleryImages/container1_image/${main_table_id}/${container1_image_id}`
   );
   return response.data;
 };
-
 
 // Delete Container 2 Image
 export const deleteContainer2Image = async (
   main_table_id,
   container2_image_id
 ) => {
- const response= await axios.delete(
+  const response = await axios.delete(
     `${BASE_URL}/galleryImages/container2_image/${main_table_id}/${container2_image_id}`
   );
   return response;
@@ -614,7 +612,6 @@ export const addContainer1Image = async (image1, main_table_id) => {
   return response.data;
 };
 
-
 // Add Container 2 Image
 export const addContainer2Image = async (image2, main_table_id) => {
   const formData = new FormData();
@@ -635,7 +632,6 @@ export const addContainer2Image = async (image2, main_table_id) => {
 
 // Get all Gallery Data
 
-
 export const addGalleryImages = async (data) => {
   const response = await axios.post(
     `${BASE_URL}/addAllHeadingWithImages`,
@@ -652,13 +648,11 @@ export const deleteGalleryImage = async (mainTableId) => {
   return response.data;
 };
 
-
-// Get Gallery Banner 
+// Get Gallery Banner
 export const getGalleryBanner = async () => {
   const response = await axios.get(`${BASE_URL}/galleryBanner`);
   return response.data;
 };
-
 
 // Update Gallery Banner
 export const updateGalleryBanner = async (id, formData) => {
@@ -668,4 +662,39 @@ export const updateGalleryBanner = async (id, formData) => {
     },
   });
   return response.data;
+};
+// Delete NRI contact data
+export const deleteNriPageFormData = async (id) => {
+  try {
+    await axios.delete(`${BASE_URL}/deleteNriPageForm/${id}`);
+  } catch (error) {
+    console.error(`Error deleting NRI page form data with id ${id}:`, error);
+    throw error;
+  }
+};
+// Delete Footer contact data
+export const deleteFooterEmail = async (id) => {
+  try {
+    await axios.delete(`${BASE_URL}/deleteFooterEmail/${id}`);
+  } catch (error) {
+    console.error(`Error deleting footer email with id ${id}:`, error);
+    throw error;
+  }
+};
+export const getContactFormData = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/getAllContactUsForms`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
+export const deleteContactFormData = async (id) => {
+  try {
+    await axios.delete(`${BASE_URL}/deleteContactUsForm/${id}`);
+  } catch (error) {
+    console.error(`Error deleting Contact form data with id ${id}:`, error);
+    throw error;
+  }
 };
