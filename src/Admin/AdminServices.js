@@ -268,7 +268,7 @@ export const getHomeSectionSecond = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching HomeSectionSecond data:", error);
-    throw error;
+    return null;
   }
 };
 
@@ -282,7 +282,7 @@ export const updateHomeSectionSecond = async (id, updatedData) => {
     return response.data;
   } catch (error) {
     console.error("Error updating HomeSectionSecond data:", error);
-    throw error;
+    return null;
   }
 };
 
@@ -302,26 +302,15 @@ export const addHomeSectionSecond = async (formData) => {
 };
 
 // Delete Home Section Second Data
-
-// export const deleteHomeSectionSecond = async (id) => {
-//   try {
-//     const response = await axios.delete(`${BASE_URL}/homeSectionSecond/${id}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error deleting Home Section Second data:", error);
-//     return null;
-//   }
-// };
-
-export const deleteHomeSectionSecond = async (id) => {
+export const deleteHomeSectionSecond = async (second_id) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/homeSectionSecond/${id}`);
-    return response;
+    const response = await axios.delete(`${BASE_URL}/homeSectionSecond/${second_id}`);
+    return response.data; // Assuming your API returns data with a success message
   } catch (error) {
-    console.error("Error deleting image:", error);
-    throw error;
+    throw error; // Throw the error for handling in the component
   }
 };
+
 
 // Get Home Section Third  Data
 export const fetchHomeSectionThird = async () => {
@@ -675,7 +664,8 @@ export const deleteNriPageFormData = async (id) => {
 // Delete Footer contact data
 export const deleteFooterEmail = async (id) => {
   try {
-    await axios.delete(`${BASE_URL}/deleteFooterEmail/${id}`);
+    const response = await axios.delete(`${BASE_URL}/deleteFooterEmail/${id}`);
+    return response.data;
   } catch (error) {
     console.error(`Error deleting footer email with id ${id}:`, error);
     throw error;
