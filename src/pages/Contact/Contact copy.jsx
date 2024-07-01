@@ -60,14 +60,14 @@ function Contact() {
     if (formData.name.trim() === "") {
       errors.name = "! Name is required";
     } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-      errors.name = "! Only alphabets are allowed";
+      errors.name = "Only alphabets are allowed";
     }
     if (formData.phone.trim() === "") {
-      errors.phone = "! Phone number is required";
+      errors.phone = "Phone number is required";
     } else if (!/^\d+$/.test(formData.phone)) {
-      errors.phone = "! Only numbers are allowed";
+      errors.phone = "Only numbers are allowed";
     } else if (formData.phone.length < 10 || formData.phone.length > 12) {
-      errors.phone = "! Number should be between 10 to 12 digits";
+      errors.phone = "Number should be between 10 to 12 digits";
     }
     if (formData.comment.trim() === "") {
       errors.comment = "! Comment is required";
@@ -213,7 +213,7 @@ function Contact() {
         open={notification.open}
         autoHideDuration={6000} // Adjust duration as needed
         onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top 100", horizontal: "right" }}
       >
         <MuiAlert
           elevation={6}

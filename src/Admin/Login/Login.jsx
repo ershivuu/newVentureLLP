@@ -1,13 +1,13 @@
-// src/components/Login.js
 import React, { useState, useEffect } from "react";
 import "./Login.css";
 
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 function Login({ onLogin }) {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || ""
+  );
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -20,6 +20,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     if (username === "admin" && password === "admin") {
+      localStorage.setItem("username", username); // Store username in localStorage
       onLogin();
     } else {
       alert("Invalid credentials");
@@ -28,13 +29,7 @@ function Login({ onLogin }) {
 
   return (
     <>
-    
       <div className="login-container">
-        {/* <div className="logo-section">
-          <a href="/">
-            <img className="logo-img" src={imageUrl} alt="Logo" />
-          </a>
-        </div> */}
         <div style={{ textAlign: "center" }}>
           <p className="login-content">Admin Panel</p>
         </div>

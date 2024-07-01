@@ -26,7 +26,6 @@ function Headers() {
         document.head.appendChild(style);
 
         setHeaderClass(className);
-        console.log(color, "header color");
       }
     } catch (error) {
       console.error("Error fetching header color:", error);

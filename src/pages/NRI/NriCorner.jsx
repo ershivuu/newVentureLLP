@@ -7,7 +7,8 @@ import {
   getNriPageData,
   addNriPageFormData,
 } from "../../Services/frontendServices";
-
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 function NriCorner() {
   const [bannerData, setBannerData] = useState(null);
   const [formData, setFormData] = useState({
@@ -21,6 +22,11 @@ function NriCorner() {
     contact: "",
     email: "",
     comment: "",
+  });
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -66,9 +72,11 @@ function NriCorner() {
       errors.name = "Only alphabets are allowed";
     }
     if (formData.contact.trim() === "") {
-      errors.contact = "! Contact is required";
-    } else if (!/^\d*$/.test(formData.contact)) {
-      errors.contact = "! Only numbers are allowed";
+      errors.contact = "Phone number is required";
+    } else if (!/^\d+$/.test(formData.contact)) {
+      errors.contact = "Only numbers are allowed";
+    } else if (formData.contact.length < 10 || formData.contact.length > 12) {
+      errors.contact = "Number should be between 10 to 12 digits";
     }
     if (formData.email.trim() === "") {
       errors.email = "! Email is required";
@@ -90,11 +98,25 @@ function NriCorner() {
       await addNriPageFormData(formData);
       setFormSubmitted(true);
       setFormData({ name: "", contact: "", email: "", comment: "" }); // Reset the form
+      setNotification({
+        open: true,
+        message: "Form submitted successfully!",
+        severity: "success",
+      });
     } catch (error) {
-      alert("Internal server error!");
+      setNotification({
+        open: true,
+        message: "Internal server error! Please try again later.",
+        severity: "error",
+      });
     }
   };
-
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setNotification({ ...notification, open: false });
+  };
   useEffect(() => {
     getNriBanner();
   }, []);
@@ -179,6 +201,37 @@ function NriCorner() {
           </div>
         </form>
       </div>
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={notification.severity}
+        >
+          {notification.message}
+        </MuiAlert>
+      </Snackbar>
+      {/* 
+      <Snackbar
+  open={notification.open}
+  autoHideDuration={6000}
+  onClose={handleSnackbarClose}
+  anchorOrigin={{ vertical: "top", horizontal: "right" }} 
+>
+  <MuiAlert
+    elevation={6}
+    variant="filled"
+    onClose={handleSnackbarClose}
+    severity={notification.severity}
+  >
+    {notification.message}
+  </MuiAlert>
+</Snackbar> */}
       <Footers></Footers>
     </>
   );
