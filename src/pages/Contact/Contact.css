@@ -1,0 +1,203 @@
+.single-banner-image {
+  position: relative;
+  width: 100%;
+  height: 99vh;
+}
+.single-banner-image img {
+  width: inherit;
+  height: inherit;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.colored-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c73654d;
+  z-index: 10;
+}
+.single-banner-heading {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  word-wrap: break-word !important;
+  max-width: 700px;
+}
+.single-banner-heading p {
+  text-align: center;
+  color: white;
+  font-size: 100px;
+  font-family: "Playfair Display", serif;
+  line-height: 1;
+}
+.contact-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  padding-block: 50px;
+}
+.contect-us p {
+  color: #88c128;
+  font-size: 60px;
+  font-family: "Cormorant", serif;
+  font-style: italic;
+  font-weight: bold;
+}
+.contect-us {
+  text-align: center;
+  padding-block: 50px;
+}
+.social-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 50px;
+}
+.social-icons img {
+  width: 30px;
+  height: 30px;
+}
+.contact-details p:nth-child(1) {
+  color: #88c128;
+  font-size: 60px;
+  font-family: "Cormorant", serif;
+  font-style: italic;
+  font-weight: bold;
+}
+.contact-details a {
+  color: black;
+}
+.contact-details a:hover {
+  color: black;
+}
+.contact-details p:nth-child(2) a {
+  font-family: "Poppins", sans-serif !important;
+  border-bottom: 2px solid black;
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+  .single-banner-image {
+    height: 40vh;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for landscape orientation here */
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Your tablet styles for portrait orientation here */
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  /* Your styles for the larger iPad Pro landscape orientation here */
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
+  /* Your styles for the larger iPad Pro portrait orientation here */
+}
+.nri-form {
+  background-color: #333333;
+  color: white !important;
+  margin: auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding: 30px 50px 100px 50px;
+  border-radius: 80px;
+
+  margin-block: 50px;
+}
+.nri-form ::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form :-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form ::placeholder {
+  color: rgba(255, 255, 255, 0.685);
+  font-family: "Poppins", sans-serif;
+}
+.nri-form input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: transparent !important;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  width: 250px;
+  font-family: "Poppins", sans-serif;
+}
+.nri-form input:focus {
+  outline: none;
+  color: white;
+}
+.nri-form p {
+  font-size: 50px;
+  font-style: italic;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-weight: bold;
+}
+.submit-btns button {
+  background-color: #88c128;
+  color: black;
+  font-size: 16px;
+  font-style: italic;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px 5px 15px;
+  float: right;
+  margin-top: 15px;
+}
