@@ -1,0 +1,22 @@
+.set-table {
+  margin-top: 20px;
+}
+
+.horizontal-images {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.slider-image-container {
+  margin-bottom: 10px;
+}
+
+.slider-image {
+  width: 100px;
+}
+
+.add-btn {
+  float: right;
+}

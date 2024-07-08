@@ -1,0 +1,157 @@
+.single-banner-image {
+  position: relative;
+  width: 100%;
+  height: 99vh;
+}
+.single-banner-image img {
+  width: inherit;
+  height: inherit;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.colored-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #2c73654d;
+  z-index: 10;
+}
+.single-banner-heading {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  word-wrap: break-word !important;
+  max-width: 700px;
+}
+.single-banner-heading p {
+  text-align: center;
+  color: white;
+  font-size: 100px;
+  font-family: "Playfair Display", serif;
+  line-height: 1;
+}
+/* -------------------------------------designing imgs-------------------------- */
+.project-gallery {
+  max-width: 1440px;
+  margin: auto;
+  margin-block: 50px;
+}
+.group-1-heading {
+  position: sticky;
+  top: 135px;
+  width: 100%;
+  text-align: right;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  padding-right: 30px;
+  font-weight: bold;
+  background-color: white;
+  border: none !important;
+}
+.project-name {
+  position: sticky;
+  top: 75px;
+  font-size: 40px;
+  font-family: "Playfair Display", serif;
+  color: #12302a;
+  font-weight: bold;
+  background-color: white;
+  z-index: 99;
+}
+.project-name p {
+  border-bottom: 2px solid #12302a;
+}
+.image-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.image-section {
+  width: 400px;
+  height: 250px;
+}
+
+.image-section-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 50px;
+}
+.image-section img {
+  width: inherit;
+  height: inherit;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  /* Styles for larger smartphones */
+  .single-banner-image {
+    height: 40vh;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+  .image-section {
+    width: 300px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .single-banner-image {
+    height: 40vh;
+  }
+  .single-banner-heading p {
+    font-size: 40px;
+  }
+  .nri-content {
+    text-align: justify;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation: portrait) {
+  /* Your styles for the larger iPad Pro portrait orientation here */
+}
+.modal-image {
+  -o-object-fit: contain !important;
+  object-fit: contain !important;
+  -o-object-position: top !important;
+  object-position: top !important;
+}
+.modal-content {
+  -o-object-fit: contain !important;
+  object-fit: contain !important;
+  -o-object-position: top !important;
+  object-position: top !important;
+}
