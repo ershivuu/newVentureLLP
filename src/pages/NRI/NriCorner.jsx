@@ -130,6 +130,7 @@ function NriCorner() {
             <img
               src={bannerData?.banner_img}
               alt={bannerData?.banner_heading}
+              loading="lazy"
             />
             <div className="colored-overlay"></div>
             <div className="single-banner-heading">

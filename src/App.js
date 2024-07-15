@@ -1,3 +1,4 @@
+import { Policy } from "@mui/icons-material";
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -24,7 +25,9 @@ const About = lazy(() => import("./pages/About/About.jsx"));
 const NriCorner = lazy(() => import("./pages/NRI/NriCorner.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery/Gallery.jsx"));
 const Contact = lazy(() => import("./pages/Contact/Contact.jsx"));
-const CharCounter = lazy(() => import("./pages/CharCounter/Counter.jsx"));
+const VenturePolicy = lazy(() =>
+  import("./pages/PolicyPage/VenturePolicy.jsx")
+);
 const EditHome = lazy(() =>
   import("./admin/AdminInnerPages/EditHome/EditHome.jsx")
 );
@@ -125,7 +128,7 @@ function App() {
           <Route path="/nri-corner" element={<NriCorner />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact-us" element={<Contact />} />
-          <Route path="/counter" element={<CharCounter />} />
+          <Route path="/privacy-policy" element={<VenturePolicy />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

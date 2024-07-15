@@ -49,7 +49,7 @@ function Headers() {
         >
           <div className="container-fluid">
             <Link to="/" className="navbar-brand" aria-current="page">
-              <img src={corusviewLogo} alt="corusviewLogo" />
+              <img src={corusviewLogo} alt="corusviewLogo" loading="lazy" />
             </Link>
             <button
               className="navbar-toggler"
@@ -100,6 +100,15 @@ function Headers() {
                     CONTACT US
                   </Link>
                 </li>
+                {/* <li className="nav-item">
+                  <Link
+                    to="/privacy-policy"
+                    className="nav-link"
+                    aria-current="page"
+                  >
+                    POLICY
+                  </Link>
+                </li> */}
               </ul>
             </div>
           </div>

@@ -34,9 +34,9 @@ function Gallery() {
       return <p>Loading...</p>;
     }
     if (error) {
-      return <img src={defaultBanner} alt="Default Banner" />;
+      return <img src={defaultBanner} alt="Default Banner" loading="lazy" />;
     }
-    return <img src={banner.banner_img_url} alt="Banner" />;
+    return <img src={banner.banner_img_url} alt="Banner" loading="lazy" />;
   }, [loading, error, banner.banner_img_url]);
 
   return (

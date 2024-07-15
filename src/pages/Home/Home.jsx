@@ -101,10 +101,10 @@ function Home() {
       <div className="wrapper home-page">
         <div className="banner-home">
           {bannerHome ? (
-            <img src={bannerHome} alt="Banner" />
+            <img src={bannerHome} alt="Banner" loading="lazy" />
           ) : (
             <div className="banner-home-static">
-              <img src={bannerHomeStatic} alt="" />
+              <img src={bannerHomeStatic} alt="" loading="lazy" />
             </div>
           )}
         </div>
@@ -122,14 +122,14 @@ function Home() {
         </div>
         <div className="welcome-imgs">
           <div className="portrait-img">
-            <img src={img_first} alt="First" />
+            <img src={img_first} alt="First" loading="lazy" />
           </div>
           <div className="landscape-img">
             <div className="landscape-img-1">
-              <img src={img_second} alt="Second" />
+              <img src={img_second} alt="Second" loading="lazy" />
             </div>
             <div className="landscape-img-2">
-              <img src={img_third} alt="Third" />
+              <img src={img_third} alt="Third" loading="lazy" />
             </div>
           </div>
         </div>
@@ -160,6 +160,7 @@ function Home() {
                     src={image.slider_img_path}
                     className="d-block w-100"
                     alt={image.original_name}
+                    loading="lazy"
                   />
                 </div>
               ))
@@ -175,6 +176,7 @@ function Home() {
                     src={dummyImage.slider_img_path}
                     className="d-block w-100"
                     alt={dummyImage.original_name}
+                    loading="lazy"
                   />
                 </div>
               ))
@@ -228,14 +230,26 @@ function Home() {
         </div>
         <div className="welcome-imgs">
           <div className="portrait-img">
-            <img src={homeSectionThree.sectionthird_img_first} alt="" />
+            <img
+              src={homeSectionThree.sectionthird_img_first}
+              alt=""
+              loading="lazy"
+            />
           </div>
           <div className="landscape-img">
             <div className="landscape-img-1">
-              <img src={homeSectionThree.sectionthird_img_second} alt="" />
+              <img
+                src={homeSectionThree.sectionthird_img_second}
+                alt=""
+                loading="lazy"
+              />
             </div>
             <div className="landscape-img-2">
-              <img src={homeSectionThree.sectionthird_img_third} alt="" />
+              <img
+                src={homeSectionThree.sectionthird_img_third}
+                alt=""
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

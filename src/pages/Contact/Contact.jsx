@@ -33,7 +33,7 @@ function Contact() {
   });
   const dummyData = {
     id: 0,
-    heading: "Contact",
+    heading: "Contact Us",
     banner_img: banner,
     email: "email@corusview.com",
     phone: "+91 96172-44330",
@@ -121,7 +121,7 @@ function Contact() {
       <div className="wrapper">
         <div className="single-banner">
           <div className="single-banner-image">
-            <img src={contactData.banner_img} alt="Banner" />
+            <img src={contactData.banner_img} alt="Banner" loading="lazy" />
             <div className="colored-overlay"></div>
             <div className="single-banner-heading">
               <p>{contactData.heading}</p>
@@ -148,7 +148,7 @@ function Contact() {
         <div className="social-icons">
           <div>
             <a href="" target="_blank">
-              <img src={facebookLogo} alt="" />
+              <img src={facebookLogo} alt="" loading="lazy" />
             </a>
           </div>
           <div>
@@ -156,13 +156,13 @@ function Contact() {
               href="https://www.instagram.com/corusviewventure/?igsh=MXZvd2c1Z251Y2p6eg%3D%3D"
               target="_blank"
             >
-              <img src={instagramLogo} alt="" />
+              <img src={instagramLogo} alt="" loading="lazy" />
             </a>
           </div>
 
           <div>
             <a href="" target="_blank"></a>
-            <img src={youtubeLogo} alt="" />
+            <img src={youtubeLogo} alt="" loading="lazy" />
           </div>
         </div>
       </div>

@@ -52,22 +52,22 @@ function ProjectGallery() {
           </div>
           <div className="image-section-container">
             <div className="image-section">
-              <img src={venture1} alt="siddhraj Paradise" />
+              <img src={venture1} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture2} alt="siddhraj Paradise" />
+              <img src={venture2} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture3} alt="siddhraj Paradise" />
+              <img src={venture3} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture4} alt="siddhraj Paradise" />
+              <img src={venture4} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture5} alt="siddhraj Paradise" />
+              <img src={venture5} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture6} alt="siddhraj Paradise" />
+              <img src={venture6} alt="siddhraj Paradise" loading="lazy" />
             </div>
           </div>
         </div>
@@ -77,22 +77,22 @@ function ProjectGallery() {
           </div>
           <div className="image-section-container">
             <div className="image-section">
-              <img src={venture7} alt="siddhraj Paradise" />
+              <img src={venture7} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture8} alt="siddhraj Paradise" />
+              <img src={venture8} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture9} alt="siddhraj Paradise" />
+              <img src={venture9} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture10} alt="siddhraj Paradise" />
+              <img src={venture10} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture11} alt="siddhraj Paradise" />
+              <img src={venture11} alt="siddhraj Paradise" loading="lazy" />
             </div>
             <div className="image-section">
-              <img src={venture12} alt="siddhraj Paradise" />
+              <img src={venture12} alt="siddhraj Paradise" loading="lazy" />
             </div>
           </div>
         </div>

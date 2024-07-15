@@ -71,6 +71,7 @@ function Projects() {
                     src={image.img_path}
                     className="d-block w-100"
                     alt={image.img_name}
+                    loading="lazy"
                   />
                 </div>
               ))
@@ -79,10 +80,20 @@ function Projects() {
               <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                   <div class="carousel-item active carousel-item-banner">
-                    <img src={vectorOne} class="d-block w-100" alt="..." />
+                    <img
+                      src={vectorOne}
+                      class="d-block w-100"
+                      alt="..."
+                      loading="lazy"
+                    />
                   </div>
                   <div class="carousel-item carousel-item-banner">
-                    <img src={vectorTwo} class="d-block w-100" alt="..." />
+                    <img
+                      src={vectorTwo}
+                      class="d-block w-100"
+                      alt="..."
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <button
@@ -164,6 +175,7 @@ function Projects() {
                           src={image.slider_img_path}
                           className="d-block w-100"
                           alt={image.file_name}
+                          loading="lazy"
                         />
                       </div>
                     ))}
@@ -221,10 +233,20 @@ function Projects() {
               <div id="carouselExampleDummy" class="carousel slide">
                 <div class="carousel-inner">
                   <div class="carousel-item active carousel-item-project">
-                    <img src={vectorOne} class="d-block w-100" alt="..." />
+                    <img
+                      src={vectorOne}
+                      class="d-block w-100"
+                      alt="..."
+                      loading="lazy"
+                    />
                   </div>
                   <div class="carousel-item carousel-item-project">
-                    <img src={vectorTwo} class="d-block w-100" alt="..." />
+                    <img
+                      src={vectorTwo}
+                      class="d-block w-100"
+                      alt="..."
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <button

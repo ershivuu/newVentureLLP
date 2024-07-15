@@ -89,6 +89,7 @@ function About() {
                     src={image.img_path}
                     className="d-block w-100"
                     alt={image.img_name}
+                    loading="lazy"
                   />
                 </div>
               ))
@@ -96,10 +97,20 @@ function About() {
               <div id="carouselExample" className="carousel slide">
                 <div className="carousel-inner">
                   <div className="carousel-item active carousel-item-banner">
-                    <img src={vectorOne} className="d-block w-100" alt="..." />
+                    <img
+                      src={vectorOne}
+                      className="d-block w-100"
+                      alt="..."
+                      loading="lazy"
+                    />
                   </div>
                   <div className="carousel-item carousel-item-banner">
-                    <img src={vectorTwo} className="d-block w-100" alt="..." />
+                    <img
+                      src={vectorTwo}
+                      className="d-block w-100"
+                      alt="..."
+                      loading="lazy"
+                    />
                   </div>
                 </div>
                 <button
@@ -184,6 +195,7 @@ function About() {
                 <img
                   src={aboutUsData.img_first}
                   alt={aboutUsData.img_first_originalname}
+                  loading="lazy"
                 />
               </div>
               <div className="horizontal-group">
@@ -191,12 +203,14 @@ function About() {
                   <img
                     src={aboutUsData.img_second}
                     alt={aboutUsData.img_second_originalname}
+                    loading="lazy"
                   />
                 </div>
                 <div className="hor-group-img-2">
                   <img
                     src={aboutUsData.img_third}
                     alt={aboutUsData.img_third_originalname}
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -221,14 +235,14 @@ function About() {
             </div>
             <div className="about-imgs">
               <div className="vert-img">
-                <img src={home1} alt="Default image 1" />
+                <img src={home1} alt="Default image 1" loading="lazy" />
               </div>
               <div className="horizontal-group">
                 <div className="hor-group-img-1">
-                  <img src={home2} alt="Default image 2" />
+                  <img src={home2} alt="Default image 2" loading="lazy" />
                 </div>
                 <div className="hor-group-img-2">
-                  <img src={home3} alt="Default image 3" />
+                  <img src={home3} alt="Default image 3" loading="lazy" />
                 </div>
               </div>
             </div>

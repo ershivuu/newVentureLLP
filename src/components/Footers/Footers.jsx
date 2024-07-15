@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import "./Footers.css"; // Import CSS file after JS imports
 import logo from "../../assets/logos/logo.png";
 import mailicon from "../../assets/logos/mail.png";
 import { submitEmail, getFooterData } from "../../Services/frontendServices";
+import Notification from "../../Notification/Notification"; // Adjust the path based on your project structure
 
 function Footers() {
-  // const phoneNumber = "+91 96172-44330";
   const [phoneNumber, setPhoneNumber] = useState("");
   const [footerColor, setFooterColor] = useState("");
   const [email, setEmail] = useState("");
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationSeverity, setNotificationSeverity] = useState("success");
+
+  // Function to show notifications
+  const showNotification = (message, severity) => {
+    setNotificationMessage(message);
+    setNotificationSeverity(severity);
+    setNotificationOpen(true);
+  };
+
+  const handleCloseNotification = () => {
+    setNotificationOpen(false);
+  };
+
   const getFooterInfo = async () => {
     try {
       const data = await getFooterData();
       if (data && data.mobile) {
         setPhoneNumber(data.mobile);
       } else {
-        // Set a default phone number if the API response is empty or doesn't contain a valid number
         setPhoneNumber("+91 9617244330");
       }
       setFooterColor(
@@ -26,36 +40,33 @@ function Footers() {
       );
     } catch (error) {
       console.error("Error fetching footer data:", error);
-      // Set a default phone number in case of an error fetching data from the API
       setPhoneNumber("+91 9617244330");
     }
   };
+
   useEffect(() => {
     getFooterInfo();
   }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await submitEmail(email);
       console.log("Email submitted successfully:", response);
-
       setEmail("");
-      alert("Email submitted successfully");
+      showNotification("Email submitted successfully", "success");
     } catch (error) {
       console.error("Error submitting email:", error);
-
-      alert("Failed to submit email. Please try again.");
+      showNotification("Failed to submit email. Please try again.", "error");
     }
   };
+
   return (
     <>
       <div
         className="footer-wrapper"
         style={{
-          background:
-            footerColor ||
-            "radial-gradient(150.55% 150.55% at 50% 50%, #004c3f 0%, #000000 100%)",
+          background: footerColor || "#004337",
         }}
       >
         <div className="inner-wrapper">
@@ -131,7 +142,7 @@ function Footers() {
         <div className="footer-wrapper-2">
           <div>
             <p>
-              Copyright&#169;2023, All rights reserved Corusview Venture LLP
+              Copyright&#169;2024, All rights reserved Corusview Venture LLP
             </p>
           </div>
           <div></div>
@@ -140,10 +151,20 @@ function Footers() {
           </div>
           <div></div>
           <div>
-            <p>Privacy Policy | Terms of Use Apply</p>
+            <p>
+              <a href="/privacy-policy">Privacy Policy | Terms of Use Apply</a>
+            </p>
           </div>
         </div>
       </div>
+
+      {/* Notification Component */}
+      <Notification
+        open={notificationOpen}
+        handleClose={handleCloseNotification}
+        alertMessage={notificationMessage}
+        alertSeverity={notificationSeverity}
+      />
     </>
   );
 }

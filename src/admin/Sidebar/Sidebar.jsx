@@ -1,58 +1,20 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar({ isOpen }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(isOpen);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
-  const [footerDropdownOpen, setFooterDropdownOpen] = useState(false);
-  const [contactDropdownOpen, setContactDropdownOpen] = useState(false);
-  const [nriDropdownOpen, setNriDropdownOpen] = useState(false);
-  const [galleryDropdownOpen, setGalleryDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const handleHomeDropdown = () => {
-    setHomeDropdownOpen(!homeDropdownOpen);
-  };
-
-  const handleAboutDropdown = () => {
-    setAboutDropdownOpen(!aboutDropdownOpen);
-  };
-  const handleFooterDropdown = () => {
-    setFooterDropdownOpen(!footerDropdownOpen);
-  };
-
-  const handleNriDropdown = () => {
-    // Function to toggle NRI Corner dropdown
-    setNriDropdownOpen(!nriDropdownOpen);
-  };
-  const handleGalleryDropdown = () => {
-    setGalleryDropdownOpen(!galleryDropdownOpen);
-  };
-  const handleContactDropdown = () => {
-    setContactDropdownOpen(!contactDropdownOpen);
+  const handleDropdown = (dropdownName) => {
+    if (activeDropdown === dropdownName) {
+      setActiveDropdown(null); // Close the dropdown if clicking again
+    } else {
+      setActiveDropdown(dropdownName); // Open the clicked dropdown
+    }
   };
 
   const handleLinkClick = () => {
-    setDropdownOpen(false);
-    setHomeDropdownOpen(false);
-    setAboutDropdownOpen(false);
-    setNriDropdownOpen(false);
-    setAboutDropdownOpen(false);
-    setFooterDropdownOpen(false);
-    setGalleryDropdownOpen(false);
-    setContactDropdownOpen(false);
+    setActiveDropdown(null); // Close all dropdowns when a link is clicked
   };
 
   return (
@@ -61,63 +23,48 @@ function Sidebar({ isOpen }) {
         <div className="side-bar">
           <div className={`custom-sidebar ${isOpen ? "open" : ""}`}>
             <ul>
-              <button className="dropdown-btn" onClick={handleHomeDropdown}>
-                Home
-                <span className="custom-btn">
-                  {homeDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  homeDropdownOpen ? "active" : ""
-                }`}
+              {/* Home Dropdown */}
+              <DropdownButton
+                title="Home"
+                isOpen={activeDropdown === "home"}
+                onClick={() => handleDropdown("home")}
               >
                 <Link to="/adminpanel/edithome" onClick={handleLinkClick}>
-                  <a>Edit Banner</a>
+                  Edit Banner
                 </Link>
                 <Link to="/adminpanel/homesection2" onClick={handleLinkClick}>
-                  <a>Edit Slider</a>
+                  Edit Slider
                 </Link>
                 <Link to="/adminpanel/homesection1" onClick={handleLinkClick}>
-                  <a>About Section</a>
+                  About Section
                 </Link>
                 <Link to="/adminpanel/homesection3" onClick={handleLinkClick}>
-                  <a>Testimonial Section</a>
+                  Testimonial Section
                 </Link>
-              </div>
-              <button className="dropdown-btn" onClick={handleAboutDropdown}>
-                About
-                <span className="custom-btn">
-                  {aboutDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  aboutDropdownOpen ? "active" : ""
-                }`}
-                style={{ display: aboutDropdownOpen ? "block" : "none" }}
+              </DropdownButton>
+
+              {/* About Dropdown */}
+              <DropdownButton
+                title="About"
+                isOpen={activeDropdown === "about"}
+                onClick={() => handleDropdown("about")}
               >
                 <Link to="/adminpanel/aboutbanner" onClick={handleLinkClick}>
-                  <a>Edit Banner</a>
+                  Edit Banner
                 </Link>
                 <Link to="/adminpanel/aboutsection1" onClick={handleLinkClick}>
-                  <a>About Section</a>
+                  About Section
                 </Link>
                 <Link to="/adminpanel/aboutsection2" onClick={handleLinkClick}>
-                  <a>Mission & Vision</a>
+                  Mission & Vision
                 </Link>
-              </div>
-              <button className="dropdown-btn" onClick={handleGalleryDropdown}>
-                Gallery
-                <span className="custom-btn">
-                  {galleryDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-              <div
-                className={`dropdown-container ${
-                  galleryDropdownOpen ? "active" : ""
-                }`}
-                style={{ display: galleryDropdownOpen ? "block" : "none" }}
+              </DropdownButton>
+
+              {/* Gallery Dropdown */}
+              <DropdownButton
+                title="Gallery"
+                isOpen={activeDropdown === "gallery"}
+                onClick={() => handleDropdown("gallery")}
               >
                 <Link to="/adminpanel/gallerybanner" onClick={handleLinkClick}>
                   Edit Banner
@@ -140,98 +87,87 @@ function Sidebar({ isOpen }) {
                 >
                   Real Site Images
                 </Link>
-              </div>
+              </DropdownButton>
 
-              <button className="dropdown-btn" onClick={handleNriDropdown}>
-                NRI Corner
-                <span className="custom-btn">
-                  {nriDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  nriDropdownOpen ? "active" : ""
-                }`}
-                style={{ display: nriDropdownOpen ? "block" : "none" }}
+              {/* NRI Corner Dropdown */}
+              <DropdownButton
+                title="NRI Corner"
+                isOpen={activeDropdown === "nri"}
+                onClick={() => handleDropdown("nri")}
               >
                 <Link to="/adminpanel/nribanner" onClick={handleLinkClick}>
-                  <a>Edit Banner & Content</a>
+                  Edit Banner & Content
                 </Link>
                 <Link to="/adminpanel/contactdetails" onClick={handleLinkClick}>
-                  <a>Contact Details</a>
+                  Contact Details
                 </Link>
-              </div>
+              </DropdownButton>
 
-              {/* --------------------------------------------------------------------------- */}
-              <button className="dropdown-btn" onClick={handleContactDropdown}>
-                Contact Page
-                <span className="custom-btn">
-                  {contactDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  contactDropdownOpen ? "active" : ""
-                }`}
-                style={{ display: contactDropdownOpen ? "block" : "none" }}
+              {/* Contact Page Dropdown */}
+              <DropdownButton
+                title="Contact Page"
+                isOpen={activeDropdown === "contact"}
+                onClick={() => handleDropdown("contact")}
               >
-                <Link
-                  className="dropdown-btn"
-                  to="/adminpanel/editcontactus"
-                  onClick={handleLinkClick}
-                >
-                  <a>Edit Contact Page</a>
+                <Link to="/adminpanel/editcontactus" onClick={handleLinkClick}>
+                  Edit Contact Page
                 </Link>
                 <Link to="/adminpanel/contactform" onClick={handleLinkClick}>
-                  <a>Contact Form Data</a>
+                  Contact Form Data
                 </Link>
-              </div>
-              <button className="dropdown-btn" onClick={handleDropdown}>
-                Upcoming Projects
-                <span className="custom-btn">{dropdownOpen ? "-" : "+"}</span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  dropdownOpen ? "active" : ""
-                }`}
-                style={{ display: dropdownOpen ? "block" : "none" }}
+              </DropdownButton>
+
+              {/* Upcoming Projects Dropdown */}
+              <DropdownButton
+                title="Upcoming Projects"
+                isOpen={activeDropdown === "projects"}
+                onClick={() => handleDropdown("projects")}
               >
                 <Link to="/adminpanel/pageheading" onClick={handleLinkClick}>
-                  <a href="#">Edit Heading</a>
+                  Edit Heading
                 </Link>
                 <Link to="/adminpanel/bannerimages" onClick={handleLinkClick}>
-                  <a href="#">Edit Banner</a>
+                  Edit Banner
                 </Link>
                 <Link to="/adminpanel/slidercontent" onClick={handleLinkClick}>
-                  <a href="#">Create Project</a>
+                  Create Project
                 </Link>
                 <Link to="/adminpanel/projectslider" onClick={handleLinkClick}>
-                  <a href="#">Project Images</a>
+                  Project Images
                 </Link>
-              </div>
-              <button className="dropdown-btn" onClick={handleFooterDropdown}>
-                Footer
-                <span className="custom-btn">
-                  {footerDropdownOpen ? "-" : "+"}
-                </span>
-              </button>
-              <div
-                className={`dropdown-container  ${
-                  footerDropdownOpen ? "active" : ""
-                }`}
-                style={{ display: footerDropdownOpen ? "block" : "none" }}
+              </DropdownButton>
+
+              {/* Footer Dropdown */}
+              <DropdownButton
+                title="Footer"
+                isOpen={activeDropdown === "footer"}
+                onClick={() => handleDropdown("footer")}
               >
                 <Link to="/adminpanel/footerdata" onClick={handleLinkClick}>
-                  <a>Footer Data</a>
+                  Footer Data
                 </Link>
                 <Link to="/adminpanel/editfooter" onClick={handleLinkClick}>
-                  <a>Edit Footer</a>
+                  Edit Footer
                 </Link>
-              </div>
+              </DropdownButton>
             </ul>
           </div>
         </div>
         <div>{/* <Outlet /> */}</div>
+      </div>
+    </>
+  );
+}
+
+function DropdownButton({ title, isOpen, onClick, children }) {
+  return (
+    <>
+      <button className="dropdown-btn" onClick={onClick}>
+        {title}
+        <span className="custom-btn">{isOpen ? "-" : "+"}</span>
+      </button>
+      <div className={`dropdown-container ${isOpen ? "active" : ""}`}>
+        {children}
       </div>
     </>
   );
