@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Login.css";
-
+import { useNavigate } from "react-router-dom";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Login({ onLogin }) {
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [username, setUsername] = useState(
     localStorage.getItem("username") || ""
   );
@@ -22,6 +23,7 @@ function Login({ onLogin }) {
     if (username === "admin" && password === "admin") {
       localStorage.setItem("username", username); // Store username in localStorage
       onLogin();
+      navigate("edithome");
     } else {
       alert("Invalid credentials");
     }
